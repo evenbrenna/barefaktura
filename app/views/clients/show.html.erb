@@ -1,0 +1,35 @@
+<h1><%= @client.name %></h1><br>
+<p><%= link_to 'Rediger Kunde', edit_client_path(@client), class:'btn btn-default btn-block' %></p><br>
+
+<div class="row">
+  <div class="col-sm-6">
+    <p>
+      <strong>Navn:</strong><br><%= @client.name %>
+    </p>
+    <p>
+      <strong>Org.nr:</strong><br><%= @client.org_nr %>
+    </p>
+    <p>
+      <strong>Ref.:</strong><br><%= @client.ref %>
+    </p>
+  </div>
+  <div class="col-sm-6">
+    <p>
+      <strong>Adresse:</strong><br><%= @client.address %>
+    </p>
+    <p>
+      <strong>Leveringsadresse:</strong><br><%= @client.delivery_address %>
+    </p>
+    <p>
+      <strong>Email:</strong><br><%= @client.email %>
+    </p>
+  </div>
+</div>
+
+<p><strong>Totalt fakturert: </strong><br><%= number_to_currency(@total_invoiced) %></p>
+
+    <div class="clearfix"></div>
+
+    <!-- FAKTURALISTE -->
+    <h3>Fakturaer til <%= @client.name %></h3>
+    <%= render partial: 'invoices/partials/invoice_list' %>

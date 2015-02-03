@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Bare Faktura</h1>
+        <p class="lead">Enkel og gratis fakturering for enkeltpersonforetak og små bedrifter.</p>
+        <img src="<%= url_for(image_path('office.jpg')) %>" class="img-responsive img-rounded" style="min-width: 100%; border: 1px solid #eee;" alt="BareFaktura.no - Enkel og gratis fakturering for små bedrifter.">
+    </div>
+    <div class="col-sm-12">
+    </div>
+</div>
+<br>
+    <div class="col-sm-12 well visible-xs">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <h3>Enkelt</h3>
+                <p>All informasjon og funksjonalitet du behøver er umiddelbart tilgjengelig når du logger inn.</p>
+            </div>
+            <div class="col-sm-4 text-center">
+                <h3>Oversiktelig</h3>
+                <p>Brukervennlige sider sørger for at du slipper du å navigere gjennom kronglete menyer.</p>
+            </div>
+            <div class="col-sm-4 text-center">
+                <h3>Sikkert</h3>
+                <p>All bruk av BareFaktura.no går via krypterte forbindelser, og alle data blir sikkerhetskopiert daglig.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 well hidden-xs">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <h3>Enkelt</h3>
+                <p>All informasjon og funksjonalitet du behøver er umiddelbart tilgjengelig når du logger inn.</p>
+            </div>
+            <div class="col-sm-4 text-center" style="border-left: 1px dashed;">
+                <h3>Oversiktelig</h3>
+                <p>Brukervennlige sider sørger for at du slipper du å navigere gjennom kronglete menyer.</p>
+            </div>
+            <div class="col-sm-4 text-center" style="border-left: 1px dashed;">
+                <h3>Sikkert</h3>
+                <p>All bruk av BareFaktura.no går via krypterte forbindelser, og alle data blir sikkerhetskopiert daglig.</p>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <% unless signed_in? %>
+            <%= link_to 'Registrer Konto', new_user_registration_path, class:"btn btn-default btn-lg btn-block" %>
+        <% end %>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <hr class="divider">
+        <div class="media">
+            <div class="media-left media-middle text-center hidden-xs">
+                <i class="glyphicon glyphicon-list" style="font-size: 32px; color: #015D70; width: 100px;"></i>
+            </div>
+            <div class="media-body" >
+                <h4 class="media-heading text-muted">Fakturaliste</h4>
+                <p class="text-muted"><small>Alle dine fakturaer og den viktigste informasjonen på ett sted. Med et øyekast får du oversikt over utestående og forfalt beløp, hvilke fakturaer som krever handling og mer. </small></p>
+            </div>
+        </div>
+        <div class="media">
+            <div class="media-left media-middle text-center hidden-xs">
+                <i class="glyphicon glyphicon-user" style="font-size: 32px; color: #015D70; width: 100px;"></i>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading text-muted">Kunderegister</h4>
+                <p class="text-muted"><small>Når du lager en faktura vil mottakeren automatisk bli lagret som en ny kunde dersom kunden ikke finnes fra før. Du trenger med andre ord aldri å taste inn samme kundeinfo to ganger. I kunderegisteret kan du redigere og opprette nye kunder.</small></p>
+            </div>
+        </div>
+
+        <div class="media">
+            <div class="media-left media-middle text-center hidden-xs">
+                <i class="glyphicon glyphicon-shopping-cart" style="font-size: 32px; color: #015D70; width: 100px;"></i>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading text-muted">Produktregister</h4>
+                <p class="text-muted"><small>Fyll ditt produktregister med varer og tjenester som du regelmessig fakturerer for. Når en ny faktura skal opprettes velger du bare produkt(er) fra ditt produktregister og fyller inn antallet det skal faktureres for.</small></p>
+            </div>
+        </div>
+
+        <div class="media">
+            <div class="media-left media-middle text-center hidden-xs">
+                <i class="glyphicon glyphicon-plus" style="font-size: 32px; color: #015D70; width: 100px;"></i>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading text-muted">... og mye mer</h4>
+                <p class="text-muted"><small>Send faktura via epost, last ned som pdf eller generer en kreditnota. BareFaktura utvikles fortløpende og vårt mål er å tilby stadig flere, bedre og enda mer brukervennlige tjenester.</small></p>
+            </div>
+        </div>
+        <hr class="divider">
+    </div>
+</div>
+    <div class="col-sm-12 well">
+        <h3>Usikker på om BareFaktura passer for deg?</h3>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    Å "prøvekjøre" BareFaktura er så enkelt som å registrere en konto og sette i gang. Det tar bare noen sekunder.<br> Lag noen fiktive fakturaer og test systemet så lenge du ønsker.
+                </p>
+                <p>
+                    Når du etterhvert er klar for å ta BareFaktura i bruk til reell fakturering går du til "Min Profil", sletter kontoen din (dette er den eneste måten å bli kvitt testfakturaene du har laget), oppretter en ny konto og starter med blanke ark!
+                </p>
+            </div>
+        </div>
+    </div>
+
+<% unless signed_in? %>
+    <div class="row">
+        <div class="col-sm-12">
+            <%= link_to 'Registrer Konto', new_user_registration_path, class:"btn btn-default btn-lg btn-block" %>
+        </div>
+    </div>
+<% end %>

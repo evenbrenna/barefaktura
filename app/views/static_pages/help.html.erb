@@ -1,0 +1,168 @@
+<h1>Hjelp</h1>
+
+<p>
+    Det er vårt mål at BareFaktura skal være så lett å bruke at tjenesten er selvforklarende. Hvis det likevel er noe som er uklart er du velkommen til å sende spørsmål og/eller forslag til forbedringer til <%= mail_to 'post@barefaktura.no' %>. Under har vi beskrevet bruken av de viktigste funksjonene hos BareFaktura.
+</p>
+<p>
+    <ul class="list-inline">
+        <li>
+            <b>Hopp til:</b>
+        </li>
+        <li>
+            <a href="#minprofil">Min Profil</a>
+        </li>
+        <li>
+            <a href="#kunderegister">Kunderegister</a>
+        </li>
+        <li>
+            <a href="#produktregister">Produktregister</a>
+        </li>
+        <li>
+            <a href="#fakturaliste">Fakturaliste</a>
+        </li>
+    </ul>
+</p>
+
+
+<dl>
+    <dt id="minprofil"></dt>
+    <dd><h3>Min Profil</h3></dd>
+    <dt>Opprett konto</dt>
+    <dd>
+        <p>
+            Når du <%= link_to 'oppretter en konto', new_user_registration_path %> blir du bedt om en del informasjon. Her er nesten alle feltene obligatoriske. Dette er fordi informasjonen du oppgir her blir brukt når du skal generere fakturaer. Dersom du bare skal teste tjenesten og f.eks ikke har et organisasjonsnummer enda kan du fylle inn fiktiv informasjon. Alle felter kan endres i ettertid.
+        </p>
+    </dd>
+    <dt>Rediger profil</dt>
+    <dd>
+        <p>
+            For å redigere din profil klikker du på navnet ditt (øverst til høyre) og velger "Min Profil". Klikk på "Rediger Profil" og gjør ønskede endringer. Du må alltid oppgi ditt nåværende passord (nederste felt) før du lagrer. Dette er for å forhindre at andre skal kunne endre din konto (f.eks sette sitt eget kontonummer på dine fakturaer) dersom du glemmer å logge ut.
+        </p>
+    </dd>
+    <dt>Slett konto</dt>
+    <dd>
+        <p>
+            På siden for redigering av profil er det en knapp for å slette din konto. Alle dine fakturaer, kunder og produkter vil bli slettet permanent.
+        </p>
+    </dd>
+</dl>
+
+<dl>
+    <dt id="kunderegister"></dt>
+    <dd><h3>Kunderegister</h3></dd>
+    <dt>Opprett kunde</dt>
+    <dd>
+        <p>
+            Når du lager en faktura med en mottaker som ikke finnes i kunderegisteret vil kunden automatisk bli lagret. Det er flere grunner til dette, men den vikigste er at du skal slippe å fylle inn samme kundeinfo to ganger. Du kan også gå til kunderegisteret og klikke "Ny Kunde".<br>
+        </p>
+    </dd>
+    <dt>Vis kunde</dt>
+    <dd>
+        <p>
+            Gå til kunderegisteret og klikk på forstørrelsesglass-ikonet eller på kundens navn. Her vil du se kundens profil, alle fakturaer sendt til kunden, totalt fakturert med mer.
+        </p>
+    </dd>
+    <dt>Rediger kunde</dt>
+    <dd>
+        <p>
+            For å redigere en kunde går du til kunderegisteret og klikker på blyant-ikonet. Eventuelt kan du gå til kundens profil og klikke "Rediger Kunde" under kundens navn. Her kan du endre eller legge til ny informasjon. Du kan endre alle felter, inkludert navn, uten at du mister oversikten over kundens tidligere fakturaer.
+        </p>
+    </dd>
+    <dt>Slett Kunde</dt>
+    <dd>
+        <p>
+            Klikk på søppel-ikonet. Du kan kun slette kunder som ikke har assosierte fakturaer. Systemet krever at alle fakturaer er tilknyttet en kunde i kunderegisteret.
+        </p>
+    </dd>
+</dl>
+
+<dl>
+    <dt id="produktregister"></dt>
+    <dd><h3>Produktregister</h3></dd>
+    <dt>Opprette produkt</dt>
+    <dd>
+        <p>
+            Gå til produktregisteret og klikk "Nytt Produkt". Alle feltene må fylles ut. Når du senere legger produktet til på en faktura kan du, om ønskelig, gjøre endringer som kun vil gjelde den aktuelle fakturaen.
+        </p>
+    </dd>
+    <dt>Redigere produkt</dt>
+    <dd>
+        <p>
+            For å permanent redigere et produkt går du til produktregisteret og klikker på blyant-ikonet.
+        </p>
+    </dd>
+    <dt>Slette produkt</dt>
+    <dd>
+        <p>
+            For å slette et produkt klikker du søppel-ikonet for ønsket produkt i produktregisteret.
+        </p>
+    </dd>
+</dl>
+
+<dl>
+    <dt id="fakturaliste"></dt>
+    <dd><h3>Fakturaliste</h3></dd>
+    <dt>Oversikt</dt>
+    <dd>
+        <p>
+             Øverst på siden er det en oversikt over totalt utestående beløp, eventuelt forfalt beløp og annen nøkkelinformasjon. I fakturalisten vil du se alle dine fakturaer sortert etter fakturanummer. Forfalte fakturaer vil være markert med rødt.For hver faktura finnes det knapper for en rekke handlinger i høyre kolonne. Ved å holde pekeren over en knapp vil du se hva knappen gjør. Det er også en forklaring under fakturalisten. Disse handlingene er nærmere beskrevet i punktene under.
+        </p>
+    </dd>
+    <dt>Opprette faktura</dt>
+    <dd>
+        <p>
+            Klikk "Ny Faktura" øverst i fakturalisten. Alle felt markert med '*' må fylles ut. Dersom du velger en kunde fra nedtrekksmenyen vil kundeinformasjon fylles ut automatisk. Du kan fritt endre ett eller flere felter. Disse endringene vil kun gjelde for den aktuelle fakturaen. For eksempel kan leveringsadresse være en annen for denne fakturaen enn kundens lagrede leveringsadresse. Permanente endringer av kundeinformasjon må gjøres i kunderegisteret.
+        </p>
+        <p>
+            Fakturanummer settes automatisk. Dersom du må endre nummerserie kan du bestemme hva neste fakturanummer skal være under "Min Profil". Merk at fakturanummer må være et tall (uten andre tegn eller mellomrom). Du kan altså ikke ha fakturanummer som f.eks "2015-001".
+        </p>
+        <p>
+            Ordredato er valgfritt å fylle inn. Leveringsdato og forfallsdato forhåndsutfylles med henholdsvis dagens dato og 14 dager frem i tid. Disse kan selvfølgelig endres. Fakturadato settes automatisk til dagens dato og vil fremkomme på fakturaen når den er lagret.
+        </p>
+        <p>
+            I feltet for beskirvelse anbefaler vi å fylle inn en oppsummerende setning eller to som gjør det lett for både kunden og deg selv å se hva fakturaen gjelder. Ved oppretting av kreditnota vil "Kreditnota for faktura X" fylles inn automatisk.
+        </p>
+        <p>
+            For å legge til varer/tjenester fyller du enten ut feltene manuelt eller velger et lagret produkt fra nedtrekksmenyen. Hvis du velger fra produktregister må du huske å fylle ut antall. Du kan også endre de automatisk utfyllte feltene om ønskelig. For å legge til flere produkter klikker du "Legg til produkt/tjeneste" og gjentar.
+        </p>
+        <p>
+            Når du er ferdig klikker du lagre. Du vil se en påminnelse om at en lagret faktura ikke kan slettes eller endres. (En faktura med feil kan oppheves ved å lage en kreditnota for hele fakturabeløpet.) Klikk ok for å lagre eller avbryt for å gjøre endringer. Dersom alle obligatoriske felter er korrekt utfyllt vil fakturaen lagres og bli vist i fakturalisten. Dersom det finnes feil i skjemaet vil du bli bedt om å korrigere disse.
+        </p>
+    </dd>
+    <dt>Vis faktura</dt>
+    <dd>
+        <p>
+            Klikk forstørrelsesglass-ikonet i fakturalisten for å gå til visningssiden. Nederst på siden er det en knapp for å skrive ut fakturaen. Dette er kun en visningsside og ingen endringer kan gjøres.
+        </p>
+    </dd>
+    <dt>Last ned PDF</dt>
+    <dd>
+        <p>
+            For å laste ned en faktura i pdf-format klikker du på last-ned-ikonet i fakturalisten.
+        </p>
+    </dd>
+    <dt>Send på epost</dt>
+    <dd>
+        <p>
+            Klikk på send-ikonet for å åpne en forhåndsvisning av eposten som vil bli sendt til kunden. Her kan du legge til tekst om ønskelig. Dersom fakturaen allerede er sendt vil ikonet være grått og du vil få en advarsel i forhåndsvisningen. Dersom du ser at kundens epostadresse er feil må du gå til kunderegisteret og endre kundens epost der. Åpne deretter send-vinduet på nytt. Forhåndsvisningen vil da vise den oppdaterte informasjonen.
+        </p>
+    </dd>
+    <dt>Kreditnota</dt>
+    <dd>
+        <p>
+            For å oppheve en faktura (eller deler av en faktura), må du lage en kreditnota. Klikk ikonet med et kryss i fakturalisten. Du vil få opp en forhåndsutfyllt kreditnota for den aktuelle fakturaen. Dersom bare deler av fakturaen skal krediteres kan du endre antall og/eller pris på varene. Hvis hele fakturaen skal krediteres klikker du lagre uten å gjøre endringer.
+        </p>
+        <p>
+            Beskrivelse-feltet er forhåndsutfyllt med "Kreditnota for faktura X". Det er viktig at det fremgår hvilken faktura kreditnotaen gjelder, så vi anbefaler at du ikke endrer dette. Du kan eventuelt legge til utfyllende informasjon.
+        </p>
+        <p>
+            Dersom du krediterer en faktura må du huske å markere den krediterte fakturaen som betalt. Dette skjer ikke automatisk ettersom systemet ikke vet om du har kreditert hele eller deler av fakturaen.
+        </p>
+    </dd>
+    <dt>Marker faktura som betalt</dt>
+    <dd>
+        <p>
+            For å markere en faktura som betalt klikker du knappen lengst til høyre. Klikk en gang til for å markere som ikke betalt. Utestående/forfalt beløp oppdateres umiddelbart.
+        </p>
+    </dd>
+</dl>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  client_id: 1
+  invoice_number: 1
+  order_date: 2014-12-25
+  delivery_date: 2014-12-25
+  total: 9.99
+  currency: MyString
+
+two:
+  user_id: 1
+  client_id: 1
+  invoice_number: 1
+  order_date: 2014-12-25
+  delivery_date: 2014-12-25
+  total: 9.99
+  currency: MyString

@@ -1,0 +1,56 @@
+<h1>Ny Kunde</h1><br>
+
+<%= form_for @client, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%= render 'shared/client_error_messages' %>
+
+  <div class="form-group">
+    <%= f.label :name, 'Navn *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :org_nr, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :org_nr, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :ref, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :ref, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+    <%= f.text_field :address, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :delivery_address, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+    <%= f.text_field :delivery_address, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+    <%= f.text_field :email, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.submit "Opprett Kunde", class:'btn btn-primary'%>
+      <%= link_to "Avbryt", clients_path, class:'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

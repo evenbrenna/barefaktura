@@ -1,0 +1,169 @@
+<h1>Rediger Profil</h1><br>
+
+<p class="text-muted">
+  Informasjonen du oppgir her vil bli brukt på dine fakturaer. Dersom et firma skal stå som avsender er det firmaets navn som skal fylles inn. Oppgi eventuelt ditt eget navn som "Vår Ref". Epostadressen du oppgir vil stå som avsender når du fakturerer kunder via epost.
+</p>
+<br>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal' }) do |f| %>
+
+  <%= render 'shared/user_error_messages' %>
+
+  <!-- Name -->
+  <div class="form-group">
+    <%= f.label :name, 'Navn *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :name, autofocus: true, class:"form-control", placeholder:'Fornavn Etternavn / Firma' %>
+    </div>
+  </div>
+
+  <!-- Ref -->
+  <div class="form-group">
+    <%= f.label :ref, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :ref, class:"form-control" %>
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="form-group">
+    <%= f.label :email, 'Epost *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.email_field :email, class:"form-control", placeholder:'navn@eksempel.no' %>
+    </div>
+  </div>
+
+  <!-- Waiting for email confirmation -->
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <p class="help-block">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+  <% end %>
+
+  <!-- Change Password -->
+  <div class="form-group">
+    <%= f.label :password, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.password_field :password, autocomplete: "off", class:"form-control", :placeholder => "La stå tom om du ikke ønsker å endre passord." %>
+    </div>
+  </div>
+
+  <!-- Confirm Change Password -->
+  <div class="form-group">
+    <%= f.label :password_confirmation, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", :placeholder => "La stå tom om du ikke ønsker å endre passord." %>
+    </div>
+  </div>
+
+  <p>&nbsp;</p>
+
+  <!-- Address -->
+  <div class="form-group">
+    <%= f.label :address, 'Adresse *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :address, class:"form-control", placeholder:'Eksempelgata 1, 0123 Andeby' %>
+    </div>
+  </div>
+
+  <!-- Phone number -->
+  <div class="form-group">
+    <%= f.label :phone, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :phone, class:"form-control", placeholder:'(+47) 999 99 999' %>
+    </div>
+  </div>
+
+  <!-- Org Number -->
+  <div class="form-group">
+    <%= f.label :org_number, 'Org.nr *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :org_number, :placeholder => '012345678', class:"form-control" %>
+    </div>
+  </div>
+
+  <!-- Foretaks Reg -->
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :foretaks_reg %> Registrert i Foretaksregisteret
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- MVA Reg -->
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :mva_reg %> Registrert i Merverdiavgiftsregisteret
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <p>&nbsp;</p>
+
+  <!-- Neste Faktura -->
+  <div class="form-group">
+    <%= f.label :next_invoice_number, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.number_field :next_invoice_number, class:"form-control" %>
+    </div>
+  </div>
+
+  <!-- Bank Name -->
+  <div class="form-group">
+    <%= f.label :bank_name, 'Bank *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :bank_name, class:"form-control", placeholder:'Din Bank' %>
+    </div>
+  </div>
+
+  <!-- Account Number -->
+  <div class="form-group">
+    <%= f.label :bank_account, 'Kontonummer *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :bank_account, class:"form-control", placeholder:'9999 99 99999' %>
+    </div>
+  </div>
+
+  <!-- SWIFT -->
+  <div class="form-group">
+    <%= f.label :bank_swift, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :bank_swift, class:"form-control", placeholder:'XXXXXXXX' %>
+    </div>
+  </div>
+
+  <!-- IBAN -->
+  <div class="form-group">
+    <%= f.label :bank_iban, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :bank_iban, class:"form-control", placeholder:'XXXX 9999.99.99999' %>
+    </div>
+  </div>
+
+  <p>&nbsp;</p>
+
+  <!-- Password To Confirm Changes -->
+  <div class="form-group">
+    <%= f.label :current_password, 'Ditt Passord *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.password_field :current_password, autocomplete: "off", class:"form-control", :placeholder => "Skriv passord for å bekrefte endringer." %>
+    </div>
+  </div>
+
+  <p>&nbsp;</p>
+
+  <!-- Buttons -->
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.submit "Oppdater", class:'btn btn-primary' %>
+      <%= link_to "Avbryt", current_user, class:'btn btn-default' %>
+      <%= link_to 'Slett Konto', user_registration_path, class:'btn btn-default', data: {:confirm => 'Er du sikker på at du vil slette din konto? Alle fakturaer, kunder og produkter vil bli slettet.'}, :method => :delete %>
+    </div>
+  </div>
+
+<% end %>
+

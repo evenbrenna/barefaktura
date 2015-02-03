@@ -1,0 +1,11 @@
+
+<div class="container invoicewidth">
+
+    <%= render partial: 'invoices/partials/invoice_layout' %>
+
+    <div class="row hidden-print text-right">
+        <br><br>
+        <%= link_to 'Skriv Ut', '#', :onclick => 'window.print();return false;', class:'btn btn-default btn-block'%>
+        <%= link_to 'Lukk', :back, class:'btn btn-default btn-block' %>
+    </div>
+</div>

@@ -1,0 +1,206 @@
+<h1>Ny Faktura</h1><br>
+
+<%= javascript_tag do %>
+  userProducts = <%= raw @products.to_json %>
+<% end %>
+
+<%= form_for @invoice, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <% if @invoice.errors.any? %>
+    <div id="">
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        Skjemaet inneholder <%= @invoice.errors.count %> feil. <br><br>
+        <ul class="">
+          <% @invoice.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <h3>Kundedetaljer</h3>
+  <p>Velg en kunde fra listen eller opprett en ny kunde ved å fylle ut feltene manuelt. Dersom du endrer på feltene for en lagret kunde vil endringene kun være gyldige for denne fakturaen. Vil du endre en kundeoppføring permanent må du gå til kunderegisteret ditt og klikke rediger kunde.</p><br>
+
+  <div class="form-group">
+    <%= label_tag 'kundevalg', 'Velg Kunde', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+    <%= f.select :client_id, @client_list, {include_blank: "Ny Kunde"}, { :class => 'form-control' } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :client_name, 'Navn *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :client_name, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :client_email, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :client_email, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :client_org_nr, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :client_org_nr, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :client_ref, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :client_ref, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :client_address, 'Adresse *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :client_address, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :delivery_address, 'Leveringsadresse *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :delivery_address, class:"form-control" %>
+    </div>
+  </div>
+
+<br><br>
+
+<h3>Fakturadetaljer</h3>
+
+  <div class="form-group">
+    <%= f.label :invoice_number, 'Fakturanummer *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.number_field :invoice_number, readonly: true, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :user_ref, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :user_ref, value: @user.ref, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :order_date, class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
+        <%= f.text_field :order_date, 'data-provide' => 'datepicker', 'data-date-format' => "dd/mm/yyyy", 'placeholder' => 'dd/mm/yyyy', class:"form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :delivery_date, 'Leveringsdato *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
+        <%= f.text_field :delivery_date, 'data-provide' => 'datepicker', 'data-date-format' => "dd/mm/yyyy", 'value' => DateTime.now.to_date.strftime('%d/%m/%Y'), class:"form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :due_date, 'Forfallsdato *', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
+        <%= f.text_field :due_date, 'data-provide' => 'datepicker', 'data-date-format' => "dd/mm/yyyy", 'value' => (DateTime.now.to_date + 14).strftime('%d/%m/%Y'), class:"form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :notes, 'Beskrivelse', class:"col-sm-3 control-label" %>
+    <div class="col-sm-9">
+    <%= f.text_area :notes, class:"form-control", 'placeholder' => 'En beskrivende oppsummering av fakturaen' %>
+    </div>
+  </div>
+
+  <div id="itemList">
+    <%= f.fields_for :invoice_items do |item| %>
+
+      <div class="itempadding grad">
+        <h3>Produkt/Tjeneste</h3>
+
+        <div class="form-group">
+          <%= label_tag 'produktvalg', '', class:"col-sm-3 control-label" %>
+          <div class="col-sm-9">
+          <%= select_tag 'products', options_from_collection_for_select(@products, "id", :product_with_number), {include_blank: 'Hent fra produktregister', class: 'form-control'} %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= item.label :quantity, 'Antall *', class:"col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <%= item.text_field :quantity, class:"form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= item.label :unit, 'Enhet (timer, kg, ...) *', class:"col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <%= item.text_field :unit, class:"form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= item.label :description, 'Beskrivelse *', class:"col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <%= item.text_field :description, class:"form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= item.label :unit_price, 'Pris per enhet *', class:"col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <div class="input-group">
+                <%= item.text_field :unit_price, class:"form-control" %>
+                <div class="input-group-addon">kr</div>
+              </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= item.label :vat, 'MVA *', class:"col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <%= item.select :vat, [['0%', 0], ['8%', 8], ['15%', 15], ['25%', 25]], {include_blank: "Velg mva-sats"}, { :class => 'form-control' } %>
+          </div>
+        </div>
+
+      </div>
+
+    <% end %>
+  </div>
+
+  <br>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= submit_tag "+ Legg til produkt/tjeneste", :type => 'button', :id => 'addItem', :onclick => 'addItemField()', class:'btn btn-default btn-block' %>
+    </div>
+  </div>
+
+  <%= f.hidden_field :currency, :value => 'kr' %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.submit "Lagre", class:'btn btn-primary', data: { confirm: 'En lagret faktura kan ikke slettes eller endres. Er du sikker på at alle felt er korrekt utfyllt?' } %>
+      <%= link_to "Avbryt", invoices_path, class:'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
+

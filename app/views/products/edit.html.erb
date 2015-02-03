@@ -1,0 +1,51 @@
+<h1>Nytt Produkt</h1><br>
+
+<%= form_for @product, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%= render 'shared/product_error_messages' %>
+
+  <p>Alle felt må fylles ut.</p>
+
+  <div class="form-group">
+    <%= f.label :product_number, class:"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :product_number, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, class:"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :description, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :unit, class:"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :unit, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price, class:"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_field :price, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :vat, class:"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.select :vat, [['0%', 0], ['8%', 8], ['15%', 15], ['25%', 25]], {include_blank: "Velg mva-sats"}, { :class => 'form-control' } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit "Save", class:'btn btn-primary'%>
+      <%= link_to "Cancel", products_path, class:'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

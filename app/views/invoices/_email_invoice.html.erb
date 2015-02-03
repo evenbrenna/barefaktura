@@ -1,0 +1,64 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Send Faktura</h4>
+    </div>
+    <div class="modal-body">
+
+        <% if @invoice.sends != 0 %>
+            <div class="alert alert-danger" role="alert">
+                Denne <%= @type %>en er allerede sendt. Er du sikker på at du vil sende på nytt?
+            </div>
+        <% end %>
+
+        <%= form_tag(send_email_invoice_path) do %>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="muted">
+                        <small>
+                        <b>Til: </b><%= @client.name %> &lt;<%= @client.email %>&gt;<br>
+                        <b>Fra: </b><%= @user.name %> &lt;<%= @user.email %>&gt;<br>
+                        <b>Blindkopi: </b><%= @user.name %> &lt;<%= @user.email %>&gt;<br>
+                        <b>Vedlegg: </b><%= @type %>_<%= @invoice.invoice_number %>.pdf
+                        </small>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <h1><%= @type.capitalize %> <%= @invoice.invoice_number %></h1>
+
+                    <div class="form-group">
+                        <%= text_area_tag 'message', (@invoice.notes + "\n\n" + "Mvh,\n" + @user.name), class: 'form-control', rows: 6,
+                            placeholder: 'Beskjed til mottaker.', autofocus: true %>
+                    </div>
+
+                    <u><b>Oppsummering:</u></b><br>
+                    <%= @type.capitalize %>nummer: <%= @invoice.invoice_number %><br>
+                    Fra: <%= @user.name %><br>
+                    Forfallsdato: <%= @invoice.kreditnota ? '--/--/----' : @invoice.due_date.strftime('%d/%m/%Y') %><br>
+                    <% unless @invoice.kreditnota %>
+                        Kontonummer: <%= @user.bank_account %><br>
+                    <% end %>
+                    Totalt <%= @invoice.kreditnota ? 'kreditert' : 'å betale' %>:  <%= number_with_precision(@invoice.total, :precision => 2) %> <%= @invoice.currency %><br><br>
+
+
+                    <p>
+                        ---<br>
+                        <%= @type.capitalize %> er vedlagt i pdf-format.<br>
+                        <em>Sendt med <a href="http://www.barefaktura.no">BareFaktura.no</a></em><p>
+                    </p>
+
+
+                </div>
+            </div>
+
+            <%= hidden_field_tag 'id', @invoice.id %>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+        <%= submit_tag 'Send faktura', class: 'btn btn-primary' %>
+       <% end %>
+    </div>
+</div>

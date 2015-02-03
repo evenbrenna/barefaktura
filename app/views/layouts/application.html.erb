@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+    <head lang="en">
+        <title>BareFaktura</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        <%= csrf_meta_tags %>
+        <%= google_webfonts_init( { google: ['Open Sans', 'Lato', 'Fauna One'] } ) %>
+    </head>
+
+    <body>
+        <div class="container">
+
+            <%= render partial: 'layouts/partials/navigation' %>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <!-- Alerts and Messages -->
+                    <% if flash[:notice] %>
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <%= flash[:notice] %>
+                        </div>
+                    <% end %>
+
+                    <% if flash[:alert] %>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <%= flash[:alert] %>
+                        </div>
+                    <% end %>
+
+                    <!-- Main Content -->
+                    <%= yield %>
+
+                </div>
+                <!-- <div class="col-md-4">
+                    <%= render partial: 'layouts/partials/sidebar' %>
+                </div> -->
+            </div>
+        </div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+
+    </body>
+    <footer class="footer hidden-print">
+        <%= render partial: 'layouts/partials/footer' %>
+    </footer>
+</html>

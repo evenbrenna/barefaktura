@@ -1,0 +1,230 @@
+    <!-- RAD -->
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-no-border">
+                <tr>
+                    <td style="border-left: 1px dashed">
+                        <strong><%= @invoice.user_name.split.map(&:capitalize).join(' ') %></strong><br>
+                        <small>
+                            <%= @invoice.user_org_number %><br />
+                            <%= @invoice.user_address %><br />
+                            Email: <%= @invoice.user_email %><br />
+                            <% if @invoice.user_phone? %>
+                                Telefon: <%= @invoice.user_phone %>
+                            <% end %>
+                        </small>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+
+    </div>
+
+
+    <!-- RAD -->
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+
+        <div class="col-xs-12">
+            <table class="table table-condensed table-no-border">
+                <tr colspan="2">
+                    <th class="col-xs-6"></th>
+                    <th></th>
+                    <th>
+                        <% if @invoice.kreditnota %>
+                            <h3>KREDITNOTA <%= @invoice.invoice_number %></h3>
+                        <% else %>
+                            <h3>FAKTURA <%= @invoice.invoice_number %></h3>
+                        <% end %>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <strong><%= @invoice.client_name %></strong><br>
+                        <% if @invoice.client_org_nr? %>
+                            Org.nr: <%= @invoice.client_org_nr %> <br>
+                        <% end %>
+                        <%= @invoice.client_address %><br>
+                        <br>
+                        Leveringsadresse:<br>
+                        <%= @invoice.delivery_address %><br>
+                    </td>
+                    <td></td>
+                    <td>
+                        Bank: <br>
+                        Kontonr.: <br>
+                        <% if @invoice.user_bank_swift? %>
+                            BIC/SWIFT: <br>
+                        <% end %>
+                        <% if @invoice.user_bank_iban? %>
+                            IBAN: <br>
+                        <% end %>
+                        <br>
+                        <% if @invoice.user_ref? %>
+                            Vår ref: <br>
+                        <% end %>
+                        <% if @invoice.client_ref? %>
+                            Deres ref: <br>
+                        <% end %>
+                        <% if @invoice.order_date? %>
+                            Ordredato: <br>
+                        <% end %>
+                        Leveringsdato: <br>
+                        <br>
+                        Dato: <br>
+                        Forfallsdato: <br>
+                        <br>
+                    </td>
+                    <td>
+                        <%= @invoice.user_bank_name %><br>
+                            <%= @invoice.user_bank_account %><br>
+                        <% if @invoice.user_bank_iban? %>
+                            <%= @invoice.user_bank_swift %><br>
+                        <% end %>
+                        <% if @invoice.user_bank_swift? %>
+                            <%= @invoice.user_bank_iban %><br>
+                        <% end %>
+                        <br>
+                        <% if @invoice.user_ref? %>
+                            <%= @invoice.user_ref %><br>
+                        <% end %>
+                        <% if @invoice.client_ref? %>
+                            <%= @invoice.client_ref %><br>
+                        <% end %>
+                        <% if @invoice.order_date? %>
+                            <%= @invoice.order_date %><br>
+                        <% end %>
+                        <%= @invoice.delivery_date %><br>
+                        <br>
+                        <%= @invoice.created_at.strftime('%d/%m/%Y') %><br>
+                        <% if @invoice.kreditnota %>
+                            --/--/----<br>
+                        <% else %>
+                            <%= @invoice.due_date.strftime('%d/%m/%Y') %><br>
+                        <% end %>
+                        <br>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+
+    <% if @invoice.notes? %>
+        <div class="row">
+            <div class="col-xs-12">
+                <p>
+                    <%= @invoice.notes %>
+                </p>
+            </div>
+        </div>
+    <% end %>
+
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Beskrivelse</th>
+                        <th class="text-right">Antall</th>
+                        <th class="text-right">Enhet</th>
+                        <th class="text-right">Pris (kr)</th>
+                        <th class="text-right">MVA</th>
+                        <th class="text-right">Sum (kr)</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% total = 0 %>
+                    <% ex_mva = 0 %>
+                    <% flere_mva = 0 %>
+                    <% @invoice.invoice_items.each do |item| %>
+                        <% total += (item.quantity * item.unit_price + (item.quantity * item.unit_price * item.vat / 100)) %>
+                        <% ex_mva += (item.quantity * item.unit_price) %>
+                        <tr>
+                          <td><%= item["description"] %></td>
+                          <td class="text-right"><%= number_with_precision(item.quantity, :precision => 2) %> </td>
+                          <td class="text-right"><%= item.unit %></td>
+                          <td class="text-right"><%= number_with_precision(item.unit_price, :precision => 2) %></td>
+                          <td class="text-right"><%= item.vat %> %</td>
+                          <td class="text-right"><%= number_with_precision(item.quantity * item.unit_price + (item.quantity * item.unit_price * item.vat / 100), :precision => 2) %></td>
+                        </tr>
+                    <% end %>
+                    <tr style="border-top: 2px solid #ccc">
+                        <td class="text-muted"><small>
+                            <% mva_total = 0 %>
+                            <% unless finn_grunnlag(@invoice, 0) == 0 %>
+                                <% flere_mva += 1 %>
+                                <% if multiple_mva(@invoice) %>
+                                    mva-fritt: <%= number_with_precision(finn_grunnlag(@invoice, 0), :precision => 2) %><br>
+                                <% end %>
+                            <% end %>
+                            <% unless (grunnlag = finn_grunnlag(@invoice, 8)) == 0 %>
+                                <% flere_mva += 1 %>
+                                <% mva_total += (grunnlag * 0.08) %>
+                                <% if multiple_mva(@invoice) %>
+                                    mva 8%: <%= number_with_precision((grunnlag * 0.08), :precision => 2) %>
+                                    | grunnlag: <%= number_with_precision(finn_grunnlag(@invoice, 8), :precision => 2) %> <br>
+                                <% end %>
+                            <% end %>
+                            <% unless (grunnlag = finn_grunnlag(@invoice, 15)) == 0 %>
+                                <% flere_mva += 1 %>
+                                <% mva_total += (grunnlag * 0.15) %>
+                                <% if multiple_mva(@invoice) %>
+                                    mva 15%: <%= number_with_precision((grunnlag * 0.15), :precision => 2) %>
+                                    | grunnlag: <%= number_with_precision(finn_grunnlag(@invoice, 15), :precision => 2) %> <br>
+                                <% end %>
+                            <% end %>
+                            <% unless (grunnlag = finn_grunnlag(@invoice, 25)) == 0 %>
+                                <% flere_mva += 1 %>
+                                <% mva_total += (grunnlag * 0.25) %>
+                                <% if multiple_mva(@invoice) %>
+                                    mva 25%: <%= number_with_precision((grunnlag * 0.25), :precision => 2) %>
+                                    | grunnlag: <%= number_with_precision(finn_grunnlag(@invoice, 25), :precision => 2) %> <br>
+                                <% end %>
+                            <% end %></small>
+
+                        </td>
+                        <td class="text-right" colspan="4">
+                            ekskl. mva: <br>
+                            mva: <br>
+                        </td>
+
+                        <td class="text-right">
+                            <%= number_with_precision(ex_mva, :precision => 2) %><br>
+                            <%= number_with_precision(mva_total, :precision => 2) %><br>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 2px solid">
+                        <td colspan="5" class="text-right">
+                            <% if @invoice.kreditnota %>
+                                <strong>Totalt kreditert: </strong>
+                            <% else %>
+                                <strong>Totalt å betale: </strong>
+                            <% end %>
+                        </td>
+                        <td class="text-right">
+                            <strong><%= number_with_precision(total, :precision => 2) %> </strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+

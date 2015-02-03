@@ -1,0 +1,19 @@
+<h1>Produkt #<%= @product.product_number %></h1><br>
+<p><%= link_to 'Rediger Produkt', edit_product_path(@product), class:'btn btn-default btn-block' %></p><br>
+
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <strong>Beskrivelse:</strong><br><%= @product.description %>
+    </p>
+    <p>
+      <strong>Enhet:</strong><br><%= @product.unit %>
+    </p>
+    <p>
+      <strong>MVA:</strong><br><%= @product.vat %>
+    </p>
+    <p>
+      <strong>Pris:</strong><br><%= number_with_precision(@product.price, :precision => 2) %> kr
+    </p>
+  </div>
+</div>

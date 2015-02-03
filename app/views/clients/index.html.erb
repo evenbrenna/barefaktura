@@ -1,0 +1,53 @@
+  <h1>Mine Kunder</h1><br>
+  <p><%= link_to '+ Ny Kunde', new_client_path, class:'btn btn-default btn-block' %></p><br>
+
+<% if @clients.count == 0 %>
+  <p>Her vil du se dine lagrede kunder/kontakter. Det vil etterhvert bli mulig å velge mellom lagrede kunder eller å skrive inn info direkte når du oppretter en faktura, men foreløpig er du nødt til å lagre en kunde her før du kan fakturere vedkommende.</p>
+<% else %>
+  <div class="table-responsive">
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Adresse</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @clients.each do |client| %>
+          <tr>
+            <td><%= link_to client.name, client %></td>
+            <td><%= client.address %></td>
+            <td><%= client.email %></td>
+            <td class="text-right" style="min-width: 100px">
+              <div class="btn-group">
+                <%= link_to client, class: "btn btn-default btn-xs" do %>
+                  <i class="glyphicon glyphicon-zoom-in"></i>
+                <% end %>&nbsp;
+                <%= link_to edit_client_path(client), class: "btn btn-default btn-xs" do %>
+                  <i class="glyphicon glyphicon-pencil"></i>
+                <% end %>&nbsp;
+                <%= link_to client, method: :delete, data: { confirm: 'Sikker? Sletting kan ikke angres. (Dersom kunden allerede har assosierte fakturaer vil sletting ikke være mulig.)' }, class: "btn btn-default btn-xs" do %>
+                  <i class="glyphicon glyphicon-trash"></i>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+<!-- IKON FORKLARINGER -->
+<div class="text-muted text-center">
+  <small>
+  <ul class="list-inline">
+    <li><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;&nbsp;Se kundeinfo.</li>
+    <li><i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Rediger kunde.</li>
+    <li><i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Slett kunde. (Kun mulig for kunder uten fakturaer.)</li>
+  </ul>
+  </small>
+</div>
+<% end %>

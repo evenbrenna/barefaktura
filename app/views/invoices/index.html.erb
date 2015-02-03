@@ -1,0 +1,21 @@
+<h1>Mine Fakturaer</h1><br>
+<p><%= link_to '+ Ny Faktura', new_invoice_path, class:'btn btn-default btn-block' %></p><br>
+<% if @invoices.count == 0 %>
+  <p>Dine lagrede fakturaer vil dukke opp her.</p>
+<% else %>
+  <% if outstanding_count == 0 %>
+    <p>Du har ingen utestående fakturaer.</p><br>
+  <% else %>
+    <p>
+      Du har <%= pluralize(outstanding_count, 'faktura', 'fakturaer') %> utestående, hvorav <%= overdue_count %> er forfalt.
+    </p>
+    <p>
+      <strong>Forfalt beløp: </strong><%= number_to_currency(overdue_amount) %><br>
+      <strong>Totalt utestående: </strong><%= number_to_currency(outstanding_amount) %><br>
+    </p>
+    <br>
+  <% end %>
+  <%= render partial: 'invoices/partials/invoice_list' %>
+
+<% end %>
+

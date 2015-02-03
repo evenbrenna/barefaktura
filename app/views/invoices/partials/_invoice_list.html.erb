@@ -1,0 +1,100 @@
+  <!-- FAKTURALISTE -->
+  <div class="table-responsive">
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th class="text-left">#</th>
+          <th class="text-left">Kunde</th>
+          <th class="text-left">Forfall</th>
+          <th class="text-right">Beløp</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @invoices.each do |invoice| %>
+          <tr class="<%= rowcolor(invoice) %>">
+            <!-- # -->
+            <td class="text-left"><%= invoice.invoice_number %></td>
+            <!-- Kunde -->
+            <td><%= link_to invoice.client.name, invoice.client %></td>
+            <!-- Forfall -->
+            <td>
+              <% if invoice.kreditnota %>
+                Kreditnota
+              <% else %>
+                <%= invoice.due_date.strftime('%d/%m/%Y') %>
+              <% end %>
+            </td>
+            <!-- Beløp -->
+            <td class="text-right"><%= number_with_precision(invoice.total, :precision => 2) %> <%= invoice.currency %></td>
+            <!-- Meny -->
+            <td class="text-right" style="min-width: 140px">
+              <div class="btn-group">
+                <!-- Åpne -->
+                <%= link_to invoice, title: "Åpne faktura", class: "btn btn-default btn-xs" do %>
+                  <i class="glyphicon glyphicon-zoom-in"></i>
+                <% end %>
+                <!-- PDF -->
+                <%= link_to invoice_path(invoice, :format => :pdf), title: "Last ned som PDF", class: "btn btn-default btn-xs" do %>
+                  <i class="glyphicon glyphicon-save"></i>
+                <% end %>
+                <!-- Send -->
+                <% if invoice.client.email.blank? %>
+                  <%= link_to '#', data: { :confirm => 'Du har ikke lagt inn en epost-adresse for denne kunden.'}, title: "Ingen lagret epostadresse for kunden", class: "btn btn-default btn-xs" do %>
+                      <i class="glyphicon glyphicon-ban-circle" style="color: #BD362F"></i>
+                    <% end %>
+                <% else %>
+                  <% if invoice.sends == 0 %>
+                    <%= link_to email_invoice_path(:id => invoice.id), { :title => "Send faktura til kunde", :remote => true, 'class' => "btn btn-default btn-xs", 'data-toggle' =>  "modal", 'data-target' => '#modal-invoice-email-window'} do %>
+                      <i class="glyphicon glyphicon-send"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to email_invoice_path(:id => invoice.id), { :title => "Send på nytt", :remote => true, 'class' => "btn btn-default btn-xs", 'data-toggle' =>  "modal", 'data-target' => '#modal-invoice-email-window'} do %>
+                      <i class="glyphicon glyphicon-send" style="color: #777"></i>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                <!-- Kreditnota -->
+                <% if invoice.kreditnota %>
+                  <%= link_to '#', title: "Kan ikke kreditere en kreditnota", class: "btn btn-default btn-xs" do %>
+                    <i class="glyphicon glyphicon-ban-circle" style="color: #777"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to kreditnota_path(:id => invoice.id), title: "Lag Kreditnota", class: "btn btn-default btn-xs" do %>
+                    <i class="glyphicon glyphicon-remove"></i>
+                  <% end %>
+                <% end %>
+                <!-- Marker Betalt -->
+                <% if invoice.paid %>
+                  <%= link_to set_paid_invoice_path(invoice, paid: false), title: "Marker som ikke betalt", class: "btn btn-default btn-xs" do %>
+                      <i class="glyphicon glyphicon-ok-sign"></i> <% end %>
+                <% else %>
+                      <%= link_to set_paid_invoice_path(invoice, paid: true), title: "Marker som betalt", class: "btn btn-default btn-xs" do %>
+                      <i class="glyphicon glyphicon-ok-circle" style="color: #777"></i><% end %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- IKON FORKLARINGER -->
+  <div class="text-muted text-center">
+    <small>
+    <ul class="list-inline">
+      <li><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;&nbsp;Se faktura.</li>
+      <li><i class="glyphicon glyphicon-save"></i>&nbsp;&nbsp;Last ned  PDF.</li>
+      <li><i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;Send til kunde på epost.</li>
+      <li><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;Lag kreditnota.</li>
+      <li><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;&nbsp;Marker som betalt/ikke betalt.</li>
+    </ul>
+    </small>
+  </div>
+
+  <!-- Modal Div -->
+<div class="modal fade" id="modal-invoice-email-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" id="render-here"></div>
+</div>

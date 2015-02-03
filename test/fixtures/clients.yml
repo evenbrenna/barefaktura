@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Client One
+  org_nr: 232 232 232
+  ref:
+  address: Postboks 2323 Grønnland, 3434 Andeby
+  delivery_address: Andeveien 23, 5932 Andeby
+  email: clientone@test.no
+  user_id: 1
+
+two:
+  name: Client Industries
+  org_nr: 432 232 232
+  ref: Sjef Sjefesen
+  address: Testeveien 23, 2323 Oslo
+  delivery_address: Andeveien 23, 5932 Andeby
+  email: firma@client.com
+  user_id: 2

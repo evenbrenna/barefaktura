@@ -1,0 +1,63 @@
+<h1>Mine Produkter</h1><br>
+
+<p><%= link_to '+ Nytt Produkt', new_product_path, class:'btn btn-default btn-block' %></p><br>
+
+<% if @products.count == 0 %>
+    <p>
+        Her kan du lagre varer og tjenester som du ofte fakturerer for. Oppføringer i ditt produktregister vil være tilgjengelige som hurtigvalg når du lager en ny faktura.
+    </p>
+
+<% else %>
+
+    <div class="table-responsive">
+        <table class="table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Beskrivelse</th>
+                    <th>Enhet</th>
+                    <th>MVA</th>
+                    <th class="text-right">Pris</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% @products.each do |product| %>
+                    <tr>
+                        <td><%= product.product_number %></td>
+                        <td><%= link_to product.description, product %></td>
+                        <td><%= product.unit %></td>
+                        <td><%= product.vat %> %</td>
+                        <td class="text-right"><%= number_with_precision(product.price, :precision => 2) %> kr</td>
+                        <td class="text-right" style="min-width: 100px">
+                            <div class="btn-group">
+                            <%= link_to product, class: "btn btn-default btn-xs" do %>
+                                <i class="glyphicon glyphicon-zoom-in"></i>
+                            <% end %>&nbsp;
+                            <%= link_to edit_product_path(product), class: "btn btn-default btn-xs" do %>
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            <% end %>&nbsp;
+                            <%= link_to product, method: :delete, data: { confirm: 'Sikker? Sletting kan ikke angres.' }, class: "btn btn-default btn-xs" do %>
+                                <i class="glyphicon glyphicon-trash"></i>
+                            <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- IKON FORKLARINGER -->
+    <div class="text-muted text-center">
+        <small>
+            <ul class="list-inline">
+                <li><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;&nbsp;Se produktinfo.</li>
+                <li><i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Rediger produkt.</li>
+                <li><i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Slett produkt.</li>
+            </ul>
+        </small>
+    </div>
+
+<% end %>
