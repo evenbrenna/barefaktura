@@ -49,7 +49,7 @@ describe ProductsController do
                 @product = FactoryGirl.create(:product)
             end
 
-            it "assigns the requested product to @products" do
+            it "assigns the requested product to @product" do
                 @user.products << @product
                 get :show, id: @product
                 expect(assigns(:product)).to eq(@product)
