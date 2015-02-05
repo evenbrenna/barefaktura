@@ -106,6 +106,7 @@ class InvoicesController < ApplicationController
     end
 
     def kreditnota
+        @user = current_user
         @invoice_to_credit = current_user.invoices.find(params[:id])
         @invoice = @invoice_to_credit.replicate
         @invoice.assign_attributes(:notes => "Kreditnota for faktura #{@invoice_to_credit.invoice_number.to_s}", :kreditnota => true)
@@ -113,7 +114,7 @@ class InvoicesController < ApplicationController
         @client_list = current_user.clients.map { |c| [c.name, c.id] }
         @products = current_user.products.all
 
-        @invoice.invoice_number = @user.next_invoice_number
+        @invoice.invoice_number = current_user.next_invoice_number
 
     end
 
