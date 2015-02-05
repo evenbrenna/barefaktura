@@ -2,10 +2,10 @@ class Invoice < ActiveRecord::Base
 
     belongs_to :user
     belongs_to :client
-    has_many :invoice_items, dependent: :destroy
+    has_many :invoice_items, inverse_of: :invoice, dependent: :destroy
 
     validates :user, :presence => true
-    validates :client, :presence => true
+    validates :client, :presence => true, :on => :save
     validates :invoice_items, :presence => true
 
     accepts_nested_attributes_for :invoice_items,
