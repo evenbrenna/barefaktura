@@ -1,7 +1,7 @@
 README
 ======
 
-Development guidelines
+Development guidelines (need to be updated)
 ----------------------
 1. Check out a new branch from master
 2. Write code
