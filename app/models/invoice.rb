@@ -5,7 +5,7 @@ class Invoice < ActiveRecord::Base
     has_many :invoice_items, dependent: :destroy
 
     validates :user, :presence => true
-    validates :client, :presence => true
+    validates :client, :presence => true, :on => :save
     validates :invoice_items, :presence => true
 
     accepts_nested_attributes_for :invoice_items,

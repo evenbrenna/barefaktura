@@ -61,9 +61,7 @@ class InvoicesController < ApplicationController
     end
 
     def show
-        @user = current_user
-        @invoice = @user.invoices.find(params[:id])
-        @client = @invoice.client
+        @invoice = current_user.invoices.find(params[:id])
 
         respond_to do |format|
             format.html

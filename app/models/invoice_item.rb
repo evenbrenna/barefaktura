@@ -1,7 +1,7 @@
 class InvoiceItem < ActiveRecord::Base
 
     belongs_to :invoice
-    validates :invoice, :presence => true
+    validates :invoice, :presence => true, :on => :save
 
     validates_presence_of :description, :quantity, :unit, :unit_price, :vat
 
