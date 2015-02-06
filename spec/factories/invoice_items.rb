@@ -5,7 +5,7 @@ FactoryGirl.define do
         association :invoice, factory: :invoice, strategy: :build
         f.description { Faker::Commerce.product_name }
         f.quantity { Faker::Commerce.price }
-        f.unit { Faker::Lorem.words(1) }
+        f.unit { Faker::Lorem.word }
         f.unit_price { Faker::Commerce.price }
         f.vat 25
     end
