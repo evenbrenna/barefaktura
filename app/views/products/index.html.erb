@@ -24,7 +24,7 @@
 
             <tbody>
                 <% @products.each do |product| %>
-                    <tr>
+                    <tr id="product_<%= product.id %>">
                         <td><%= product.product_number %></td>
                         <td><%= link_to product.description, product %></td>
                         <td><%= product.unit %></td>
@@ -32,13 +32,13 @@
                         <td class="text-right"><%= number_with_precision(product.price, :precision => 2) %> kr</td>
                         <td class="text-right" style="min-width: 100px">
                             <div class="btn-group">
-                            <%= link_to product, class: "btn btn-default btn-xs" do %>
+                            <%= link_to product, class: "btn btn-default btn-xs", id: 'show' do %>
                                 <i class="glyphicon glyphicon-zoom-in"></i>
                             <% end %>&nbsp;
-                            <%= link_to edit_product_path(product), class: "btn btn-default btn-xs" do %>
+                            <%= link_to edit_product_path(product), class: "btn btn-default btn-xs", id: 'edit' do %>
                                 <i class="glyphicon glyphicon-pencil"></i>
                             <% end %>&nbsp;
-                            <%= link_to product, method: :delete, data: { confirm: 'Sikker? Sletting kan ikke angres.' }, class: "btn btn-default btn-xs" do %>
+                            <%= link_to product, method: :delete, data: {confirm: 'Sikker? Sletting kan ikke angres.' }, class: "btn btn-default btn-xs", id: 'delete' do %>
                                 <i class="glyphicon glyphicon-trash"></i>
                             <% end %>
                         </td>
