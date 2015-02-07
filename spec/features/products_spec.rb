@@ -11,7 +11,7 @@ describe "The products page" do
     end
 
     it "lets me add a new product, then displays it in the products list." do
-        visit products_url
+        visit products_path
         expect {
             click_link "+ Nytt Produkt"
             fill_in 'Produktnummer', with: "A01"
@@ -35,7 +35,7 @@ describe "The products page" do
     it "shows my products details." do
         product = FactoryGirl.create(:product, description: "Produkt", unit: "Kilo")
         @user.products << product
-        visit products_url
+        visit products_path
         expect(page).to have_content("Produkt")
         expect(page).to have_content("Kilo")
         within("tr#product_#{product.id}") do
@@ -53,7 +53,7 @@ describe "The products page" do
     it "lets me edit a product." do
         product = FactoryGirl.create(:product, description: "Produkt", unit: "Kilo")
         @user.products << product
-        visit products_url
+        visit products_path
         within("tr#product_#{product.id}") do
             click_link "edit"
         end
@@ -70,7 +70,7 @@ describe "The products page" do
     it "lets me delete a product." do
         product = FactoryGirl.create(:product, description: "Slett meg!")
         @user.products << product
-        visit products_url
+        visit products_path
         expect(page).to have_content("Slett meg!")
         expect{
             within("tr#product_#{product.id}") do
