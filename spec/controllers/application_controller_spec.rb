@@ -3,6 +3,7 @@ require 'rails_helper'
 
 describe ApplicationController do
 
-    it "gots to be implemented"
+    describe "it has no methods" do
+    end
 
 end
