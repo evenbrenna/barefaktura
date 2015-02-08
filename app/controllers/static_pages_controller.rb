@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
     def home
         @user = current_user
+        render :layout => 'landing'
     end
 
     def help

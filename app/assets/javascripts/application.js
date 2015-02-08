@@ -16,6 +16,7 @@
 //= require bootstrap-datepicker/core
 //= require turbolinks
 //= require jquery.turbolinks
+//= require jquery.easing
 //= require_tree .
 
 $(function () {

@@ -15,12 +15,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap-datepicker3";
 @import "bootstrap";
+@import "navbar";
+@import "home";
 
-
-
+html, body{
+    height: 100%;
+}
 
 body {
-    padding-top: 80px;
+    padding-top: 90px;
     font-family: "Open Sans";
     color: #666;
  }
@@ -66,23 +69,6 @@ h4 {
   color: #225378;
  }
 
-
- .navbar-custom {
-    color: #FFFFFF;
-    font-family: "Open Sans";
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
- .navbar-brand {
-  font-family: "Fauna One";
-  color: #225378;
-    text-transform: none;
-    font-size: 14px;
-
- }
-
 .table-no-border>thead>tr>th,
 .table-no-border>tbody>tr>th,
 .table-no-border>tfoot>tr>th,
@@ -123,24 +109,6 @@ h4 {
   }
 }
 
-.container {
-  width: auto;
-  max-width: 900px; /* 680px;  */
-  padding: 0 15px;
-
-}
-
-.container-nav {
-  width: auto;
-  max-width: 100%;
-  padding: 0 15px;
-
-}
-
-.navbar-default .nav .dropdown .dropdown-menu {
-
-    width: 250px;
-}
 
 .invoicewidth {
   width: auto;
