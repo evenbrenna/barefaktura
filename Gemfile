@@ -11,10 +11,10 @@ gem 'turbolinks' # Turbolinks makes following links in your web application fast
 gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'unicorn'
 gem 'devise'
-gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
+# gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
 gem 'activeadmin', github: 'activeadmin'
 gem 'cancan'
-gem 'bootstrap-sass', '~> 3.3.1'
+gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'wicked_pdf'
