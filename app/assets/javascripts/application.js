@@ -17,9 +17,18 @@
 //= require turbolinks
 //= require jquery.turbolinks
 //= require jquery.easing
+//= require twitter/bootstrap/rails/confirm
 //= require_tree .
 
 $(function () {
   $('[data-toggle="popover"]').popover()
 })
 
+$.fn.twitter_bootstrap_confirmbox.defaults = {
+    fade: true,
+    title: "Advarsel", // if title equals null window.top.location.origin is used
+    cancel: "Avbryt",
+    cancel_class: "btn btn-default",
+    proceed: "Slett",
+    proceed_class: "btn btn-primary"
+};
