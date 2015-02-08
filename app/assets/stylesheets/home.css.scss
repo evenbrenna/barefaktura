@@ -1,4 +1,7 @@
 .glyph-link {
+    position: absolute;
+    bottom: 0px;
+    margin-left: -15px;
     font-size: 40px;
     color: #fff !important;
     text-shadow: 0px 0px 3px rgba(150, 150, 150, 1);
@@ -20,7 +23,9 @@
 }
 
 .top-section .top-section-body {
+    position: relative;
     display: table-cell;
+    align: center;
     vertical-align: middle;
 }
 
@@ -31,8 +36,18 @@
 }
 
 .top-section .top-section-body .top-section-text {
-    font-size: 15px;
+    font-size: 18px;
     color: #fff;
+}
+
+.top-section .top-section-body a, a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+.top-section .top-section-body a:hover {
+    color: #fff;
+    text-decoration: underline;
 }
 
 .middle-section {
@@ -50,6 +65,7 @@
 }
 
 .middle-section .middle-section-body {
+    position: relative;
     display: table-cell;
     vertical-align: middle;
 }
@@ -75,5 +91,62 @@
 }
 
 .middle-section p {
+    color: #fff;
+}
+
+.middle-section .middle-section-body a, a:hover, a:visited {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.third-section {
+    display: table;
+    width: 100%;
+    height:100%;
+    padding: 30px;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), image-url("forest-bg.jpg") no-repeat bottom center scroll;
+    background-color: #000;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.third-section .third-section-body {
+    position: relative;
+    display: table-cell;
+    align: center;
+    vertical-align: middle;
+}
+
+.third-section .third-section-body .brand-heading {
+    font-size: 70px;
+    color: #fff;
+    text-shadow: 0px 0px 3px rgba(150, 150, 150, 1);
+}
+
+.third-section .third-section-body .third-section-text {
+    font-size: 18px;
+    color: #fff;
+}
+
+.third-section .third-section-body a, a:hover, a:visited {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.third-section h3 {
+    font-size: 35px;
+    color: #fff;
+}
+
+.third-section h4 {
+    font-size: 20px;
+    color: #fff;
+}
+
+.third-section p {
     color: #fff;
 }

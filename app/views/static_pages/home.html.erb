@@ -1,12 +1,50 @@
 <div class="top-section">
     <div class="top-section-body">
         <div class="row">
-            <div class="col-sm-12 text-center">
-                <h1 class="brand-heading">BareFaktura</h1>
-                <p class="top-section-text">Enkel og <u>gratis</u> fakturering for enkeltpersonforetak og små bedrifter.</p>
+            <div class="col-sm-12">
+                <h1 class="brand-heading">Bare<br>Faktura</h1>
+                <p class="top-section-text">Enkel og <u>gratis</u> fakturering på nett.</p><br>
             </div>
         </div>
-        <a class="glyph-link page-scroll" href="#side2"><i class="glyphicon glyphicon-download"></i></a>
+        <div class="row">
+            <div class="col-sm-12">
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
+
+                  <% unless devise_error_messages!.empty? %>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <%= devise_error_messages! %>
+                    </div>
+                  <% end %>
+
+                  <div class="form-group">
+                    <%= f.label :email, class:"sr-only" %>
+                    <div class="col-sm-offset-4 col-sm-4">
+                      <%= f.email_field :email, class:"form-control", placeholder:'epost' %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <%= f.label :password, 'Passord', class:"sr-only" %>
+                    <div class="col-sm-offset-4 col-sm-4">
+                      <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:'passord' %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-4">
+                      <%= f.submit "Logg Inn", class:'btn btn-default' %><br>
+                    </div>
+                  </div>
+                      <%= link_to "Opprett Konto", new_user_registration_path %>
+                <% end %>
+            </div>
+        </div>
+        <div class="row">
+            <a class="glyph-link page-scroll" href="#side2"><i class="glyphicon glyphicon-download"></i></a>
+        </div>
     </div>
 </div>
 
@@ -18,13 +56,13 @@
             <div class="col-sm-offset-3 col-sm-6 text-left">
                 <h3>Enkelt, gratis og sikkert</h3>
                 <p>
-                    Bare Faktura er laget med tanke på deg som overlater regnskapet til en regnskapsfører, men selv tar deg av faktureringen. Med våre oversiktelige sider og gjennomtenkte løsninger kan du frigjøre tid til å fokusere på viktigere ting.
+                    Bare Faktura er for deg som overlater regnskapsføringen til en regnskapsfører, men selv tar deg av fakturering. Vi vil gjøre din jobb litt enklere ved å tilby et effektivt og komplett faktureringsverktøy, uten alt det unødvendige "støyet" du må forholde deg til i mer avanserte systemer.
                 </p>
                 <p>
-                    Tjenesten er helt gratis. Dersom du ønsker å "prøvekjøre" BareFaktura kan du registrere en konto og prøve deg frem. Test systemet så lenge du ønsker.
+                    Bare Faktura er helt gratis å bruke. Dersom du ønsker å teste tjenesten kan du registrere en konto og prøve deg frem så lenge du ønsker. Lurer du på noe hører vi gjerne fra deg på <%= mail_to 'post@barefaktura.no' %>.
                 </p>
                 <p>
-                    All trafikk går selvfølgelig via krypterte forbindelser, og alle dine data blir sikkerhetskopiert daglig.
+                    All trafikk går (selvfølgelig) via krypterte forbindelser, og alle dine data blir sikkerhetskopiert daglig.
                 </p>
             </div>
             <div class="col-sm-3">&nbsp;</div>
@@ -33,20 +71,21 @@
     </div>
 </div>
 
-<div class="middle-section" id="side3">
-    <div class="middle-section-body">
+<div class="third-section" id="side3">
+    <div class="third-section-body">
         <div class="row">
 
             <div class="col-sm-offset-3 col-sm-6 text-left">
-                <h3>En komplett løsning</h3>
+                <h3>Bruk tiden på viktigere ting</h3>
                 <p>
-                    Kunderegister, produktregister og alt annet du trenger. Ved å lagre dine kunder og produkter fyller du enkelt ut en ny faktura i løpet av sekunder. Nye kunder lagres automatisk ved første fakturering.</p>
+                    Joda, det er viktig å fakturere, men ikke kast vekk tid på å navigere gjennom komplekse menyer i avanserte systemer du ikke trenger.
                 <p>
-                    Epostlevering, pdf-nedlasting, kreditnota og mer. Alle funksjoner du trenger er enkelt tilgjengelig fra fakturalisten.
+                    Hos Bare Faktura får du alt du trenger for å fakturere raskt og enkelt: Ved hjelp av ditt kunde- og produktregister fyller du ut en faktura i løpet av sekunder. Nye kunder lagres automatisk ved første fakturering slik at du aldri trenger å gjenta deg selv.</p>
+                <p>
+                    Send fakturaen direkte til kunden fra din konto via epost eller last ned en pdf. Oppdager du en feil lager du en kreditnota med ett klikk. Alle funksjoner du trenger er enkelt tilgjengelig i fakturalisten.
                 </p>
-                <br>
                 <p>
-                    <%= link_to 'Registrer Konto', new_user_registration_path, class:"btn btn-default btn-block" %>
+                    <%= link_to 'Registrer en konto', new_user_registration_path %> i dag og gjør din hverdag litt enklere.
                 </p>
             </div>
             <div class="col-sm-3">&nbsp;</div>
