@@ -65,6 +65,20 @@ h4 {
   letter-spacing: 2px;
 }
 
+.btn-primary {
+  background-color: #015D70;
+  border-color: #015D70;
+}
+
+.btn-primary:hover {
+  background-color: #014A5A;
+  border-color: #014A5A;
+}
+
+a.btn-primary {
+  color: #fff;
+}
+
  .page-header {
   color: #225378;
  }
