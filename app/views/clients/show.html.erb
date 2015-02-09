@@ -2,31 +2,26 @@
 <p><%= link_to 'Rediger Kunde', edit_client_path(@client), class:'btn btn-default btn-block' %></p><br>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <p>
-      <strong>Navn:</strong><br><%= @client.name %>
+      <strong><%= @client.name %></strong><br>
+      Ref: <%= @client.ref %><br>
+      <%= @client.address %>
     </p>
     <p>
-      <strong>Org.nr:</strong><br><%= @client.org_nr %>
+      Leveringsadresse:<br>
+      <%= @client.delivery_address %>
     </p>
     <p>
-      <strong>Ref.:</strong><br><%= @client.ref %>
-    </p>
-  </div>
-  <div class="col-sm-6">
-    <p>
-      <strong>Adresse:</strong><br><%= @client.address %>
+      Org.nr: <%= @client.org_nr %><br>
+      Epost: <%= @client.email %>
     </p>
     <p>
-      <strong>Leveringsadresse:</strong><br><%= @client.delivery_address %>
-    </p>
-    <p>
-      <strong>Email:</strong><br><%= @client.email %>
+      <strong>Totalt fakturert: </strong> <%= number_to_currency(@total_invoiced) %>
     </p>
   </div>
 </div>
-
-<p><strong>Totalt fakturert: </strong><br><%= number_to_currency(@total_invoiced) %></p>
+<hr class="divider">
 
     <div class="clearfix"></div>
 

@@ -17,6 +17,7 @@
 @import "bootstrap";
 @import "navbar";
 @import "home";
+@import "footer";
 
 html, body{
     height: 100%;
@@ -27,6 +28,14 @@ body {
     font-family: "Open Sans";
     color: #666;
  }
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -0em;
+}
+
 
 p {
     font-family: "Open Sans";

@@ -1,64 +1,50 @@
 <h1><%= @user.name %></h1><br>
 <%= link_to "Rediger Profil", edit_user_registration_path ,class:'btn btn-default btn-block' %>
 <br>
-<h3>Min Profil</h3>
 <div class="row">
   <div class="col-sm-6">
     <p>
-      <strong>Neste fakturanummer: </strong><br><%= @user.next_invoice_number %>
+      <h3><%= @user.name %></h3>
+      <strong>Vår ref: </strong><%= @user.ref %><br>
+      <%= @user.foretaks_reg ? 'Foretaksregisteret' : 'Org.nr:' %> <%= @user.org_number %> <%= @user.mva_reg ? 'MVA' : '' %><br>
     </p>
     <p>
-      <strong>Navn: </strong><br><%= @user.name %>
+      <strong>Email: </strong><%= @user.email %><br>
+      <strong>Telefon: </strong><%= @user.phone %><br>
+      <strong>Adresse: </strong><%= @user.address %><br>
     </p>
     <p>
-      <strong>Email: </strong><br><%= @user.email %>
+      <strong>Bank: </strong><%= @user.bank_name %><br>
+      <strong>Kontonummer: </strong><%= @user.bank_account %><br>
+      <strong>SWIFT/BIC: </strong><%= @user.bank_swift %><br>
+      <strong>IBAN: </strong><%= @user.bank_iban %><br>
     </p>
     <p>
-      <strong>Adresse: </strong><br><%= @user.address %>
-    </p>
-    <p>
-      <strong>Telefon: </strong><br><%= @user.phone %>
-    </p>
-    <p>
-      <strong>Org.nr: </strong><br><%= @user.foretaks_reg ? 'Foretaksregisteret' : '' %> <%= @user.org_number %> <%= @user.mva_reg ? 'MVA' : '' %>
+      <strong>Neste fakturanummer: </strong><%= @user.next_invoice_number %>
     </p>
   </div>
   <div class="col-sm-6">
-    <p>
-      <strong>Vår ref: </strong><br><%= @user.ref %>
-    </p>
-    <p>
-      <strong>Bank: </strong><br><%= @user.bank_name %>
-    </p>
-    <p>
-      <strong>Kontonummer: </strong><br><%= @user.bank_account %>
-    </p>
-    <p>
-      <strong>SWIFT/BIC: </strong><br><%= @user.bank_swift %>
-    </p>
-    <p>
-      <strong>IBAN: </strong><br><%= @user.bank_iban %>
-    </p>
+    <h3>Utestående</h3>
+    <% if outstanding_count == 0 %>
+      <p>Du har ingen utestående fakturaer.</p>
+    <% else %>
+      <p>
+        Du har <%= pluralize(outstanding_count, 'faktura', 'fakturaer') %> utestående, hvorav <%= overdue_count %> er forfalt.
+      </p>
+      <p>
+        <strong>Forfalt beløp: </strong><%= number_to_currency(overdue_amount) %><br>
+        <strong>Totalt utestående: </strong><%= number_to_currency(outstanding_amount) %><br>
+      </p>
+    <% end %>
   </div>
 </div>
-<br>
-
-
-<h3>Utestående</h3>
-  <% if outstanding_count == 0 %>
-    <p>Du har ingen utestående fakturaer.</p>
-  <% else %>
-    <p>
-      Du har <%= pluralize(outstanding_count, 'faktura', 'fakturaer') %> utestående, hvorav <%= overdue_count %> er forfalt.
-    </p>
+<hr class="divider">
+<div class="row">
+  <div class="col-xs-12">
+    <h3>Oversikt Utestående Fakturaer</h3>
     <br>
-    <p>
-      <strong>Forfalt beløp: </strong><%= number_to_currency(overdue_amount) %><br>
-      <strong>Totalt utestående: </strong><%= number_to_currency(outstanding_amount) %><br>
-    </p>
-  <% end %>
-
-<br>
-<% unless @invoices.count == 0 %>
-  <%= render partial: 'invoices/partials/invoice_list' %>
-<% end %>
+    <% unless @invoices.count == 0 %>
+      <%= render partial: 'invoices/partials/invoice_list' %>
+    <% end %>
+  </div>
+</div>

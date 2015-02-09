@@ -1,24 +1,23 @@
 README
 ======
 
-Development guidelines (need to be updated)
+Development guidelines
 ----------------------
 1. Check out a new branch from master
 2. Write code
 3. Run tests locally
-  - Remember to make sure dev branch is up to date with staging branch.
-4. Merge into staging branch and push
-5. If all tests pass, merge staging into master and push
+4. Checkout master, merge
+5. Push
 
 ***
 
-Build Status
+Status
 ------------
 
-**Master**
+**Code Ship Build Status**
 
 [ ![Codeship Status for evenbrenna/BareFaktura](https://codeship.com/projects/bbc45710-8b03-0132-04dc-660f9dc63bc4/status?branch=master)](https://codeship.com/projects/60234)
 
-**Staging**
+**Code Climate**
 
-[ ![Codeship Status for evenbrenna/BareFaktura](https://codeship.com/projects/bbc45710-8b03-0132-04dc-660f9dc63bc4/status?branch=staging)](https://codeship.com/projects/60234)
+[![Code Climate](https://codeclimate.com/repos/54d917c669568006d5002a33/badges/cd14de099850f960a83b/gpa.svg)](https://codeclimate.com/repos/54d917c669568006d5002a33/feed)

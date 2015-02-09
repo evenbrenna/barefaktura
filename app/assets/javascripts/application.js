@@ -21,8 +21,8 @@
 //= require_tree .
 
 $(function () {
-  $('[data-toggle="popover"]').popover()
-})
+  $('[data-toggle="popover"]').popover();
+});
 
 $.fn.twitter_bootstrap_confirmbox.defaults = {
     fade: true,
