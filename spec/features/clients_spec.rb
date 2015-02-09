@@ -31,7 +31,7 @@ describe "The clients page" do
         expect(page).to have_content("kunde@oddfowl.com")
     end
 
-    it "shows my products details." do
+    it "shows my clients details." do
         client = FactoryGirl.create(:client, name: "Kunde Kundemann", org_nr: "123456789")
         @user.clients << client
         visit clients_path
@@ -43,12 +43,10 @@ describe "The clients page" do
         within 'h1' do
             expect(page).to have_content("Kunde Kundemann")
         end
-        expect(page).to have_content("Navn:")
-        expect(page).to have_content("Org.nr")
         expect(page).to have_content("123456789")
     end
 
-    it "lets me edit a product." do
+    it "lets me edit a client." do
         client = FactoryGirl.create(:client, name: "Test Kunde", address: "Adresse 123")
         @user.clients << client
         visit clients_path
