@@ -117,8 +117,8 @@ describe InvoicesController do
             it "assigns user details to invoice" do
                 post :create, invoice: FactoryGirl.attributes_for(:invoice).merge(
                     invoice_items_attributes: [ FactoryGirl.attributes_for(:invoice_item) ])
-                expect(Invoice.last.user.name).to eq(@user.name)
-                expect(Invoice.last.user.address).to eq(@user.address)
+                expect(Invoice.last.user_name).to eq(@user.name)
+                expect(Invoice.last.user_address).to eq(@user.address)
             end
 
             it "creates new client if client_id is blank" do
