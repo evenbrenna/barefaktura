@@ -23,33 +23,6 @@ class InvoicesController < ApplicationController
         @client_list = current_user.clients.map { |c| [c.name, c.id] }
         @products = current_user.products.all
 
-        @invoice.assign_attributes(:user_name => @user.name,
-                                    :user_org_number => ((@user.foretaks_reg ? 'Foretaksregisteret ' : 'Org.nr: ') + (@user.org_number) + (@user.mva_reg ? ' MVA' : '')),
-                                    :user_email => @user.email,
-                                    :user_phone => @user.phone,
-                                    :user_bank_swift => @user.bank_swift,
-                                    :user_bank_iban => @user.bank_iban,
-                                    :user_bank_name => @user.bank_name,
-                                    :user_bank_account => @user.bank_account,
-                                    :user_address => @user.address)
-
-        if @invoice.client_id.blank?
-            new_client = current_user.clients.new(:name => @invoice.client_name,
-                                                    :email => @invoice.client_email,
-                                                    :address => @invoice.client_address,
-                                                    :delivery_address => @invoice.delivery_address,
-                                                    :ref => @invoice.client_ref,
-                                                    :org_nr => @invoice.client_org_nr)
-
-            if @invoice.valid?
-                if new_client.save
-                    flash[:notice] = 'Ny kunde er opprettet!'
-                    @invoice.assign_attributes(:client_id => new_client.id)
-                end
-            end
-
-        end
-
         # save like usual
         if @invoice.save
                 @user.update_attribute(:next_invoice_number, (@user.next_invoice_number + 1))
@@ -68,7 +41,6 @@ class InvoicesController < ApplicationController
             format.pdf do
                 render :pdf => "faktura_#{@invoice.invoice_number}",
                 :disposition => "attachment",
-                #:print_media_type => true,
                 :encoding => 'utf8'
             end
         end
@@ -79,13 +51,6 @@ class InvoicesController < ApplicationController
         @invoice = current_user.invoices.find(params[:id])
         @client = @invoice.client
         @type = @invoice.kreditnota ? 'kreditnota' : 'faktura'
-
-        # Unødvendig??
-        # respond_to do |format|
-        #     format.html
-        #     format.js
-        # end
-
     end
 
     def send_email_invoice

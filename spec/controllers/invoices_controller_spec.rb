@@ -121,10 +121,16 @@ describe InvoicesController do
                 expect(Invoice.last.user_address).to eq(@user.address)
             end
 
-            it "creates new client if client_id is blank" do
+            it "creates new client assigned to user if client_id is blank" do
                 expect{post :create, invoice: FactoryGirl.attributes_for(:invoice).merge(
                     invoice_items_attributes: [FactoryGirl.attributes_for(:invoice_item) ])
-                    }.to change(Client, :count).by(1)
+                    }.to change(@user.clients, :count).by(1)
+            end
+
+            it "saves the correct data for the new user" do
+                post :create, invoice: FactoryGirl.attributes_for(:invoice, client_name: "Even").merge(
+                    invoice_items_attributes: [FactoryGirl.attributes_for(:invoice_item) ])
+                expect(@user.clients.last.name).to eq("Even")
             end
 
             it "assigns the new client to the invoice" do

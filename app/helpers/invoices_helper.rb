@@ -48,6 +48,5 @@ module InvoicesHelper
         end
 
         satser > 1
-
     end
 end
