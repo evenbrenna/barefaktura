@@ -42,7 +42,7 @@ describe "The products page" do
             click_link "show"
         end
         within 'h1' do
-            expect(page).to have_content("Produkt ##{product.product_number}")
+            expect(page).to have_content("Prod.nr #{product.product_number}")
         end
         expect(page).to have_content("Beskrivelse:")
         expect(page).to have_content("Produkt")
