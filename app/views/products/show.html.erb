@@ -1,19 +1,29 @@
-<h1>Produkt #<%= @product.product_number %></h1><br>
+<h1>Prod.nr <%= @product.product_number %></h1><br>
 <p><%= link_to 'Rediger Produkt', edit_product_path(@product), class:'btn btn-default btn-block' %></p><br>
 
 <div class="row">
   <div class="col-sm-12">
-    <p>
-      <strong>Beskrivelse:</strong><br><%= @product.description %>
-    </p>
-    <p>
-      <strong>Enhet:</strong><br><%= @product.unit %>
-    </p>
-    <p>
-      <strong>MVA:</strong><br><%= @product.vat %>
-    </p>
-    <p>
-      <strong>Pris:</strong><br><%= number_with_precision(@product.price, :precision => 2) %> kr
-    </p>
+    <table class="table table-condensed table-striped table-no-border">
+      <tr>
+        <td>Produktnummer: </td>
+        <td><%= @product.product_number %></td>
+      </tr>
+      <tr>
+        <td>Beskrivelse: </td>
+        <td><%= @product.description %></td>
+      </tr>
+      <tr>
+        <td>Enhet: </td>
+        <td><%= @product.unit %></td>
+      </tr>
+      <tr>
+        <td>MVA-sats: </td>
+        <td><%= @product.vat %></td>
+      </tr>
+      <tr>
+        <td>Pris: </td>
+        <td><%= number_with_precision(@product.price, :precision => 2) %> kr</td>
+      </tr>
+    </table>
   </div>
 </div>

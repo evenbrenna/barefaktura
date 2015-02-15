@@ -2,24 +2,35 @@
 <p><%= link_to 'Rediger Kunde', edit_client_path(@client), class:'btn btn-default btn-block' %></p><br>
 
 <div class="row">
-  <div class="col-sm-4">
-    <p>
-      <strong><%= @client.name %></strong><br>
-      Ref: <%= @client.ref %><br>
-      <%= @client.address %>
-    </p>
-    <p>
-      Leveringsadresse:<br>
-      <%= @client.delivery_address %>
-    </p>
-    <p>
-      Org.nr: <%= @client.org_nr %><br>
-      Epost: <%= @client.email %>
-    </p>
-    <p>
-      <strong>Totalt fakturert: </strong> <%= number_to_currency(@total_invoiced) %>
-    </p>
+  <div class="col-sm-12">
+    <table class="table table-condensed table-striped table-no-border">
+      <tr>
+        <td>Org.nr: </td>
+        <td><%= @client.org_nr %></td>
+      </tr>
+      <tr>
+        <td>Deres ref: </td>
+        <td><%= @client.ref %></td>
+      </tr>
+      <tr>
+        <td>Adresse: </td>
+        <td><%= @client.address %></td>
+      </tr>
+      <tr>
+        <td>Leveringsadresse: </td>
+        <td><%= @client.delivery_address %></td>
+      </tr>
+      <tr>
+        <td>Epost: </td>
+        <td><%= @client.email %></td>
+      </tr>
+      <tr>
+        <td>Totalt fakturert: </td>
+        <td><%= number_to_currency(@total_invoiced) %></td>
+      </tr>
+    </table>
   </div>
+
 </div>
 <hr class="divider">
 
