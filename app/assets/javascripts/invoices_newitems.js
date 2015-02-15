@@ -313,8 +313,8 @@ function addItemField() {
 
     document.getElementById("itemList").appendChild(div);
 
-    //show address header
-    $("#itemList").show();
+
+    // ----------- FUNCTION FOR AUTOFILLING SELECTED PRODUCT ------------
 
     jQuery(function() {
         return $('#' + idAttributProdSelect).change(function() {
