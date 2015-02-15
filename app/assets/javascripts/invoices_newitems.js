@@ -7,41 +7,32 @@ function addItemField() {
     //and use it for address key
     var mSec = date.getTime();
 
-    //Replace 0 with milliseconds
-    idAttributProdSelect =
-          "prodSelect_0".replace("0", mSec);
-    nameAttributProdSelect =
-          "prodSelect[0]".replace("0", mSec);
-    idAttributDescription =
-          "invoice_invoice_items_attributes_0_description".replace("0", mSec);
-    nameAttributDescription =
-          "invoice[invoice_items_attributes][0][description]".replace("0", mSec);
+    // Create unique id and name for fields
+    // by replacing 0 with milliseconds
+    var idAttributProdSelect = "prodSelect_0".replace("0", mSec);
+    var nameAttributProdSelect = "prodSelect[0]".replace("0", mSec);
 
-    idAttributQuantity =
-          "invoice_invoice_items_attributes_0_quantity".replace("0", mSec);
-    nameAttributQuantity =
-          "invoice[invoice_items_attributes][0][quantity]".replace("0", mSec);
+    var idAttributDescription = "0_description".replace("0", mSec);
+    var nameAttributDescription = "[0][description]".replace("0", mSec);
 
-    idAttributUnit =
-          "invoice_invoice_items_attributes_0_unit".replace("0", mSec);
-    nameAttributUnit =
-          "invoice[invoice_items_attributes][0][unit]".replace("0", mSec);
+    var idAttributQuantity = "0_quantity".replace("0", mSec);
+    var nameAttributQuantity = "[0][quantity]".replace("0", mSec);
 
-    idAttributPrice =
-          "invoice_invoice_items_attributes_0_unit_price".replace("0", mSec);
-    nameAttributPrice =
-          "invoice[invoice_items_attributes][0][unit_price]".replace("0", mSec);
+    var idAttributUnit = "0_unit".replace("0", mSec);
+    var nameAttributUnit = "[0][unit]".replace("0", mSec);
 
-    idAttributVat =
-          "invoice_invoice_items_attributes_0_vat".replace("0", mSec);
-    nameAttributVat =
-          "invoice[invoice_items_attributes][0][vat]".replace("0", mSec);
+    var idAttributPrice = "0_unit_price".replace("0", mSec);
+    var nameAttributPrice = "[0][unit_price]".replace("0", mSec);
+
+    var idAttributVat = "0_vat".replace("0", mSec);
+    var nameAttributVat = "[0][vat]".replace("0", mSec);
 
     //create main container div tag
     var div = document.createElement("div");
     div.className = "itempadding grad";
 
     // ---------- HEADING -------------
+
     var itemHeading = document.createElement("h3");
     var itemHeadingText = document.createTextNode("Produkt/Tjeneste");
     itemHeading.appendChild(itemHeadingText);
@@ -330,7 +321,6 @@ function addItemField() {
             return $.get("/products/" + $(this).val() + "/get_json", function(data, status, xhr) {
                 var productsDataObj;
                 productsDataObj = JSON.parse(data);
-            console.log(productsDataObj);
                 $('#' + idAttributDescription).val(productsDataObj.description);
                 $('#' + idAttributUnit).val(productsDataObj.unit);
                 $('#' + idAttributPrice).val(productsDataObj.price);
