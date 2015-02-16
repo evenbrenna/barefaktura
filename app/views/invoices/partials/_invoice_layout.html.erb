@@ -3,7 +3,7 @@
         <div class="col-xs-12">
             <table class="table table-no-border">
                 <tr>
-                    <td style="border-left: 1px dashed">
+                    <td>
                         <strong><%= @invoice.user_name.split.map(&:capitalize).join(' ') %></strong><br>
                         <small>
                             <%= @invoice.user_org_number %><br />
@@ -18,10 +18,7 @@
 
             </table>
         </div>
-
-
     </div>
-
 
     <!-- RAD -->
     <div class="row">&nbsp;</div>
@@ -29,7 +26,6 @@
     <div class="row">&nbsp;</div>
     <div class="row">&nbsp;</div>
     <div class="row">
-
         <div class="col-xs-12">
             <table class="table table-condensed table-no-border">
                 <tr colspan="2">
@@ -46,6 +42,7 @@
                 <tr>
                     <td>
                         <strong><%= @invoice.client_name %></strong><br>
+                        <small>
                         <% if @invoice.client_org_nr? %>
                             Org.nr: <%= @invoice.client_org_nr %> <br>
                         <% end %>
@@ -53,62 +50,68 @@
                         <br>
                         Leveringsadresse:<br>
                         <%= @invoice.delivery_address %><br>
+                        </small>
                     </td>
                     <td></td>
                     <td>
-                        Bank: <br>
-                        Kontonr.: <br>
-                        <% if @invoice.user_bank_swift? %>
-                            BIC/SWIFT: <br>
-                        <% end %>
-                        <% if @invoice.user_bank_iban? %>
-                            IBAN: <br>
-                        <% end %>
-                        <br>
-                        <% if @invoice.user_ref? %>
-                            Vår ref: <br>
-                        <% end %>
-                        <% if @invoice.client_ref? %>
-                            Deres ref: <br>
-                        <% end %>
-                        <% if @invoice.order_date? %>
-                            Ordredato: <br>
-                        <% end %>
-                        Leveringsdato: <br>
-                        <br>
-                        Dato: <br>
-                        Forfallsdato: <br>
-                        <br>
-                    </td>
-                    <td>
-                        <%= @invoice.user_bank_name %><br>
-                            <%= @invoice.user_bank_account %><br>
-                        <% if @invoice.user_bank_iban? %>
-                            <%= @invoice.user_bank_swift %><br>
-                        <% end %>
-                        <% if @invoice.user_bank_swift? %>
-                            <%= @invoice.user_bank_iban %><br>
-                        <% end %>
-                        <br>
-                        <% if @invoice.user_ref? %>
-                            <%= @invoice.user_ref %><br>
-                        <% end %>
-                        <% if @invoice.client_ref? %>
-                            <%= @invoice.client_ref %><br>
-                        <% end %>
-                        <% if @invoice.order_date? %>
-                            <%= @invoice.order_date %><br>
-                        <% end %>
-                        <%= @invoice.delivery_date %><br>
-                        <br>
-                        <%= @invoice.created_at.strftime('%d/%m/%Y') %><br>
-                        <% if @invoice.kreditnota %>
-                            --/--/----<br>
-                        <% else %>
-                            <%= @invoice.due_date.strftime('%d/%m/%Y') %><br>
-                        <% end %>
-                        <br>
-
+                        <table class="table table-condensed table-no-border table-striped">
+                            <tr>
+                                <td>Bank: </td>
+                                <td><%= @invoice.user_bank_name %></td>
+                            </tr>
+                            <tr>
+                                <td>Kontonr.: </td>
+                                <td><%= @invoice.user_bank_account %></td>
+                            </tr>
+                            <% if @invoice.user_bank_swift? %>
+                                <tr>
+                                    <td>BIC/SWIFT: </td>
+                                    <td><%= @invoice.user_bank_swift %></td>
+                                </tr>
+                            <% end %>
+                            <% if @invoice.user_bank_iban? %>
+                                <tr>
+                                    <td>IBAN: </td>
+                                    <td><%= @invoice.user_bank_iban %></td>
+                                </tr>
+                            <% end %>
+                            <% if @invoice.user_ref? %>
+                                <tr>
+                                    <td>Vår ref.: </td>
+                                    <td><%= @invoice.user_ref %></td>
+                                </tr>
+                            <% end %>
+                            <% if @invoice.client_ref? %>
+                                <tr>
+                                    <td>Deres ref: </td>
+                                    <td><%= @invoice.client_ref %></td>
+                                </tr>
+                            <% end %>
+                            <% if @invoice.order_date? %>
+                                <tr>
+                                    <td>Ordredato: </td>
+                                    <td><%= @invoice.order_date %></td>
+                                </tr>
+                            <% end %>
+                            <tr>
+                                <td>Leveringsdato: </td>
+                                <td><%= @invoice.delivery_date %></td>
+                            </tr>
+                            <tr>
+                                <td>Fakturadato: </td>
+                                <td><%= @invoice.created_at.strftime('%d/%m/%Y') %></td>
+                            </tr>
+                            <tr>
+                                <td>Forfallsdato: </td>
+                                <td>
+                                    <% if @invoice.kreditnota %>
+                                        --/--/----<br>
+                                    <% else %>
+                                        <%= @invoice.due_date.strftime('%d/%m/%Y') %><br>
+                                    <% end %>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>

@@ -42,7 +42,7 @@
                 <!-- Send -->
                 <% if invoice.client.email.blank? %>
                   <%= link_to '#', data: { :confirm => 'Du har ikke lagt inn en epost-adresse for denne kunden.'}, title: "Ingen lagret epostadresse for kunden", class: "btn btn-default btn-xs" do %>
-                      <i class="glyphicon glyphicon-ban-circle" style="color: #BD362F"></i>
+                      <i class="glyphicon glyphicon-ban-circle" style="color: #777"></i>
                     <% end %>
                 <% else %>
                   <% if invoice.sends == 0 %>
@@ -93,8 +93,3 @@
     </ul>
     </small>
   </div>
-
-  <!-- Modal Div -->
-<div class="modal fade" id="modal-invoice-email-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" id="render-here"></div>
-</div>

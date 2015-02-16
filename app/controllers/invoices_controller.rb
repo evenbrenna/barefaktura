@@ -26,7 +26,7 @@ class InvoicesController < ApplicationController
         # save like usual
         if @invoice.save
                 @user.update_attribute(:next_invoice_number, (@user.next_invoice_number + 1))
-                redirect_to invoices_path, :notice => "Faktura er opprettet!"
+                redirect_to @invoice
         else
             render "new"
         end
