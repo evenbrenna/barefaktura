@@ -48,6 +48,7 @@ group :development do
 end
 
 group :test do
+    gem "codeclimate-test-reporter"
     gem 'faker'
     gem 'capybara'
     gem 'capybara-slow_finder_errors'
