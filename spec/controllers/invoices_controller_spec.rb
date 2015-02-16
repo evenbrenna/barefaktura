@@ -152,10 +152,10 @@ describe InvoicesController do
                 expect(assigns(:user).next_invoice_number).to eq(now + 1)
             end
 
-            it "redirects to the :index view" do
+            it "redirects to the :show view" do
                 post :create, invoice: FactoryGirl.attributes_for(:invoice).merge(
                     invoice_items_attributes: [ FactoryGirl.attributes_for(:invoice_item) ])
-                expect(response).to redirect_to invoices_path
+                expect(response).to render_template(:show)
             end
         end
 
