@@ -18,21 +18,11 @@ class Invoice < ActiveRecord::Base
                         :due_date,
                         :client_name,
                         :client_address,
-                        :delivery_address,
-                        :user_name,
-                        :user_org_number,
-                        :user_email,
-                        :user_bank_name,
-                        :user_bank_account,
-                        :user_address
+                        :delivery_address
 
-
-    before_save :calculate_total
     before_save :store_user_data
+    before_save :calculate_total
     before_save :save_new_client
-
-
-
 
     # Duplicates the invoice and returns the copy. Needed
     # to make sure all items are duplicated for kreditnota.
