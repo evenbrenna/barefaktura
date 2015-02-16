@@ -155,7 +155,7 @@ describe InvoicesController do
             it "redirects to the :show view" do
                 post :create, invoice: FactoryGirl.attributes_for(:invoice).merge(
                     invoice_items_attributes: [ FactoryGirl.attributes_for(:invoice_item) ])
-                expect(response).to redirect_to :action => :show
+                expect(response).to redirect_to(:action => :show, :id => assigns(:invoice).id)
             end
         end
 
