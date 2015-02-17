@@ -62,7 +62,7 @@ describe ProductsController do
             end
 
             it "raises error if @user does not own requested product" do
-                expect{get :show, id: @product}.to raise_error(ActiveRecord::RecordNotFound)
+                expect{get :show, id: @product}.to raise_error(CanCan::AccessDenied)
             end
         end
 
@@ -184,7 +184,7 @@ describe ProductsController do
             context "who does not own product" do
 
                 it "raises error" do
-                    expect{get :edit, id: @product}.to raise_error(ActiveRecord::RecordNotFound)
+                    expect{get :edit, id: @product}.to raise_error(CanCan::AccessDenied)
                 end
             end
         end
@@ -262,7 +262,7 @@ describe ProductsController do
 
                 it "raises record not found error" do
                     expect{put :update, id: @product, product: FactoryGirl.attributes_for(:product)
-                        }.to raise_error(ActiveRecord::RecordNotFound)
+                        }.to raise_error(CanCan::AccessDenied)
                 end
             end
         end
@@ -297,7 +297,7 @@ describe ProductsController do
             end
 
             it "raises error if user is not owner of product" do
-                expect{delete :destroy, id: @product}.to raise_error(ActiveRecord::RecordNotFound)
+                expect{delete :destroy, id: @product}.to raise_error(CanCan::AccessDenied)
             end
 
             it "deletes the product" do
@@ -340,7 +340,7 @@ describe ProductsController do
             end
 
             it "raises error if user is not owner of product" do
-                expect{get :get_json, id: @product}.to raise_error(ActiveRecord::RecordNotFound)
+                expect{get :get_json, id: @product}.to raise_error(CanCan::AccessDenied)
             end
         end
 

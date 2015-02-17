@@ -63,7 +63,7 @@ describe InvoicesController do
         end
 
         it "raises error if user is not owner of invoice" do
-            expect{get :show, id: @invoice}.to raise_error(ActiveRecord::RecordNotFound)
+            expect{get :show, id: @invoice}.to raise_error(CanCan::AccessDenied)
         end
     end
 

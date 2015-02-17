@@ -77,7 +77,7 @@ describe ClientsController do
             end
 
             it "raises error if @user does not own requested client" do
-                expect{get :show, id: @client}.to raise_error(ActiveRecord::RecordNotFound)
+                expect{get :show, id: @client}.to raise_error(CanCan::AccessDenied)
             end
         end
 
@@ -199,7 +199,7 @@ describe ClientsController do
             context "who does not own client" do
 
                 it "raises error" do
-                    expect{get :edit, id: @client}.to raise_error(ActiveRecord::RecordNotFound)
+                    expect{get :edit, id: @client}.to raise_error(CanCan::AccessDenied)
                 end
             end
         end
@@ -277,7 +277,7 @@ describe ClientsController do
 
                 it "raises record not found error" do
                     expect{put :update, id: @client, client: FactoryGirl.attributes_for(:client)
-                        }.to raise_error(ActiveRecord::RecordNotFound)
+                        }.to raise_error(CanCan::AccessDenied)
                 end
             end
         end
@@ -312,7 +312,7 @@ describe ClientsController do
             end
 
             it "raises error if user is not owner of client" do
-                expect{delete :destroy, id: @client}.to raise_error(ActiveRecord::RecordNotFound)
+                expect{delete :destroy, id: @client}.to raise_error(CanCan::AccessDenied)
             end
 
             it "deletes the client" do
@@ -355,7 +355,7 @@ describe ClientsController do
             end
 
             it "raises error if user is not owner of client" do
-                expect{get :get_json, id: @client}.to raise_error(ActiveRecord::RecordNotFound)
+                expect{get :get_json, id: @client}.to raise_error(CanCan::AccessDenied)
             end
         end
 
