@@ -17,7 +17,7 @@
 
         <ul class="nav navbar-nav">
           <% if signed_in? %>
-            <li class="<%= params[:controller] == 'invoices' ? 'active' : '' %>"><%= link_to 'Fakturaliste', invoices_path %></li>
+            <li class="<%= params[:controller] == 'invoices' && params[:action] != 'show' ? 'active' : '' %>"><%= link_to 'Fakturaliste', invoices_path %></li>
             <li class="<%= params[:controller] == 'clients' ? 'active' : '' %>"><%= link_to 'Kunderegister', clients_path %></li>
             <li class="<%= params[:controller] == 'products' ? 'active' : '' %>"><%= link_to 'Produktregister', products_path %></li>
           <% end %>
