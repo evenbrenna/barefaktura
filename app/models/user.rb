@@ -19,9 +19,11 @@ class User < ActiveRecord::Base
   after_create :send_welcome_email
 
   private
+
+    # Sends a welcome email to user.
     def send_welcome_email
       UserMailer.welcome_email(self).deliver_now
-      # Ubrukt resque job
+      # Unused resque job (due to need for expensive dynos)
       # WelcomeEmailJob.new(self).enqueue(wait: 5.minutes)
     end
 end

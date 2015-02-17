@@ -1,3 +1,7 @@
+# ------------------------------------------------------
+# jQuery to get info via JSON and autofill fields based
+# on dropdown selection when creating a new invoice
+# ------------------------------------------------------
 
 # Client: Autofill invoice client from dropdown
 jQuery ->

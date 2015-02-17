@@ -59,8 +59,6 @@ class ProductsController < ApplicationController
 
     private
 
-        # Require that :user be a key in the params Hash,
-        # and only accept :first, :last, and :email attributes
         def product_params
             params.require(:product).permit(:product_number, :description, :unit, :price, :vat)
         end

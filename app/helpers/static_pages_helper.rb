@@ -1,5 +1,6 @@
 module StaticPagesHelper
 
+    # Devise helpers for landing page login
     def resource_name
         :user
     end

@@ -1,3 +1,6 @@
+# Default settings for bootstrap confirmbox modal
+# from gem 'twitter-bootstrap-rails-confirm'
+
 $.fn.twitter_bootstrap_confirmbox.defaults =
   fade: true
   title: 'Advarsel'

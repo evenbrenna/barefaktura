@@ -19,133 +19,102 @@
 @import "home";
 @import "footer";
 
-html, body{
-    height: 100%;
+//////// LAYOUT /////////
+html, body
+{
+  height: 100%;
 }
 
-body {
-    padding-top: 90px;
-    font-family: "Open Sans";
-    color: #666;
- }
+body
+{
+  padding-top: 90px;
+  font-family: "Open Sans";
+  color: #666;
+}
 
-
-.wrapper {
+.wrapper // ensure footer starts below screen
+{
   min-height: 100%;
   height: auto !important;
   height: 100%;
   margin: 0 auto -0em;
 }
 
-
-p {
-    font-family: "Open Sans";
-    color: #666;
+.modal-backdrop {
+  z-index: -1;
 }
 
-a, a:link, a:visited, a:hover, a:active {
-  color: #015D70;
+.page-header // unused?
+{
+  color: #225378;
 }
 
-.lead {
-  color: #666;
-  font-size: 22px;
-  font-family: "Lato";
-}
+///////// TEXT //////////
 
-h1 {
+h1
+{
   font-family: "Fauna One";
   color: #015D70;
   font-size: 40px;
-   }
+}
 
-h3 {
+h3
+{
   font-family: "Fauna One";
   color: #015D70;
   font-size: 25px;
-   }
+}
 
-h4 {
+h4
+{
   font-family: "Fauna One";
-  }
+}
 
-.btn {
+p
+{
+  font-family: "Open Sans";
+  color: #666;
+}
+
+a, a:link, a:visited, a:hover, a:active
+{
+  color: #015D70;
+}
+
+//////// BUTTONS ///////////
+
+.btn
+{
   font-family: "Open Sans";
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
-.btn-primary {
+.btn-primary
+{
   background-color: #015D70;
   border-color: #015D70;
 }
 
-.btn-primary:hover {
+.btn-primary:hover
+{
   background-color: #014A5A;
   border-color: #014A5A;
 }
 
-a.btn-primary {
+a.btn-primary
+{
   color: #fff;
 }
 
- .page-header {
-  color: #225378;
- }
+//////// TABLES //////////
 
 .table-no-border>thead>tr>th,
 .table-no-border>tbody>tr>th,
 .table-no-border>tfoot>tr>th,
 .table-no-border>thead>tr>td,
 .table-no-border>tbody>tr>td,
-.table-no-border>tfoot>tr>td {
-    border-top: none;
-}
-
-
-.itempadding {
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 5px;
-}
-
-
-
-.grad {
-  background: -webkit-linear-gradient(left, #fff, #eee); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, #fff, #eee); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, #fff, #eee); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right, #fff, #eee); /* Standard syntax */
-}
-
-#error_explanation {
-  color: red;
-  ul {
-    color: red;
-    margin: 0 0 30px 0;
-  }
-}
-
-.field_with_errors {
-  @extend .has-error;
-  .form-control {
-    color: $state-danger-text;
-  }
-}
-
-
-.invoicewidth {
-  width: auto;
-  min-width: 767px;
-  overflow: auto;
-}
-
-
-.pdf-mail {
-    width: 1000px;
-    }
-
-
-.modal-backdrop {
-  z-index: -1;
+.table-no-border>tfoot>tr>td
+{
+  border-top: none;
 }
