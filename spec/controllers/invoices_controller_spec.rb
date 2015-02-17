@@ -4,6 +4,10 @@ require 'rails_helper'
 describe InvoicesController do
 
     before :each do
+        # to avoid having it converting to pdf every time this test runs
+        allow_any_instance_of(WickedPdf).to receive(:pdf_from_string).and_return("pdf converted invoice")
+
+        # create a user and sign in
         @user = FactoryGirl.create(:user)
         sign_in @user
     end
