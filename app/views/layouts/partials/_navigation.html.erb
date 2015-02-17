@@ -36,7 +36,7 @@
                 <li><%= link_to 'Hjelp', static_pages_help_path %></li>
                 <li class="divider"></li>
                 <li><%= link_to "Logg Ut", destroy_user_session_path, method: :delete %></li>
-                <% if can? :update, @user %>
+                <% if current_user.role? :administrator %>
                   <li><%= link_to "Admin Side", admin_root_path %></li>
                 <% end %>
               </ul>
