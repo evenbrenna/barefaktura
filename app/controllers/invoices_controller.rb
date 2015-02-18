@@ -91,6 +91,7 @@ class InvoicesController < ApplicationController
       :delivery_date, :total, :currency, :paid, :client_name, :client_email,
       :client_address, :delivery_address, :client_ref, :client_org_nr,
       invoice_items_attributes: [:id, :description, :quantity, :vat,
-        :unit, :unit_price, :total, :user_id, :invoice_id, :_destroy])
+                                 :unit, :unit_price, :total, :user_id,
+                                 :invoice_id, :_destroy])
   end
 end
