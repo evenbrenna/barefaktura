@@ -377,7 +377,7 @@ DEPENDENCIES
   mail_form
   newrelic_rpm
   pg
-  rails (= 4.2.0)
+  rails (~> 4.2.0)
   rails_12factor
   redis
   resque (~> 1.22.0)
