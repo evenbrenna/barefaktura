@@ -18,9 +18,10 @@ class User < ActiveRecord::Base
   validates :org_number, presence: true
   validates :bank_name, presence: true
   validates :bank_account, presence: true
-  validates :next_invoice_number, presence: true
-  validates :next_invoice_number, numericality: true, message: 'må være et heltall.'
-  validates :next_invoice_number, format: /\A\d+\z/, allow_blank: false, on: :create
+  validates :next_invoice_number,
+            presence: true,
+            numericality: { message: 'må være et heltall.' },
+            format: /\A\d+\z/, allow_blank: false, on: :create
 
   after_create :send_welcome_email
 
