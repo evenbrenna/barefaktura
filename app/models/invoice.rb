@@ -39,7 +39,8 @@ class Invoice < ActiveRecord::Base
     user = User.find(user_id)
     assign_attributes(
       user_name: user.name,
-      user_org_number: ((user.foretaks_reg ? 'Foretaksregisteret ' : 'Org.nr: ') + (user.org_number) + (user.mva_reg ? ' MVA' : '')),
+      user_org_number: ((user.foretaks_reg ? 'Foretaksregisteret ' : 'Org.nr: ') + (
+                        user.org_number) + (user.mva_reg ? ' MVA' : '')),
       user_email: user.email,
       user_phone: user.phone,
       user_bank_swift: user.bank_swift,
