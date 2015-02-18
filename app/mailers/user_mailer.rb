@@ -1,9 +1,11 @@
 class UserMailer < ActionMailer::Base
-  helper :application
+  # Needed for finn_grunnlag method used in pdf generation
   helper :invoices
 
+  # Unless sender is defined in mailer
   default from: 'noreply@barefaktura.no'
 
+  # Gets sent when a user signs up
   def welcome_email(user)
     @user = user
     email_with_name = %("#{@user.name}" <#{@user.email}>)
@@ -12,23 +14,40 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  # Sends an email with a summary of given invoice to invoice recipient
+  # and attaches the invoice in pdf format
   def pdf_email(invoice, message)
     @invoice = invoice
-    @user = @invoice.user
-    @client = @invoice.client
     @message = message
-    @type = @invoice.kreditnota ? 'kreditnota' : 'faktura'
-    @subject =  "#{@type} #{@invoice.invoice_number}"
 
-    email_with_name = %("#{@client.name}" <#{@client.email}>)
-    sender_with_name = %("#{@user.name}" <#{@user.email}>)
-
-    mail to: email_with_name, bcc: @user.email, from: sender_with_name, subject: @subject do |format|
+    mail to: email_with_name(@invoice), from: sender_with_name(@invoice),
+         bcc: @invoice.user.email, subject: email_subject(@invoice) do |format|
       format.html # renders pdf_email.html.erb for body of email
       format.pdf do
-        attachments[@subject + '.pdf'] = WickedPdf.new.pdf_from_string(
-          render_to_string('invoices/show.pdf.erb'), print_media_type: false, encoding: 'utf8')
+        attachments[email_subject(@invoice) + '.pdf'] = WickedPdf.new.pdf_from_string(
+          render_to_string('invoices/show.pdf.erb'), encoding: 'utf8')
       end
     end
+  end
+
+  private
+
+  # Returns sender name and email in the following format:
+  # Firstname Lastname <name@email.com>
+  def sender_with_name(invoice)
+    %("#{invoice.user.name}" <#{invoice.user.email}>)
+  end
+
+  # Returns recipient name and email in the following format:
+  # Firstname Lastname <name@email.com>
+  def email_with_name(invoice)
+    %("#{invoice.client.name}" <#{invoice.client.email}>)
+  end
+
+  # Returns a string in the following format:
+  # Faktura/Kreditnota n, where n is invoice number
+  def email_subject(invoice)
+    "#{invoice.kreditnota ? 'kreditnota' : 'faktura'}
+     #{invoice.invoice_number}"
   end
 end

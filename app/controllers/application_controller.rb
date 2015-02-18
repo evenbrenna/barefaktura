@@ -24,6 +24,12 @@ class ApplicationController < ActionController::Base
 
   # Strong parameters for sign up and account update via Devise
   def configure_permitted_parameters
+    config_sign_up
+    config_update
+  end
+
+  # Permitted parameters for Devise sign up
+  def config_sign_up
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:email,
                :password, :password_confirmation, :current_password, :name,
@@ -31,7 +37,10 @@ class ApplicationController < ActionController::Base
                :bank_swift, :bank_iban, :ref, :mva_reg, :foretaks_reg,
                :next_invoice_number)
     end
+  end
 
+  # Permitted parameters for Devise update
+  def config_update
     devise_parameter_sanitizer.for(:account_update) do |u|
       u.permit(:email,
                :password, :password_confirmation, :current_password, :name,

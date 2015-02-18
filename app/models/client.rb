@@ -3,7 +3,9 @@ class Client < ActiveRecord::Base
   has_many :invoices, dependent: :restrict_with_exception # raises ActiveRecord::DeleteRestrictionError
 
   validates :user, presence: true
-  validates_presence_of :name, :address, :delivery_address
+  validates :name, presence: true
+  validates :address, presence: true
+  validates :delivery_address, presence: true
 
   # calculates total invoiced for client
   def total_invoiced

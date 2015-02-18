@@ -2,11 +2,15 @@ class Product < ActiveRecord::Base
   belongs_to :user
 
   validates :user, presence: true
-  validates_presence_of :description, :unit, :price, :vat, :product_number
-  validates_numericality_of :price, message: "må være et tall. Gyldige eksempler er \"100\", \"0,5\" eller \"0.50\""
-  validates_format_of :price, with: /\A\d+(\.\d{1,2})?\z/, allow_blank: false, on: :create
-  validates_numericality_of :vat, message: 'må være et heltall.'
-  validates_format_of :vat, with: /\A\d{1,2}\z/, allow_blank: false, on: :create
+  validates :description, presence: true
+  validates :unit, presence: true
+  validates :price, presence: true
+  validates :vat, presence: true
+  validates :product_number, presence: true
+  validates :price, numericality: true, message: "må være et tall. Gyldige eksempler er \"100\", \"0,5\" eller \"0.50\""
+  validates :price, format: /\A\d+(\.\d{1,2})?\z/, allow_blank: false, on: :create
+  validates :vat, numericality: true, message: 'må være et heltall.'
+  validates :vat, format: /\A\d{1,2}\z/, allow_blank: false, on: :create
 
   # Replaces comma with period and strips spaces
   def price=(price)

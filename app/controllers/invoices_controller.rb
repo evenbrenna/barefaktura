@@ -21,12 +21,10 @@ class InvoicesController < ApplicationController
     @user = current_user
     @invoice = current_user.invoices.new(invoice_params)
     @client_list = current_user.clients.map { |c| [c.name, c.id] }
-    @products = current_user.products.all
 
-    # save like usual
     if @invoice.save
-      @user.update_attribute(:next_invoice_number,
-                             (@user.next_invoice_number + 1))
+      @user.update_attribute(:next_invoice_number, (
+                             @user.next_invoice_number + 1))
       redirect_to @invoice
     else
       render 'new'
