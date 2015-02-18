@@ -1,6 +1,6 @@
-require 'spec_helper'
 require 'rails_helper'
-require 'support/database_cleaner'
+
+# Required for logging in a user
 include Warden::Test::Helpers
 Warden.test_mode!
 

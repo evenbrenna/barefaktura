@@ -80,6 +80,9 @@ GEM
       xpath (~> 2.0)
     capybara-slow_finder_errors (0.1.2)
       capybara (~> 2.0)
+    capybara-webkit (1.4.1)
+      capybara (>= 2.3.0, < 2.5.0)
+      json
     celluloid (0.16.0)
       timers (~> 4.0.0)
     childprocess (0.5.5)
@@ -361,6 +364,7 @@ DEPENDENCIES
   cancancan (~> 1.10)
   capybara
   capybara-slow_finder_errors
+  capybara-webkit
   codeclimate-test-reporter
   coffee-rails (~> 4.0.0)
   database_cleaner

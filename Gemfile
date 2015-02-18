@@ -56,6 +56,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-slow_finder_errors'
   gem 'selenium-webdriver'
+  gem "capybara-webkit"
   gem 'guard-rspec'
   gem 'launchy'
   gem 'database_cleaner'

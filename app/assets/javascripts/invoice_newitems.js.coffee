@@ -1,4 +1,12 @@
+
+# counter
+counter = 1
+itemCounter = ->
+  counter = counter + 1
+
+
 window.addItemField = ->
+
 
   #create Date object
   date = new Date
@@ -25,6 +33,7 @@ window.addItemField = ->
   #create main container div tag
   div = document.createElement('div')
   div.className = 'itempadding grad'
+  div.id = 'item_' + itemCounter()
 
   # ---------- HEADING -------------
   itemHeading = document.createElement('h3')

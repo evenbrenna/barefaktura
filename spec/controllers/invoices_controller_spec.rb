@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'rails_helper'
 
 describe InvoicesController do
@@ -142,6 +141,13 @@ describe InvoicesController do
           post :create, invoice: FactoryGirl.attributes_for(:invoice).merge(
             invoice_items_attributes: [FactoryGirl.attributes_for(:invoice_item)])
         end.to change(Invoice, :count).by(1)
+      end
+
+      it 'saves all the items' do
+        expect do
+          post :create, invoice: FactoryGirl.attributes_for(:invoice).merge(
+            invoice_items_attributes: [FactoryGirl.attributes_for(:invoice_item), FactoryGirl.attributes_for(:invoice_item)])
+        end.to change(InvoiceItem, :count).by(2)
       end
 
       it 'increments @user.next_invoice_number on save' do
