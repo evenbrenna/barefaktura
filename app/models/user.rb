@@ -12,18 +12,25 @@ class User < ActiveRecord::Base
   has_many :products, dependent: :destroy
   has_many :invoices, dependent: :destroy
 
-  validates_presence_of :name, :email, :address, :org_number, :bank_name, :bank_account, :next_invoice_number
-  validates_numericality_of :next_invoice_number, message: "må være et heltall."
-  validates_format_of :next_invoice_number, with: /\A\d+\z/, allow_blank: false, on: :create
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :address, presence: true
+  validates :org_number, presence: true
+  validates :bank_name, presence: true
+  validates :bank_account, presence: true
+  validates :next_invoice_number,
+            presence: true,
+            numericality: { message: 'må være et heltall.' },
+            format: /\A\d+\z/, allow_blank: false, on: :create
 
   after_create :send_welcome_email
 
   private
 
-    # Sends a welcome email to user.
-    def send_welcome_email
-      UserMailer.welcome_email(self).deliver_now
-      # Unused resque job (due to need for expensive dynos)
-      # WelcomeEmailJob.new(self).enqueue(wait: 5.minutes)
-    end
+  # Sends a welcome email to user.
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_now
+    # Unused resque job (due to need for expensive dynos)
+    # WelcomeEmailJob.new(self).enqueue(wait: 5.minutes)
+  end
 end

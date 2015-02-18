@@ -1,4 +1,12 @@
+
+# counter
+counter = 1
+itemCounter = ->
+  counter = counter + 1
+
+
 window.addItemField = ->
+
 
   #create Date object
   date = new Date
@@ -9,22 +17,35 @@ window.addItemField = ->
 
   # Create unique id and name for fields
   # by replacing 0 with milliseconds
-  idAttributProdSelect = 'prodSelect_0'.replace('0', mSec)
-  nameAttributProdSelect = 'prodSelect[0]'.replace('0', mSec)
-  idAttributDescription = '0_description'.replace('0', mSec)
-  nameAttributDescription = '[0][description]'.replace('0', mSec)
-  idAttributQuantity = '0_quantity'.replace('0', mSec)
-  nameAttributQuantity = '[0][quantity]'.replace('0', mSec)
-  idAttributUnit = '0_unit'.replace('0', mSec)
-  nameAttributUnit = '[0][unit]'.replace('0', mSec)
-  idAttributPrice = '0_unit_price'.replace('0', mSec)
-  nameAttributPrice = '[0][unit_price]'.replace('0', mSec)
-  idAttributVat = '0_vat'.replace('0', mSec)
-  nameAttributVat = '[0][vat]'.replace('0', mSec)
+  idAttributProdSelect = 'prodSelect_0'.
+                          replace('0', mSec)
+  nameAttributProdSelect = 'prodSelect[0]'.
+                            replace('0', mSec)
+  idAttributDescription = 'invoice_invoice_items_attributes_0_description'.
+                          replace('0', mSec)
+  nameAttributDescription = 'invoice[invoice_items_attributes][0][description]'.
+                            replace('0', mSec)
+  idAttributQuantity = 'invoice_invoice_items_attributes_0_quantity'.
+                        replace('0', mSec)
+  nameAttributQuantity = 'invoice[invoice_items_attributes][0][quantity]'.
+                          replace('0', mSec)
+  idAttributUnit = 'invoice_invoice_items_attributes_0_unit'.
+                    replace('0', mSec)
+  nameAttributUnit = 'invoice[invoice_items_attributes][0][unit]'.
+                      replace('0', mSec)
+  idAttributPrice = 'invoice_invoice_items_attributes_0_unit_price'.
+                    replace('0', mSec)
+  nameAttributPrice = 'invoice[invoice_items_attributes][0][unit_price]'.
+                      replace('0', mSec)
+  idAttributVat = 'invoice_invoice_items_attributes_0_vat'.
+                  replace('0', mSec)
+  nameAttributVat = 'invoice[invoice_items_attributes][0][vat]'.
+                    replace('0', mSec)
 
   #create main container div tag
   div = document.createElement('div')
   div.className = 'itempadding grad'
+  div.id = 'item_' + itemCounter()
 
   # ---------- HEADING -------------
   itemHeading = document.createElement('h3')
@@ -301,7 +322,7 @@ window.addItemField = ->
 
   jQuery ->
     $('#' + idAttributProdSelect).change ->
-      $.get '/products/' + $(this).val() + '/get_json', (data, status, xhr) ->
+      $.get '/products/' + $(this).val() + '/product_json', (data, status, xhr) ->
         productsDataObj = undefined
         productsDataObj = JSON.parse(data)
         $('#' + idAttributDescription).val productsDataObj.description

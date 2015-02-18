@@ -1,4 +1,4 @@
-#app/jobs/welcome_email_job.rb
+# app/jobs/welcome_email_job.rb
 
 class WelcomeEmailJob < ActiveJob::Base
   queue_as :email

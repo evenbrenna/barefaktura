@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: fupayme_production
-  username: fupayme
-  password: <%= ENV['FUPAYME_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>

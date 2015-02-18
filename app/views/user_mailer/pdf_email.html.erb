@@ -793,24 +793,24 @@ body.outlook p {
                       <table class="twelve columns">
                         <tr>
                           <td>
-                            <h1><%= @type.capitalize %> <%= @invoice.invoice_number %></h1>
+                            <h1><%= @invoice.kreditnota ? 'kreditnota' : 'faktura'.capitalize %> <%= @invoice.invoice_number %></h1>
 
                             <% unless @message.blank? %>
                                 <p> <%= simple_format @message %></p>
                             <% end %>
 
                             <b><u>Oppsummering:</u></b><br>
-                            <%= @type.capitalize %>nummer: <%= @invoice.invoice_number %><br>
-                            Fra: <%= @user.name %><br>
+                            <%= @invoice.kreditnota ? 'kreditnota' : 'faktura'.capitalize %>nummer: <%= @invoice.invoice_number %><br>
+                            Fra: <%= @invoice.user_name %><br>
                             Forfallsdato: <%= @invoice.kreditnota ? '--/--/----' : @invoice.due_date.strftime('%d/%m/%Y') %><br>
                             <% unless @invoice.kreditnota %>
-                                Kontonummer: <%= @user.bank_account %><br>
+                                Kontonummer: <%= @invoice.user_bank_account %><br>
                             <% end %>
                             Totalt <%= @invoice.kreditnota ? 'kreditert' : 'å betale' %>:  <%= number_with_precision(@invoice.total, :precision => 2) %> <%= @invoice.currency %><br><br>
 
                             <p>
                               ---<br>
-                              <%= @type.capitalize %> er vedlagt i pdf-format.<br>
+                              <%= @invoice.kreditnota ? 'kreditnota' : 'faktura'.capitalize %> er vedlagt i pdf-format.<br>
                               <em>Sendt med <a href="http://www.barefaktura.no">BareFaktura.no</a></em><p>
                             </p>
                           </td>
