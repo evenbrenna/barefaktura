@@ -295,7 +295,7 @@ describe ProductsController do
     end
   end
 
-  describe 'GET #get_json' do
+  describe 'GET #product_json' do
     context 'for signed in user' do
       before :each do
         @user = FactoryGirl.create(:user)
@@ -305,12 +305,12 @@ describe ProductsController do
 
       it 'returns the correct product' do
         @user.products << @product
-        get :get_json, id: @product
+        get :product_json, id: @product
         expect(response.body).to include('Even skaper ro')
       end
 
       it 'raises error if user is not owner of product' do
-        expect { get :get_json, id: @product }.to raise_error(CanCan::AccessDenied)
+        expect { get :product_json, id: @product }.to raise_error(CanCan::AccessDenied)
       end
     end
 
@@ -319,7 +319,7 @@ describe ProductsController do
         user = FactoryGirl.create(:user)
         product = FactoryGirl.create(:product, description: 'Even skaper ro')
         user.products << product
-        get :get_json, id: product
+        get :product_json, id: product
         expect(response).to redirect_to(new_user_session_path)
       end
     end

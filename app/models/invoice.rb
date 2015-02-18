@@ -38,25 +38,25 @@ class Invoice < ActiveRecord::Base
     user = User.find(user_id)
     assign_attributes(user_name: user.name, user_org_number: (
       (user.foretaks_reg ? 'Foretaksregisteret ' : 'Org.nr: ') + (
-      user.org_number) + (user.mva_reg ? ' MVA' : '')), user_email: user.email,
-      user_phone: user.phone, user_bank_swift: user.bank_swift,
-      user_bank_iban: user.bank_iban, user_bank_name: user.bank_name,
-      user_bank_account: user.bank_account, user_address: user.address)
+      user.org_number) + (user.mva_reg ? ' MVA' : '')),
+                      user_email: user.email, user_phone: user.phone,
+                      user_bank_swift: user.bank_swift, user_bank_iban: user.bank_iban,
+                      user_bank_name: user.bank_name, user_bank_account: user.bank_account,
+                      user_address: user.address)
   end
 
   # Creates and assigns a new client if
   # a client_id is not specified for the invoice
   def save_new_client
-    if client_id.blank?
-      user = User.find(user_id)
-      new_client = user.clients.new(name: client_name, email: client_email,
-                                    address: client_address,
-                                    delivery_address: delivery_address,
-                                    ref: client_ref, org_nr: client_org_nr)
-      # saves the client and assigns its id to self
-      new_client.save if self.valid?
-      assign_attributes(client_id: new_client.id) if self.valid?
-    end
+    return unless client_id.blank?
+    user = User.find(user_id)
+    new_client = user.clients.new(name: client_name, email: client_email,
+                                  address: client_address,
+                                  delivery_address: delivery_address,
+                                  ref: client_ref, org_nr: client_org_nr)
+    # saves the client and assigns its id to self
+    new_client.save if self.valid?
+    assign_attributes(client_id: new_client.id) if self.valid?
   end
 
   # Calculates and stores the invoice total

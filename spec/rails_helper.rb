@@ -52,7 +52,6 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-
   config.include Devise::TestHelpers, type: :controller
   Capybara.default_driver = :rack_test
   Capybara.javascript_driver = :webkit

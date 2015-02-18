@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   get :kreditnota, to: 'invoices#kreditnota', as: :kreditnota
 
   # get client info as json
-  get "clients/:id/get_json", :controller=>"clients", :action=>"get_json"
+  get "clients/:id/client_json", :controller=>"clients", :action=>"client_json"
 
   # get product info as json
-  get "products/:id/get_json", :controller=>"products", :action=>"get_json"
+  get "products/:id/product_json", :controller=>"products", :action=>"product_json"
 
   resources :invoices, except: [:edit, :update, :destroy] do
     get :set_paid, on: :member

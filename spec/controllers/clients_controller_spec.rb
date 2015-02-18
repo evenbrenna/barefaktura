@@ -310,7 +310,7 @@ describe ClientsController do
     end
   end
 
-  describe 'GET #get_json' do
+  describe 'GET #client_json' do
     context 'for signed in user' do
       before :each do
         @user = FactoryGirl.create(:user)
@@ -320,12 +320,12 @@ describe ClientsController do
 
       it 'returns the correct client' do
         @user.clients << @client
-        get :get_json, id: @client
+        get :client_json, id: @client
         expect(response.body).to include('Even skaper ro')
       end
 
       it 'raises error if user is not owner of client' do
-        expect { get :get_json, id: @client }.to raise_error(CanCan::AccessDenied)
+        expect { get :client_json, id: @client }.to raise_error(CanCan::AccessDenied)
       end
     end
 
@@ -334,7 +334,7 @@ describe ClientsController do
         user = FactoryGirl.create(:user)
         client = FactoryGirl.create(:client)
         user.clients << client
-        get :get_json, id: client
+        get :client_json, id: client
         expect(response).to redirect_to(new_user_session_path)
       end
     end

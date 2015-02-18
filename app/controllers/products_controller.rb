@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   def index
     @user = current_user
     @products = current_user.products.all.except(
-                :order).order('product_number ASC')
+      :order).order('product_number ASC')
   end
 
   def show
@@ -52,7 +52,7 @@ class ProductsController < ApplicationController
     redirect_to products_path
   end
 
-  def get_json
+  def product_json
     product = current_user.products.find(params[:id])
     render text: product.to_json
   end

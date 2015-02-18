@@ -53,7 +53,7 @@ class ClientsController < ApplicationController
     redirect_to clients_path
   end
 
-  def get_json
+  def client_json
     client = current_user.clients.find(params[:id])
     render text: client.to_json
   end

@@ -322,7 +322,7 @@ window.addItemField = ->
 
   jQuery ->
     $('#' + idAttributProdSelect).change ->
-      $.get '/products/' + $(this).val() + '/get_json', (data, status, xhr) ->
+      $.get '/products/' + $(this).val() + '/product_json', (data, status, xhr) ->
         productsDataObj = undefined
         productsDataObj = JSON.parse(data)
         $('#' + idAttributDescription).val productsDataObj.description

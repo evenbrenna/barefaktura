@@ -5,7 +5,7 @@ class InvoicesController < ApplicationController
   def index
     @user = current_user
     @invoices = current_user.invoices.all.except(
-                  :order).order('invoice_number DESC')
+      :order).order('invoice_number DESC')
   end
 
   def new
@@ -84,14 +84,15 @@ class InvoicesController < ApplicationController
   private
 
   def invoice_params
-    params.require(:invoice).permit(:notes, :client_id, :user_name,
-      :user_org_number, :user_email, :user_phone, :user_bank_swift,
-      :user_bank_iban, :user_bank_name, :user_bank_account, :user_address,
-      :user_ref, :invoice_number, :kreditnota, :due_date, :order_date,
-      :delivery_date, :total, :currency, :paid, :client_name, :client_email,
-      :client_address, :delivery_address, :client_ref, :client_org_nr,
-      invoice_items_attributes: [:id, :description, :quantity, :vat,
-                                 :unit, :unit_price, :total, :user_id,
-                                 :invoice_id, :_destroy])
+    params.require(
+      :invoice).permit(:notes, :client_id, :user_name, :user_org_number, :user_email,
+                       :user_phone, :user_bank_swift, :user_bank_iban, :user_bank_name,
+                       :user_bank_account, :user_address, :user_ref, :invoice_number,
+                       :kreditnota, :due_date, :order_date, :delivery_date, :total,
+                       :currency, :paid, :client_name, :client_email, :client_address,
+                       :delivery_address, :client_ref, :client_org_nr,
+                       invoice_items_attributes: [:id, :description, :quantity,
+                                                  :vat, :unit, :unit_price, :total,
+                                                  :user_id, :invoice_id, :_destroy])
   end
 end

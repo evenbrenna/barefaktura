@@ -6,7 +6,7 @@
 # Client: Autofill invoice client from dropdown
 jQuery ->
   $("#invoice_client_id").change ->
-    $.get "/clients/" + $(this).val() + "/get_json", (data, status, xhr) ->
+    $.get "/clients/" + $(this).val() + "/client_json", (data, status, xhr) ->
       clientObject = JSON.parse(data)
       $("#invoice_client_name").val(clientObject.name)
       $("#invoice_client_email").val(clientObject.email)
@@ -18,7 +18,7 @@ jQuery ->
 # Product: Autofill invoice_item from dropdown
 jQuery ->
   $("#products").change ->
-    $.get "/products/" + $(this).val() + "/get_json", (data, status, xhr) ->
+    $.get "/products/" + $(this).val() + "/product_json", (data, status, xhr) ->
       productObject = JSON.parse(data)
       $("#invoice_invoice_items_attributes_0_description").val(
         productObject.description)

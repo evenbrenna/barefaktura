@@ -17,9 +17,6 @@ class Ability
       can :manage, Invoice, user_id: user.id
       can :manage, Product, user_id: user.id
       can :manage, Client, user_id: user.id
-    else
-      # Guest users can only see resources that do not implement
-      # 'load_and_authorize_resource'. Currently only static_pages_controller
     end
   end
 end

@@ -9,10 +9,9 @@ class ApplicationController < ActionController::Base
   # Active Admin uses this to check if user can access back end
   def authenticate_active_admin_user!
     authenticate_user!
-    unless current_user.role? :administrator
-      flash[:alert] = 'Du har ikke tilgang til denne siden!'
-      redirect_to root_path
-    end
+    return if current_user.role? :administrator
+    flash[:alert] = 'Du har ikke tilgang til denne siden!'
+    redirect_to root_path
   end
 
   # Needed for redirect to user profile on login.
