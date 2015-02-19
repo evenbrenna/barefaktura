@@ -23,9 +23,9 @@ class ApplicationController < ActionController::Base
 
   # Strong parameters for sign up and account update via Devise
   def configure_permitted_parameters
-    account_params = [:email, :password, :password_confirmation,
-                      :current_password, :name, :address, :phone,
-                      :org_number, :bank_name, :bank_account,
+    # Params for devise parameter sanitizers
+    account_params = [:email, :password, :password_confirmation, :current_password,
+                      :name, :address, :phone, :org_number, :bank_name, :bank_account,
                       :bank_swift, :bank_iban, :ref, :mva_reg, :foretaks_reg,
                       :next_invoice_number]
 
