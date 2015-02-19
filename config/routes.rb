@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   devise_for :users, :path_prefix => 'auth'
   resources :users, only: [:show]
 
+  # Could probably be more elegant
+  get 'user_root' => 'users#show'
+
   ActiveAdmin.routes(self)
   get 'static_pages/home'
 
