@@ -23,18 +23,19 @@ class ApplicationController < ActionController::Base
 
   # Strong parameters for sign up and account update via Devise
   def configure_permitted_parameters
-    # Params for devise parameter sanitizers
-    account_params = [:email, :password, :password_confirmation, :current_password,
-                      :name, :address, :phone, :org_number, :bank_name, :bank_account,
-                      :bank_swift, :bank_iban, :ref, :mva_reg, :foretaks_reg,
-                      :next_invoice_number]
-
     devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(account_params)
+      u.permit(sanitized_params)
     end
-
     devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(account_params)
+      u.permit(sanitized_params)
     end
+  end
+
+  # Helper method for configure_permitted_parameters
+  def sanitized_params
+    [:email, :password, :password_confirmation, :current_password,
+     :name, :address, :phone, :org_number, :bank_name, :bank_account,
+     :bank_swift, :bank_iban, :ref, :mva_reg, :foretaks_reg,
+     :next_invoice_number]
   end
 end

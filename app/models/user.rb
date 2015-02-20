@@ -1,17 +1,10 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable and :omniauthable
-  devise :database_authenticatable, :registerable, :timeoutable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-  def role?(r)
-    role.include? r.to_s
-  end
-
+  # Associations
   has_many :clients, dependent: :destroy
   has_many :products, dependent: :destroy
   has_many :invoices, dependent: :destroy
 
+  # Validations
   validates :name, presence: true
   validates :email, presence: true
   validates :address, presence: true
@@ -23,7 +16,24 @@ class User < ActiveRecord::Base
             numericality: { message: 'må være et heltall.' },
             format: /\A\d+\z/, allow_blank: false, on: :create
 
+  # Callbacks
   after_create :send_welcome_email
+
+  # Devise modules.
+  # Others available are: :confirmable, :lockable and :omniauthable
+  devise :database_authenticatable, :registerable, :timeoutable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Returns true if argument matches user role
+  def role?(r)
+    role.include? r.to_s
+  end
+
+  # Returns org.nr with registrations as a string
+  def org_nr_with_registrations
+    (foretaks_reg ? 'Foretaksregisteret ' : 'Org.nr: ') +
+      org_number + (mva_reg ? ' MVA' : '')
+  end
 
   private
 

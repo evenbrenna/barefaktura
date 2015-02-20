@@ -1,15 +1,13 @@
 module ApplicationHelper
   # returns number of overdue invoices for current_user
   def overdue_count
-    overdue = current_user.invoices.select { |i| !i.paid && (DateTime.now.to_date > i.due_date) } # Overdue
-    overdue.count
+    current_user.invoices.overdue.unpaid.count
   end
 
   # returns total amount for overdue invoices for current user
   def overdue_amount
     amount = 0.00
-    overdue = current_user.invoices.select { |i| !i.paid && (DateTime.now.to_date > i.due_date) } # Overdue
-    overdue.each do |i|
+    current_user.invoices.overdue.unpaid.each do |i|
       amount += i.total
     end
     amount
