@@ -1,3 +1,4 @@
+# Helper for invoice views
 module InvoicesHelper
   # To mark overdue invoices table row in red
   def rowcolor(invoice)
