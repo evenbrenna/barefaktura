@@ -1,28 +1,30 @@
 class Product < ActiveRecord::Base
+  # Associations
   belongs_to :user
 
-  validates :user, presence: true
-  validates :description, presence: true
-  validates :unit, presence: true
-  validates :product_number, presence: true
-  validates :price,
-            presence: true,
-            numericality: { message: "må være et tall. Gyldige eksempler er \"100\", \"0,5\" eller \"0.50\"" },
-            format: /\A\d+(\.\d{1,2})?\z/,
-            allow_blank: false,
-            on: :create
-  validates :vat,
-            presence: true,
-            numericality: { message: 'må være et heltall.' },
-            format: /\A\d{1,2}\z/,
-            allow_blank: false,
-            on: :create
+  # Validations
+  validates :user,           :presence     => true
+  validates :description,    :presence     => true
+  validates :unit,           :presence     => true
+  validates :product_number, :presence     => true
+  validates :price,          :presence     => true,
+                             :numericality => { :message =>
+                                                'må være et tall.' },
+                             :format       => /\A\d+(\.\d{1,2})?\z/,
+                             :allow_blank  => false,
+                             :on           => :create
+  validates :vat,            :presence     => true,
+                             :numericality => { :message =>
+                                                'må være heltall.' },
+                             :format       => /\A\d{1,2}\z/,
+                             :allow_blank  => false,
+                             :on           => :create
 
   # Replaces comma with period and strips spaces
   def price=(price)
-    price = price.to_s.gsub(',', '.') # comma to dot
-    price = price.gsub(' ', '') # remove blanks
-    self[:price] = price  # or perhaps price.to_f
+    price = price.to_s.gsub(',', '.')
+    price = price.gsub(' ', '')
+    self[:price] = price
   end
 
   # Returns product number and description as string

@@ -214,38 +214,58 @@ describe ClientsController do
 
         context 'with valid attributes' do
           it 'locates the requested client' do
-            put :update, id: @client, client: FactoryGirl.attributes_for(:client)
+            put :update, :id     => @client,
+                         :client => FactoryGirl.attributes_for(:client)
+
             expect(assigns(:client)).to eq(@client)
           end
 
           it 'changes clients attributes' do
-            put :update, id: @client, client: FactoryGirl.attributes_for(:client, name: 'Edited', address: 'ny adresse')
+            put :update,
+                :id     => @client,
+                :client => FactoryGirl.attributes_for(:client,
+                                                      :name    => 'Edited',
+                                                      :address => 'ny adresse')
             @client.reload
+
             expect(@client.name).to eq('Edited')
             expect(@client.address).to eq('ny adresse')
           end
 
           it 'redirects to :index view' do
-            put :update, id: @client, client: FactoryGirl.attributes_for(:client)
+            put :update, :id     => @client,
+                         :client => FactoryGirl.attributes_for(:client)
+
             expect(response).to redirect_to(clients_path)
           end
         end
 
         context 'with invalid attributes' do
           it 'locates the requested client' do
-            put :update, id: @client, client: FactoryGirl.attributes_for(:client, name: nil)
+            put :update, :id => @client,
+                         :client => FactoryGirl.attributes_for(:client,
+                                                               :name => nil)
+
             expect(assigns(:client)).to eq(@client)
           end
 
           it 'does not change clients attributes' do
-            put :update, id: @client, client: FactoryGirl.attributes_for(:client, name: nil, address: 'ny adresse')
+            put :update,
+                :id     => @client,
+                :client => FactoryGirl.attributes_for(:client,
+                                                      :name => nil,
+                                                      :address => 'ny adresse')
             @client.reload
+
             expect(@client.name).to eq('Even eier')
             expect(@client.address).to_not eq('ny adresse')
           end
 
           it 're-renders the :edit view' do
-            put :update, id: @client, client: FactoryGirl.attributes_for(:client, name: nil)
+            put :update, :id     => @client,
+                         :client => FactoryGirl.attributes_for(:client,
+                                                               :name => nil)
+
             expect(response).to render_template(:edit)
           end
         end
@@ -254,7 +274,8 @@ describe ClientsController do
       context 'and not owner of client' do
         it 'raises record not found error' do
           expect do
-            put :update, id: @client, client: FactoryGirl.attributes_for(:client)
+            put :update, :id     => @client,
+                         :client => FactoryGirl.attributes_for(:client)
           end.to raise_error(CanCan::AccessDenied)
         end
       end
@@ -262,8 +283,13 @@ describe ClientsController do
 
     context 'when guest' do
       it 'does not change client attributes' do
-        put :update, id: @client, client: FactoryGirl.attributes_for(:client, name: 'hello', address: 'ny adresse')
+        put :update,
+            :id     => @client,
+            :client => FactoryGirl.attributes_for(:client,
+                                                  :name   => 'hello',
+                                                  :address => 'ny adresse')
         @client.reload
+
         expect(@client.name).to eq('Even eier')
         expect(@client.address).to_not eq('ny adresse')
       end

@@ -1,30 +1,23 @@
 class InvoicesController < ApplicationController
+  # Authenticate with Devise, Authorize with CanCanCan
   before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
-    @user = current_user
-    @invoices = current_user.invoices.all.except(
-      :order).order('invoice_number DESC')
+    @invoices = current_user.invoices
   end
 
   def new
-    @user = current_user
-    @invoice = current_user.invoices.new
     @client_list = current_user.clients.map { |c| [c.name, c.id] }
-    @invoice.invoice_items.build
-    @products = current_user.products.all
-    @invoice.invoice_number = @user.next_invoice_number
+    @invoice = current_user.invoices.new(
+      :invoice_number => current_user.next_invoice_number,
+      :invoice_items  => [InvoiceItem.new])
   end
 
   def create
-    @user = current_user
     @invoice = current_user.invoices.new(invoice_params)
-    @client_list = current_user.clients.map { |c| [c.name, c.id] }
-
     if @invoice.save
-      @user.update_attribute(:next_invoice_number, (
-                             @user.next_invoice_number + 1))
+      current_user.increment!(:next_invoice_number)
       redirect_to @invoice
     else
       render 'new'

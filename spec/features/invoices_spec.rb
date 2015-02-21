@@ -10,10 +10,10 @@ describe 'The invoices page' do
     login_as @user, scope: :user
   end
 
-  it "lets me create a new invoice, redirects to show", :js => true do
+  it 'lets me create a new invoice, redirects to show', :js => true do
     # Supress capybara-webkit warnings
-    page.driver.allow_url("ajax.googleapis.com")
-    page.driver.allow_url("fonts.googleapis.com")
+    page.driver.allow_url('ajax.googleapis.com')
+    page.driver.allow_url('fonts.googleapis.com')
 
     visit invoices_path
     click_link '+ Ny Faktura'
@@ -28,7 +28,7 @@ describe 'The invoices page' do
     # to have been filled in automatically
 
     # Item 1
-    within :css, "div#item_1" do
+    within :css, 'div#item_1' do
       fill_in 'Antall *', with: '1'
       fill_in 'Enhet (timer, kg, ...) *', with: '1'
       fill_in 'Beskrivelse *', with: 'Produkt 1'
@@ -39,7 +39,7 @@ describe 'The invoices page' do
     click_button '+ Legg til produkt/tjeneste'
 
     # Item 2
-    within :css, "div#item_2" do
+    within :css, 'div#item_2' do
       fill_in 'Antall *', with: '1'
       fill_in 'Enhet (timer, kg, ...) *', with: '1'
       fill_in 'Beskrivelse *', with: 'Produkt 2'
@@ -50,7 +50,7 @@ describe 'The invoices page' do
     click_button '+ Legg til produkt/tjeneste'
 
     # Item 3
-    within :css, "div#item_3" do
+    within :css, 'div#item_3' do
       fill_in 'Antall *', with: '0,5'
       fill_in 'Enhet (timer, kg, ...) *', with: 'timer'
       fill_in 'Beskrivelse *', with: 'Produkt 3'

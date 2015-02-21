@@ -15,9 +15,9 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap-sprockets
-#= require bootstrap-datepicker/core
 #= require turbolinks
 #= require jquery.turbolinks
 #= require jquery.easing
 #= require twitter/bootstrap/rails/confirm
+#= require bootstrap-datepicker/core
 #= require_tree .

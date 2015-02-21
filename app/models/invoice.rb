@@ -1,22 +1,26 @@
 class Invoice < ActiveRecord::Base
+  # Default scopes
+  default_scope { order('invoice_number DESC') }
+
   # Associations
   belongs_to :user
   belongs_to :client
-  has_many :invoice_items, inverse_of: :invoice, dependent: :destroy
-  accepts_nested_attributes_for :invoice_items, allow_destroy: true,
-                                                reject_if: :all_blank
+  has_many :invoice_items, :inverse_of => :invoice, :dependent => :destroy
+  accepts_nested_attributes_for :invoice_items, :allow_destroy => true,
+                                                :reject_if     => :all_blank
 
   # Validations
-  validates :user, presence: true
-  validates :client, presence: true, on: :save
-  validates :invoice_items, presence: true
-  validates :invoice_number, presence: true
-  validates :currency, presence: true
-  validates :delivery_date, presence: true
-  validates :due_date, presence: true
-  validates :client_name, presence: true
-  validates :client_address, presence: true
-  validates :delivery_address, presence: true
+  validates :user,             :presence => true
+  validates :client,           :presence => true, :on => :save
+  validates :invoice_items,    :presence => true
+  validates :invoice_number,   :presence => true
+  validates :currency,         :presence => true
+  validates :delivery_date,    :presence => true
+  validates :due_date,         :presence => true
+  validates :client_name,      :presence => true
+  validates :client_address,   :presence => true
+  validates :delivery_address, :presence => true
+  validates :total,            :presence => true, :on => :save
 
   # Callbacks
   before_save :store_user_data
@@ -37,31 +41,39 @@ class Invoice < ActiveRecord::Base
     replica
   end
 
+  def type
+    kreditnota ? 'kreditnota' : 'faktura'
+  end
+
+  def to_s
+    "#{type} #{invoice_number}"
+  end
+
   private
 
   # Stores the needed user/sender information in the invoice object
   def store_user_data
-    user = User.find(user_id)
-    assign_attributes(user_name: user.name,
-                      user_org_number: (user.org_nr_with_registrations),
-                      user_email: user.email,
-                      user_phone: user.phone,
-                      user_bank_swift: user.bank_swift,
-                      user_bank_iban: user.bank_iban,
-                      user_bank_name: user.bank_name,
-                      user_bank_account: user.bank_account,
-                      user_address: user.address)
+    assign_attributes(:user_name         => user.name,
+                      :user_org_number   => user.org_nr_with_registrations,
+                      :user_email        => user.email,
+                      :user_phone        => user.phone,
+                      :user_bank_swift   => user.bank_swift,
+                      :user_bank_iban    => user.bank_iban,
+                      :user_bank_name    => user.bank_name,
+                      :user_bank_account => user.bank_account,
+                      :user_address      => user.address)
   end
 
   # Creates and assigns a new client if
   # a client_id is not specified for the invoice
   def save_client_if_new
     return unless client_id.blank?
-    new_client = user.clients.new(name: client_name,
-                                  email: client_email,
-                                  address: client_address,
-                                  delivery_address: delivery_address,
-                                  ref: client_ref, org_nr: client_org_nr)
+    new_client = user.clients.new(:name             => client_name,
+                                  :email            => client_email,
+                                  :address          => client_address,
+                                  :delivery_address => delivery_address,
+                                  :ref              => client_ref,
+                                  :org_nr           => client_org_nr)
 
     # saves the client and assigns its id to self
     return unless self.valid?
@@ -72,8 +84,8 @@ class Invoice < ActiveRecord::Base
   # Calculates and stores the invoice total
   def calculate_total
     total = 0.0
-    invoice_items.each do |item|
-      total += (item.quantity * item.unit_price * ((item.vat.to_f / 100) + 1))
+    invoice_items.each do |i|
+      total += (i.quantity * i.unit_price * ((i.vat.to_f / 100) + 1))
     end
     self[:total] = total
   end

@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
   helper :invoices
 
   # Unless sender is defined in mailer
-  default from: 'noreply@barefaktura.no'
+  default from: 'Bare Faktura <noreply@barefaktura.no>'
 
   # Gets sent when a user signs up
   def welcome_email(user)
@@ -17,14 +17,14 @@ class UserMailer < ActionMailer::Base
   # Sends an email with a summary of given invoice to invoice recipient
   # and attaches the invoice in pdf format
   def pdf_email(invoice, message)
-    @invoice = invoice
-    @message = message
+    @invoice, @message = invoice, message
 
     mail to: email_with_name(@invoice), from: sender_with_name(@invoice),
-         bcc: @invoice.user.email, subject: email_subject(@invoice) do |format|
-      format.html # renders pdf_email.html.erb for body of email
-      format.pdf do
-        attachments[email_subject(@invoice) + '.pdf'] = WickedPdf.new.pdf_from_string(
+         bcc: sender_with_name(@invoice),
+         subject: "#{@invoice.to_s.capitalize}" do |format|
+      format.html # Render email html body
+      format.pdf do # Render pdf attachment
+        attachments[pdf_filename(@invoice)] = WickedPdf.new.pdf_from_string(
           render_to_string('invoices/show.pdf.erb'), encoding: 'utf8')
       end
     end
@@ -44,10 +44,7 @@ class UserMailer < ActionMailer::Base
     %("#{invoice.client.name}" <#{invoice.client.email}>)
   end
 
-  # Returns a string in the following format:
-  # Faktura/Kreditnota n, where n is invoice number
-  def email_subject(invoice)
-    "#{invoice.kreditnota ? 'kreditnota' : 'faktura'}
-     #{invoice.invoice_number}"
+  def pdf_filename(invoice)
+    "#{invoice.to_s.underscore}.pdf}"
   end
 end

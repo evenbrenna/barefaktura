@@ -1,7 +1,7 @@
 <h1>Ny Faktura</h1><br>
 
 <%= javascript_tag do %>
-  userProducts = <%= raw @products.to_json %>
+  userProducts = <%= raw current_user.products.to_json %>
 <% end %>
 
 <%= form_for @invoice, :html => { :class => 'form-horizontal' } do |f| %>
@@ -88,7 +88,7 @@
   <div class="form-group">
     <%= f.label :user_ref, class:"col-sm-3 control-label" %>
     <div class="col-sm-9">
-      <%= f.text_field :user_ref, value: @user.ref, class:"form-control" %>
+      <%= f.text_field :user_ref, value: current_user.ref, class:"form-control" %>
     </div>
   </div>
 
@@ -138,7 +138,7 @@
         <div class="form-group">
           <%= label_tag 'produktvalg', '', class:"col-sm-3 control-label" %>
           <div class="col-sm-9">
-          <%= select_tag 'products', options_from_collection_for_select(@products, "id", :product_with_number), {include_blank: 'Hent fra produktregister', class: 'form-control'} %>
+          <%= select_tag 'products', options_from_collection_for_select(current_user.products, "id", :product_with_number), {include_blank: 'Hent fra produktregister', class: 'form-control'} %>
           </div>
         </div>
 
