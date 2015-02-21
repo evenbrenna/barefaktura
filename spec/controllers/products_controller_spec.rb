@@ -8,11 +8,6 @@ describe ProductsController do
         sign_in @user
       end
 
-      it 'assigns the current user to @user' do
-        get :index, id: @user
-        expect(assigns(:user)).to eq(@user)
-      end
-
       it 'populates an array of products' do
         product = FactoryGirl.create(:product)
         @user.products << product

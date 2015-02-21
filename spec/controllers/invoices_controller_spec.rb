@@ -2,9 +2,6 @@ require 'rails_helper'
 
 describe InvoicesController do
   before :each do
-    # to avoid having it converting to pdf every time this test runs
-    allow_any_instance_of(WickedPdf).to receive(:pdf_from_string).and_return('pdf converted invoice')
-
     # create a user and sign in
     @user = FactoryGirl.create(:user)
     sign_in @user
@@ -48,6 +45,10 @@ describe InvoicesController do
     end
 
     it 'renders the :show view (pfd)' do
+      # to avoid having it converting to pdf every time this test runs
+      allow_any_instance_of(WickedPdf).to receive(:pdf_from_string)
+        .and_return('pdf converted invoice')
+
       @user.invoices << @invoice
       get :show, id: @invoice, format: 'pdf'
       expect(response).to render_template(:show)
@@ -169,33 +170,9 @@ describe InvoicesController do
       @user.invoices << @invoice
     end
 
-    it 'assigns current user to @user' do
-      xhr :get, :email_invoice, id: @invoice.id
-      expect(assigns(:user)).to eq(@user)
-    end
-
     it 'assigns requested invoice to @invoice' do
       xhr :get, :email_invoice, id: @invoice.id
       expect(assigns(:invoice)).to eq(@invoice)
-    end
-
-    it 'assigns invoice.client to @client' do
-      client = FactoryGirl.create(:client)
-      @invoice.update_attribute(:client_id, client.id)
-      xhr :get, :email_invoice, id: @invoice.id
-      expect(assigns(:client)).to eq(client)
-    end
-
-    it 'assigns correct type to @type when invoice' do
-      xhr :get, :email_invoice, id: @invoice.id
-      expect(assigns(:type)).to eq('faktura')
-    end
-
-    it 'assigns correct type to @type when kreditnota' do
-      invoice = FactoryGirl.create(:invoice, kreditnota: true)
-      @user.invoices << invoice
-      xhr :get, :email_invoice, id: invoice.id
-      expect(assigns(:type)).to eq('kreditnota')
     end
 
     it 'renders the :email_invoice view' do
@@ -206,6 +183,10 @@ describe InvoicesController do
 
   describe 'POST #send_email_invoice' do
     before :each do
+      # to avoid having it converting to pdf every time this test runs
+      allow_any_instance_of(WickedPdf).to receive(:pdf_from_string)
+        .and_return('pdf converted invoice')
+
       @invoice = FactoryGirl.create(:invoice)
       @user.invoices << @invoice
     end
@@ -263,14 +244,9 @@ describe InvoicesController do
       @user.invoices << @invoice
     end
 
-    it 'assigns current user to @user' do
-      get :kreditnota, id: @invoice.id
-      expect(assigns(:user)).to eq(@user)
-    end
-
     it 'assigns the requested invoice to @invoice_to_credit' do
       get :kreditnota, id: @invoice.id
-      expect(assigns(:invoice_to_credit)).to eq(@invoice)
+      expect(assigns(:to_credit)).to eq(@invoice)
     end
 
     it 'assigns a duplicate to @invoice' do
@@ -281,12 +257,17 @@ describe InvoicesController do
     it 'duplicates invoice_items' do
       get :kreditnota, id: @invoice.id
       assigns(:invoice).save
-      expect(assigns(:invoice).invoice_items.count).to eq(assigns(:invoice_to_credit).invoice_items.count)
+      expect(assigns(:invoice).invoice_items.first.description)
+        .to eq(assigns(:to_credit).invoice_items.first.description)
+      expect(assigns(:invoice).invoice_items.last.description)
+        .to eq(assigns(:to_credit).invoice_items.last.description)
+      expect(assigns(:invoice).invoice_items.count)
+        .to eq(assigns(:to_credit).invoice_items.count)
     end
 
     it 'sets a default note to @invoice' do
       get :kreditnota, id: @invoice.id
-      expect(assigns(:invoice).notes).to include('Kreditnota for faktura')
+      expect(assigns(:invoice).notes).to include("Kreditnota for faktura #{@invoice.invoice_number}")
     end
 
     it 'sets @invoice.kreditnota to true' do

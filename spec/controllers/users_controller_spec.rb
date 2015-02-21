@@ -15,7 +15,7 @@ describe UsersController do
     it 'assigns only unpaid invoices to @invoices' do
       unpaid = FactoryGirl.create(:invoice, paid: false)
       paid = FactoryGirl.create(:invoice, paid: true)
-      kreditnota = FactoryGirl.create(:invoice, kreditnota: true)
+      kreditnota = FactoryGirl.create(:invoice, kreditnota: true, paid: true)
 
       @user.invoices << unpaid
       @user.invoices << paid

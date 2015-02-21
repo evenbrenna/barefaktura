@@ -1,3 +1,4 @@
+# Authorisation with CanCanCan gem
 class Ability
   include CanCan::Ability
 

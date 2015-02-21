@@ -1,3 +1,4 @@
+# Invoice model
 class Invoice < ActiveRecord::Base
   # Default scopes
   default_scope { order('invoice_number DESC') }
@@ -28,8 +29,8 @@ class Invoice < ActiveRecord::Base
   before_save :save_client_if_new
 
   # Scopes
-  scope :overdue, -> { where('due_date < ?', Date.today) }
-  scope :unpaid,  -> { where(paid: false) }
+  scope :unpaid, -> { where(:paid => false) }
+  scope :overdue, -> { unpaid.where('due_date < ?', Date.today) }
 
   # Duplicates the invoice and returns the copy. Needed
   # to make sure all items are duplicated for kreditnota.
@@ -52,6 +53,7 @@ class Invoice < ActiveRecord::Base
   private
 
   # Stores the needed user/sender information in the invoice object
+  # rubocop:disable Metrics/AbcSize
   def store_user_data
     assign_attributes(:user_name         => user.name,
                       :user_org_number   => user.org_nr_with_registrations,
@@ -63,9 +65,11 @@ class Invoice < ActiveRecord::Base
                       :user_bank_account => user.bank_account,
                       :user_address      => user.address)
   end
+  # rubocop:enable Metrics/AbcSize
 
-  # Creates and assigns a new client if
-  # a client_id is not specified for the invoice
+  # Creates and assigns a new client if a client_id
+  # is not specified for the invoice
+  # rubocop:disable Metrics/AbcSize
   def save_client_if_new
     return unless client_id.blank?
     new_client = user.clients.new(:name             => client_name,
@@ -74,6 +78,7 @@ class Invoice < ActiveRecord::Base
                                   :delivery_address => delivery_address,
                                   :ref              => client_ref,
                                   :org_nr           => client_org_nr)
+    # rubocop:enable Metrics/AbcSize
 
     # saves the client and assigns its id to self
     return unless self.valid?

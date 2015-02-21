@@ -1,16 +1,15 @@
+# Actions related to clients
 class ClientsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
-    @clients = current_user.clients.order('name ASC')
-    @user = current_user
+    @clients = current_user.clients
   end
 
   def show
     @client = current_user.clients.find(params[:id])
-    @invoices = @client.invoices.all.except(:order).order('invoice_number DESC')
-    @total_invoiced = @client.total_invoiced
+    @invoices = @client.invoices
   end
 
   def new
@@ -19,9 +18,8 @@ class ClientsController < ApplicationController
 
   def create
     @client = current_user.clients.new(client_params)
-
     if @client.save
-      redirect_to clients_path, notice: 'Kunde Opprettet!'
+      redirect_to clients_path, :notice => 'Kunde Opprettet!'
     else
       render 'new'
     end
@@ -33,29 +31,27 @@ class ClientsController < ApplicationController
 
   def update
     @client = current_user.clients.find(params[:id])
-
     if @client.update(client_params)
-      redirect_to clients_path, notice: 'Kunde Oppdatert'
+      redirect_to clients_path, :notice => 'Kunde Oppdatert'
     else
       render 'edit'
     end
   end
 
   def destroy
-    @client = current_user.clients.find(params[:id])
-
+    client = current_user.clients.find(params[:id])
     begin
-      @client.destroy
+      client.destroy
       flash[:notice] = 'Kunde slettet'
-  rescue
-    flash[:alert] = 'Feil: Du kan ikke slette en kunde som har motatt fakturaer'
+    rescue
+      flash[:alert] = 'Du kan ikke slette en kunde som har motatt fakturaer'
     end
     redirect_to clients_path
   end
 
   def client_json
     client = current_user.clients.find(params[:id])
-    render text: client.to_json
+    render :text => client.to_json
   end
 
   private

@@ -8,11 +8,6 @@ describe ClientsController do
         sign_in @user
       end
 
-      it 'assigns the current user to @user' do
-        get :index, id: @user
-        expect(assigns(:user)).to eq(@user)
-      end
-
       it 'populates an array of clients' do
         client = FactoryGirl.create(:client)
         @user.clients << client
@@ -66,7 +61,7 @@ describe ClientsController do
         @client.invoices << kreditnota
 
         get :show, id: @client
-        expect(assigns(:total_invoiced)).to eq(625.0)
+        expect(assigns(:client).total_invoiced).to eq(625.0)
       end
 
       it 'raises error if @user does not own requested client' do

@@ -3,15 +3,15 @@
 <% if @invoices.count == 0 %>
   <p>Dine lagrede fakturaer vil dukke opp her.</p>
 <% else %>
-  <% if outstanding_count == 0 %>
+  <% if @invoices.unpaid.count == 0 %>
     <p>Du har ingen utestående fakturaer.</p><br>
   <% else %>
     <p>
-      Du har <%= pluralize(outstanding_count, 'faktura', 'fakturaer') %> utestående, hvorav <%= overdue_count %> er forfalt.
+      Du har <%= pluralize(@invoices.unpaid.count, 'faktura', 'fakturaer') %> utestående, hvorav <%= @invoices.overdue.count %> er forfalt.
     </p>
     <p>
       <strong>Forfalt beløp: </strong><%= number_to_currency(overdue_amount) %><br>
-      <strong>Totalt utestående: </strong><%= number_to_currency(outstanding_amount) %><br>
+      <strong>Totalt utestående: </strong><%= number_to_currency(unpaid_amount) %><br>
     </p>
     <br>
   <% end %>

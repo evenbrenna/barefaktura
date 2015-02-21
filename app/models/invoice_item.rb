@@ -1,5 +1,7 @@
+# Items represent a product or service and belongs to
+# an invoice. Not reusable.
 class InvoiceItem < ActiveRecord::Base
-  belongs_to :invoice, inverse_of: :invoice_items
+  belongs_to :invoice, :inverse_of => :invoice_items
 
   validates :invoice,     :presence     => true
   validates :description, :presence     => true
@@ -10,7 +12,7 @@ class InvoiceItem < ActiveRecord::Base
                           :allow_blank  => false,
                           :on           => :create
   validates :unit_price,  :presence     => true,
-                          :numericality => { message: 'må være et tall.' },
+                          :numericality => { :message => 'må være et tall.' },
                           :format       => /\A\d+(\.\d{1,2})?\z/,
                           :allow_blank  => false,
                           :on           => :create

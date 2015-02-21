@@ -1,7 +1,8 @@
+# Each action relates to a static page.
 class StaticPagesController < ApplicationController
   def home
     @user = current_user
-    render layout: 'landing'
+    render :layout => 'landing'
   end
 
   def help

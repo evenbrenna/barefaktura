@@ -1,4 +1,9 @@
+# A Client is a recipient of one or more invoices.
+# Created by a User or created automatically by Invoice controller.
 class Client < ActiveRecord::Base
+  # Sort by name as default
+  default_scope { order('name ASC') }
+
   # Associations
   belongs_to :user
   has_many :invoices, :dependent => :restrict_with_exception

@@ -1,3 +1,4 @@
+# Actions related to invoices
 class InvoicesController < ApplicationController
   # Authenticate with Devise, Authorize with CanCanCan
   before_action :authenticate_user!
@@ -27,55 +28,55 @@ class InvoicesController < ApplicationController
   def show
     @invoice = current_user.invoices.find(params[:id])
 
+    # Render html for online view or pdf for download
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "faktura_#{@invoice.invoice_number}",
-               disposition: 'attachment',
-               encoding: 'utf8'
+        render :pdf         => "faktura_#{@invoice.invoice_number}",
+               :disposition => 'attachment',
+               :encoding    => 'utf8'
       end
     end
   end
 
+  # Renders _email_invoice.html.erb via email_invoice.js.erb
   def email_invoice
-    @user = current_user
     @invoice = current_user.invoices.find(params[:id])
-    @client = @invoice.client
-    @type = @invoice.kreditnota ? 'kreditnota' : 'faktura'
   end
 
+  # Gets called by _email_invoice.html.erb submit button
   def send_email_invoice
     @invoice = current_user.invoices.find(params[:id])
-    message = params[:message]
-
-    UserMailer.pdf_email(@invoice, message).deliver_now
-    @invoice.update_attribute(:sends, @invoice.sends + 1)
-    redirect_to invoices_path
+    UserMailer.pdf_email(@invoice, params[:message]).deliver_now
+    @invoice.increment!(:sends)
     flash[:notice] = 'Faktura er sendt til kunde.'
+    redirect_to invoices_path
   end
 
   def set_paid
     @invoice = Invoice.find(params[:id])
     @invoice.update_column :paid, params[:paid]
-
+    # TODO: Javascript to reload paid button only
     redirect_to(:back)
   end
 
   def kreditnota
-    @user = current_user
-    @invoice_to_credit = current_user.invoices.find(params[:id])
-    @invoice = @invoice_to_credit.replicate
-    @invoice.assign_attributes(notes: "Kreditnota for faktura
-      #{@invoice_to_credit.invoice_number}", kreditnota: true)
-
-    @client_list = current_user.clients.map { |c| [c.name, c.id] }
-    @products = current_user.products.all
-
-    @invoice.invoice_number = current_user.next_invoice_number
+    @to_credit = current_user.invoices.find(params[:id])
+    @invoice = @to_credit.replicate
+    @invoice.assign_attributes(
+      :notes          => "Kreditnota for faktura #{@to_credit.invoice_number}",
+      :kreditnota     => true,
+      :invoice_number => current_user.next_invoice_number)
   end
 
   private
 
+  # Helper method to increase invoice sends on send_email_invoice
+  def increment_sends(invoice)
+    invoice.update_attribute(:sends, invoice.sends + 1)
+  end
+
+  # Strong parameters
   def invoice_params
     params.require(:invoice).permit(
       :notes, :client_id, :user_name, :user_org_number, :user_email,
@@ -84,8 +85,8 @@ class InvoicesController < ApplicationController
       :kreditnota, :due_date, :order_date, :delivery_date, :total, :currency,
       :paid, :client_name, :client_email, :client_address, :delivery_address,
       :client_ref, :client_org_nr,
-      invoice_items_attributes: [:id, :description, :quantity, :vat, :unit,
-                                 :unit_price, :total, :user_id, :invoice_id,
-                                 :_destroy])
+      :invoice_items_attributes => [:id, :description, :quantity, :vat, :unit,
+                                    :unit_price, :total, :user_id, :invoice_id,
+                                    :_destroy])
   end
 end

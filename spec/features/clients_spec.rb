@@ -74,7 +74,7 @@ describe 'The clients page' do
         click_link 'delete'
       end
     end.to change(Client, :count).by(0)
-    expect(page).to have_content('Feil: Du kan ikke slette en kunde som har motatt fakturaer')
+    expect(page).to have_content('Du kan ikke slette en kunde som har motatt fakturaer')
   end
 
   it 'lets me delete a client.' do

@@ -1,4 +1,9 @@
+# Products is a representation of an item or service
+# that can be transferred to an invoice item
 class Product < ActiveRecord::Base
+  # Sort by product number as default
+  default_scope { order('product_number ASC') }
+
   # Associations
   belongs_to :user
 

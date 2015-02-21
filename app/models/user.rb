@@ -1,3 +1,4 @@
+# User model
 class User < ActiveRecord::Base
   # Associations
   has_many :clients,  :dependent => :destroy
@@ -12,8 +13,8 @@ class User < ActiveRecord::Base
   validates :bank_name,           :presence     => true
   validates :bank_account,        :presence     => true
   validates :next_invoice_number, :presence     => true,
-                                  :numericality => { message:
-                                                     'må være heltall.' },
+                                  :numericality => {
+                                    :message    => 'må være heltall.' },
                                   :format       => /\A\d+\z/,
                                   :allow_blank  => false,
                                   :on           => :create

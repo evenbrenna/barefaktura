@@ -26,7 +26,7 @@
   <h3>Kundedetaljer</h3>
   <br>
 
-  <%= f.hidden_field :client_id, :value => @invoice_to_credit.client_id %>
+  <%= f.hidden_field :client_id, :value => @invoice.client_id %>
 
 
   <div class="form-group">
@@ -87,7 +87,7 @@
     <div class="col-sm-9">
       <div class="input-group">
         <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-        <%= f.text_field :order_date, 'data-provide' => 'datepicker', 'data-date-format' => "dd/mm/yyyy", 'placeholder' => 'dd/mm/yyyy', 'value' => @invoice_to_credit.order_date, :readonly => true, class:"form-control" %>
+        <%= f.text_field :order_date, 'data-provide' => 'datepicker', 'data-date-format' => "dd/mm/yyyy", 'placeholder' => 'dd/mm/yyyy', 'value' => @invoice.order_date, :readonly => true, class:"form-control" %>
       </div>
     </div>
   </div>
@@ -97,7 +97,7 @@
     <div class="col-sm-9">
       <div class="input-group">
         <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-        <%= f.text_field :delivery_date, 'data-provide' => 'datepicker', 'data-date-format' => "dd/mm/yyyy", 'value' => @invoice_to_credit.delivery_date, :readonly => true, class:"form-control" %>
+        <%= f.text_field :delivery_date, 'data-provide' => 'datepicker', 'data-date-format' => "dd/mm/yyyy", 'value' => @invoice.delivery_date, :readonly => true, class:"form-control" %>
       </div>
     </div>
   </div>
@@ -107,7 +107,7 @@
     <div class="col-sm-9">
       <div class="input-group">
         <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-        <%= f.text_field :due_date, 'data-provide' => 'datepicker', 'data-date-format' => "dd/mm/yyyy", 'value' => @invoice_to_credit.due_date.strftime('%d/%m/%Y'), :readonly => true, class:"form-control" %>
+        <%= f.text_field :due_date, 'data-provide' => 'datepicker', 'data-date-format' => "dd/mm/yyyy", 'value' => @invoice.due_date.strftime('%d/%m/%Y'), :readonly => true, class:"form-control" %>
       </div>
     </div>
   </div>

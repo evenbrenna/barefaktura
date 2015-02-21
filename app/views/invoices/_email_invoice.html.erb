@@ -7,7 +7,7 @@
 
         <% if @invoice.sends != 0 %>
             <div class="alert alert-danger" role="alert">
-                Denne <%= @type %>en er allerede sendt. Er du sikker på at du vil sende på nytt?
+                Denne <%= @invoice.type %>en er allerede sendt. Er du sikker på at du vil sende på nytt?
             </div>
         <% end %>
 
@@ -17,35 +17,35 @@
                 <div class="panel-heading">
                     <div class="muted">
                         <small>
-                        <b>Til: </b><%= @client.name %> &lt;<%= @client.email %>&gt;<br>
-                        <b>Fra: </b><%= @user.name %> &lt;<%= @user.email %>&gt;<br>
-                        <b>Blindkopi: </b><%= @user.name %> &lt;<%= @user.email %>&gt;<br>
-                        <b>Vedlegg: </b><%= @type %>_<%= @invoice.invoice_number %>.pdf
+                        <b>Til: </b><%= @invoice.client.name %> &lt;<%= @invoice.client.email %>&gt;<br>
+                        <b>Fra: </b><%= @invoice.user.name %> &lt;<%= @invoice.user.email %>&gt;<br>
+                        <b>Blindkopi: </b><%= @invoice.user.name %> &lt;<%= @invoice.user.email %>&gt;<br>
+                        <b>Vedlegg: </b><%= @invoice.to_s %>.pdf
                         </small>
                     </div>
                 </div>
                 <div class="panel-body">
 
-                    <h1><%= @type.capitalize %> <%= @invoice.invoice_number %></h1>
+                    <h1><%= @invoice.to_s.capitalize %></h1>
 
                     <div class="form-group">
-                        <%= text_area_tag 'message', (@invoice.notes + "\n\n" + "Mvh,\n" + @user.name), class: 'form-control', rows: 6,
+                        <%= text_area_tag 'message', (@invoice.notes + "\n\n" + "Mvh,\n" + @invoice.user.name), class: 'form-control', rows: 6,
                             placeholder: 'Beskjed til mottaker.', autofocus: true %>
                     </div>
 
                     <u><b>Oppsummering:</u></b><br>
-                    <%= @type.capitalize %>nummer: <%= @invoice.invoice_number %><br>
-                    Fra: <%= @user.name %><br>
+                    <%= @invoice.type.capitalize %>nummer: <%= @invoice.invoice_number %><br>
+                    Fra: <%= @invoice.user.name %><br>
                     Forfallsdato: <%= @invoice.kreditnota ? '--/--/----' : @invoice.due_date.strftime('%d/%m/%Y') %><br>
                     <% unless @invoice.kreditnota %>
-                        Kontonummer: <%= @user.bank_account %><br>
+                        Kontonummer: <%= @invoice.user.bank_account %><br>
                     <% end %>
                     Totalt <%= @invoice.kreditnota ? 'kreditert' : 'å betale' %>:  <%= number_with_precision(@invoice.total, :precision => 2) %> <%= @invoice.currency %><br><br>
 
 
                     <p>
                         ---<br>
-                        <%= @type.capitalize %> er vedlagt i pdf-format.<br>
+                        <%= @invoice.type.capitalize %> er vedlagt i pdf-format.<br>
                         <em>Sendt med <a href="http://www.barefaktura.no">BareFaktura.no</a></em><p>
                     </p>
 
