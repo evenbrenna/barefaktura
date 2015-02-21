@@ -51,7 +51,7 @@ class ClientsController < ApplicationController
 
   def client_json
     client = current_user.clients.find(params[:id])
-    render :text => client.to_json
+    render :json => client
   end
 
   private

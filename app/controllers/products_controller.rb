@@ -50,7 +50,7 @@ class ProductsController < ApplicationController
 
   def product_json
     product = current_user.products.find(params[:id])
-    render :text => product.to_json
+    render :json => product
   end
 
   private
