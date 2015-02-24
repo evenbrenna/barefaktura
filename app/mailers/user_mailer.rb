@@ -20,19 +20,19 @@ class UserMailer < ActionMailer::Base
   # and attaches the invoice in pdf format
   def pdf_email(invoice, message)
     @invoice, @message = invoice, message
-
+    attachments[pdf_filename(@invoice)] = WickedPdf.new.pdf_from_string(
+      render_to_string('invoices/show.pdf.erb'), :encoding => 'utf8')
     mail :to => email_with_name(@invoice), :from => sender_with_name(@invoice),
          :bcc => sender_with_name(@invoice),
-         :subject => "#{@invoice.to_s.capitalize}" do |format|
-      format.html # Render email html body
-      format.pdf do # Render pdf attachment
-        attachments[pdf_filename(@invoice)] = WickedPdf.new.pdf_from_string(
-          render_to_string('invoices/show.pdf.erb'), :encoding => 'utf8')
-      end
-    end
+         :subject => invoice_subject(@invoice)
   end
 
   private
+
+  # Returns "Faktura nn fra Navn Navnesen"
+  def invoice_subject(invoice)
+    "#{invoice.to_s.capitalize} fra #{invoice.user_name}"
+  end
 
   # Returns sender name and email in the following format:
   # Firstname Lastname <name@email.com>

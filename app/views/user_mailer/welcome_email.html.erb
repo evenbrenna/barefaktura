@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <title>Velkommen til Bare Faktura</title>
   </head>
   <body>
-    <h1>Velkommen til BareFaktura</h1>
-    <p>Hei, <%= @user.name %></p>
-    <p>
-      Din brukerkonto hos <%= link_to 'Bare Faktura', 'http://www.barefaktura.no' %> er opprettet!
+    <h1 style="color: #015D70;font-family: &quot;Helvetica&quot;, &quot;Arial&quot;, sans-serif;font-weight: normal;padding: 0;margin: 0;text-align: left;line-height: 1.3;word-break: normal;font-size: 40px;">
+      Velkommen til Bare Faktura
+    </h1>
+
+    <p style="margin: 0;margin-bottom: 10px;color: #222222;font-family: &quot;Helvetica&quot;, &quot;Arial&quot;, sans-serif;font-weight: normal;padding: 0;text-align: left;line-height: 19px;font-size: 14px;">
+      Din brukerkonto for <b><%= @user.name %></b> hos <a href="http://www.barefaktura.no" style="color: #015D70;text-decoration: none;">BareFaktura.no</a> er opprettet.
     </p>
+
     <p>
-      Hvis du ikke allerede har gjort det, så kan du kan logge inn med din epost og ditt passord <%= link_to 'her', 'http://www.barefaktura.no/auth/users/sign_in' %>.
+      Hvis du ikke allerede har gjort det, kan du nå logge inn med din epost, <%= @user.email %>, og ditt passord <a href="http://www.barefaktura.no/auth/users/sign_in" style="color: #015D70;text-decoration: none;">her</a>.
     </p>
+
     <p>
-      Kontakt oss gjerne på <%= mail_to 'post@barefaktura.no' %> hvis du lurer på noe!
+      Kontakt oss gjerne på <a href="mailto:post@barefaktura.no" style="color: #015D70;text-decoration: none;">post@barefaktura.no</a> med alt du måtte ha av spørsmål, ønsker, ris eller ros.
+
     </p>
   </body>
 </html>
