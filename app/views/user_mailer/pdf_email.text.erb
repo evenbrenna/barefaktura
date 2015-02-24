@@ -1,0 +1,22 @@
+<%= @invoice.to_s.capitalize %>
+===========
+
+<% unless @message.blank? %>
+    <%= @message %>
+
+<% end %>
+
+Oppsummering:
+-------------
+
+<%= @invoice.kreditnota ? 'Kreditnota' : 'Faktura' %>nummer: <%= @invoice.invoice_number %>
+Fra: <%= @invoice.user_name %>
+Forfallsdato: <%= @invoice.kreditnota ? '--/--/----' : @invoice.due_date.strftime('%d/%m/%Y') %>
+<% unless @invoice.kreditnota %>
+Kontonummer: <%= @invoice.user_bank_account %>
+<% end %>
+Totalt <%= @invoice.kreditnota ? 'kreditert' : 'å betale' %>:  <%= number_with_precision(@invoice.total, :precision => 2) %> <%= @invoice.currency %>
+
+---
+<%= @invoice.kreditnota ? 'Kreditnota' : 'Faktura' %> er vedlagt i pdf-format.
+Sendt med BareFaktura.no (https://www.barefaktura.no)
