@@ -12,7 +12,8 @@ gem 'coffee-rails', '~> 4.0.0' # CoffeeScript for .js.coffee assets and views
 gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease.
-gem 'unicorn'
+gem 'puma'
+gem 'foreman'
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
 gem 'cancancan', '~> 1.10'
