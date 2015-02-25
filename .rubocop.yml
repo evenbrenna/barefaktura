@@ -17,7 +17,6 @@ AllCops:
   # directory .rubocop.yml files, or by giving the -R/--rails option.
   RunRailsCops: true
 
-# Offense count: 36
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/HashSyntax:
