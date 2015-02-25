@@ -13,7 +13,6 @@ gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease.
 gem 'puma'
-gem 'foreman'
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
 gem 'cancancan', '~> 1.10'
@@ -43,6 +42,7 @@ group :production do
 end
 
 group :development, :test do
+  gem 'foreman'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
 end
