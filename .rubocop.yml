@@ -1,7 +1,4 @@
 # This is the configuration used to check the rubocop source code.
-
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   Include:
     - '**/Rakefile'
@@ -17,7 +14,6 @@ AllCops:
   # directory .rubocop.yml files, or by giving the -R/--rails option.
   RunRailsCops: true
 
-# Offense count: 36
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/HashSyntax:
