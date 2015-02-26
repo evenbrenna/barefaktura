@@ -104,9 +104,17 @@ a, a:link, a:visited, a:hover, a:active
   border-color: #014A5A;
 }
 
+.btn:focus { outline: none; }
+
 a.btn-primary
 {
   color: #fff;
+}
+
+a.btn-default:hover, a.btn-default:focus
+{
+  background-color: #fff;
+  color: #015D70;
 }
 
 //////// TABLES //////////
@@ -119,4 +127,10 @@ a.btn-primary
 .table-no-border>tfoot>tr>td
 {
   border-top: none;
+}
+
+/////// Badge //////////
+
+.label-as-badge {
+  border-radius: 1em;
 }

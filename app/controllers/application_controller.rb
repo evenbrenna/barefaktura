@@ -15,11 +15,6 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  # Needed for redirect to user profile on login.
-  def after_sign_in_path_for(_resource)
-    @user = current_user
-  end
-
   private
 
   # Strong parameters for sign up and account update via Devise

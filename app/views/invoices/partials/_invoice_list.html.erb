@@ -1,5 +1,11 @@
+  <h3>Fakturaoversikt</h3>
+  <div class="btn-group">
+    <button href="#" class="btn btn-primary btn-xs" id="unpaid-selectbtn" onclick="invoices.invoiceList('unpaid')">Utestående</button>
+    <button href="#" class="btn btn-default btn-xs" id="overdue-selectbtn" onclick="invoices.invoiceList('overdue')">Forfalt</button>
+    <button href="#" class="btn btn-default btn-xs" id="all-selectbtn" onclick="invoices.invoiceList('all')">Alle</button>
+  </div><br><br>
   <!-- FAKTURALISTE -->
-  <div class="table-responsive">
+  <div class="table-responsive" id="invoice-table">
     <table class="table table-condensed table-striped">
       <thead>
         <tr>
@@ -12,7 +18,7 @@
       </thead>
 
       <tbody>
-        <% @invoices.each do |invoice| %>
+        <% @invoice_list.each do |invoice| %>
           <tr class="<%= rowcolor(invoice) %>">
             <!-- # -->
             <td class="text-left"><%= invoice.invoice_number %></td>
@@ -66,12 +72,8 @@
                   <% end %>
                 <% end %>
                 <!-- Marker Betalt -->
-                <% if invoice.paid %>
-                  <%= link_to set_paid_invoice_path(invoice, paid: false), title: "Marker som ikke betalt", class: "btn btn-default btn-xs" do %>
-                      <i class="glyphicon glyphicon-ok-sign"></i> <% end %>
-                <% else %>
-                      <%= link_to set_paid_invoice_path(invoice, paid: true), title: "Marker som betalt", class: "btn btn-default btn-xs" do %>
-                      <i class="glyphicon glyphicon-ok-circle" style="color: #777"></i><% end %>
+                <%= link_to set_paid_invoice_path(invoice), title: "Marker som betalt/ikke betalt", class: "btn btn-default btn-xs", id: "#{invoice.id}-paid-button" do %>
+                    <i class="glyphicon glyphicon-ok-circle <% unless invoice.paid %> unpaid <% end %>"></i>
                 <% end %>
               </div>
             </td>

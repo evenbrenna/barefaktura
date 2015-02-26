@@ -1,5 +1,36 @@
 # Helper for invoice views
 module InvoicesHelper
+  # returns total amount for overdue invoices for current user
+  def overdue_amount
+    amount = 0.00
+    current_user.invoices.overdue.each do |i|
+      amount += i.total
+    end
+    amount
+  end
+
+  # returns total amount and currency for invoices in given array
+  def subtotal(invoices)
+    amount = 0.00
+    invoices.each do |i|
+      if i.kreditnota
+        amount -= i.total
+      else
+        amount += i.total
+      end
+    end
+    number_to_currency(amount)
+  end
+
+  # returns sum of unpaid invoices
+  def unpaid_amount
+    amount = 0.00
+    current_user.invoices.unpaid.each do |i|
+      amount += i.total
+    end
+    amount
+  end
+
   # To mark overdue invoices table row in red
   def rowcolor(invoice)
     if !invoice.paid && (DateTime.now.to_date > invoice.due_date)

@@ -26,3 +26,27 @@
 {
   width: 1000px;
 }
+
+.unpaid {
+  color: #777;
+}
+
+.summary
+{
+  display: table;
+  min-height: 80px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.summary .content
+{
+  display: table-cell;
+  vertical-align: middle;
+
+}
+
+.summary .content p
+{
+  margin: 0;
+}

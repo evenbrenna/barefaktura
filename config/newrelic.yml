@@ -165,7 +165,7 @@ common: &default_settings
     # Error collector is enabled by default. Set this to false to turn
     # it off. This feature is only available at the Professional and above
     # product levels.
-    enabled: true
+    enabled: false
 
     # To stop specific errors from reporting to New Relic, set this property
     # to comma-separated values.  Default is to ignore routing errors,
@@ -191,7 +191,7 @@ common: &default_settings
 development:
   <<: *default_settings
   # Turn on communication to New Relic service in development mode
-  monitor_mode: true
+  monitor_mode: false
   app_name: My Application (Development)
 
   # Rails Only - when running in Developer Mode, the New Relic Agent will
@@ -199,7 +199,7 @@ development:
   # executed since starting the mongrel.
   # NOTE: There is substantial overhead when running in developer mode.
   # Do not use for production or load testing.
-  developer_mode: true
+  developer_mode: false
 
 test:
   <<: *default_settings

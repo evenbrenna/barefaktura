@@ -4,9 +4,18 @@ class InvoicesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
+  # rubocop:disable Metrics/AbcSize
   def index
     @invoices = current_user.invoices
+    if params[:filter] == 'all'
+      @invoice_list = current_user.invoices
+    elsif params[:filter] == 'overdue'
+      @invoice_list = current_user.invoices.overdue
+    else
+      @invoice_list = current_user.invoices.unpaid
+    end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def new
     @client_list = current_user.clients.map { |c| [c.name, c.id] }
@@ -53,11 +62,11 @@ class InvoicesController < ApplicationController
     redirect_to invoices_path
   end
 
+  # Javascript reloads needed parts of view
   def set_paid
     @invoice = Invoice.find(params[:id])
-    @invoice.update_column :paid, params[:paid]
-    # TODO: Javascript to reload paid button only
-    redirect_to(:back)
+    @invoice.toggle!(:paid)
+    redirect_to :back
   end
 
   def kreditnota

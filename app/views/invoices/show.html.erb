@@ -1,25 +1,25 @@
 <div class="container invoicewidth">
 
     <div class="row hidden-print">
-        <div class="col-sm-12">
+        <div class="col-sm-12 text-center">
             <div class="btn-group">
                 <!-- PDF -->
                 <%= link_to invoice_path(@invoice, :format => :pdf), title: "Last ned som PDF", class: "btn btn-default btn-sm" do %>
-                  <i class="glyphicon glyphicon-save"></i>
+                  <i class="glyphicon glyphicon-save"> Last ned</i>
                 <% end %>
                 <!-- Send -->
                 <% if @invoice.client.email.blank? %>
                   <%= link_to '#', data: { :confirm => 'Du har ikke lagt inn en epost-adresse for denne kunden.'}, title: "Ingen lagret epostadresse for kunden", class: "btn btn-default btn-sm" do %>
-                      <i class="glyphicon glyphicon-ban-circle" style="color: #777"></i>
+                      <i class="glyphicon glyphicon-ban-circle" style="color: #777"> Send Epost</i>
                     <% end %>
                 <% else %>
                   <% if @invoice.sends == 0 %>
                     <%= link_to email_invoice_path(:id => @invoice.id), { :title => "Send faktura til kunde", :remote => true, 'class' => "btn btn-default btn-sm", 'data-toggle' =>  "modal", 'data-target' => '#modal-invoice-email-window'} do %>
-                      <i class="glyphicon glyphicon-send"></i>
+                      <i class="glyphicon glyphicon-send"> Send Epost</i>
                     <% end %>
                   <% else %>
                     <%= link_to email_invoice_path(:id => @invoice.id), { :title => "Send på nytt", :remote => true, 'class' => "btn btn-default btn-sm", 'data-toggle' =>  "modal", 'data-target' => '#modal-invoice-email-window'} do %>
-                      <i class="glyphicon glyphicon-send" style="color: #777"></i>
+                      <i class="glyphicon glyphicon-send" style="color: #777"> Send Epost</i>
                     <% end %>
                   <% end %>
                 <% end %>
@@ -30,16 +30,16 @@
                   <% end %>
                 <% else %>
                   <%= link_to kreditnota_path(:id => @invoice.id), title: "Lag Kreditnota", class: "btn btn-default btn-sm" do %>
-                    <i class="glyphicon glyphicon-remove"></i>
+                    <i class="glyphicon glyphicon-remove"> Lag Kreditnota</i>
                   <% end %>
                 <% end %>
                 <!-- Marker Betalt -->
                 <% if @invoice.paid %>
                   <%= link_to set_paid_invoice_path(@invoice, paid: false), title: "Marker som ikke betalt", class: "btn btn-default btn-sm" do %>
-                      <i class="glyphicon glyphicon-ok-sign"></i><% end %>
+                      <i class="glyphicon glyphicon-ok-sign"> Marker Betalt</i><% end %>
                 <% else %>
                       <%= link_to set_paid_invoice_path(@invoice, paid: true), title: "Marker som betalt", class: "btn btn-default btn-sm" do %>
-                      <i class="glyphicon glyphicon-ok-circle" style="color: #777"></i><% end %>
+                      <i class="glyphicon glyphicon-ok-circle" style="color: #777"> Marker Betalt</i><% end %>
                 <% end %>
             </div>
         </div>

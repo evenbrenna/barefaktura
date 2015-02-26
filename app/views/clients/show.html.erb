@@ -33,9 +33,7 @@
 
 </div>
 <hr class="divider">
-
-    <div class="clearfix"></div>
-
-    <!-- FAKTURALISTE -->
-    <h3>Fakturaer til <%= @client.name %></h3>
-    <%= render partial: 'invoices/partials/invoice_list' %>
+<div class="clearfix"></div>
+<div id="invoice-list">
+  <%= render partial: 'invoices/partials/invoice_list' %>
+</div>

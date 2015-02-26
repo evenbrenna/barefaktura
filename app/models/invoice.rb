@@ -29,8 +29,15 @@ class Invoice < ActiveRecord::Base
   before_save :save_client_if_new
 
   # Scopes
-  scope :unpaid, -> { where(:paid => false) }
-  scope :overdue, -> { unpaid.where('due_date < ?', Date.today) }
+  scope :unpaid,       -> { where(:paid => false) }
+  scope :overdue,      -> { unpaid.where('due_date < ?', Date.today) }
+
+  def self.current_year
+    dt = DateTime.new(2015)
+    boy = dt.beginning_of_year
+    eoy = dt.end_of_year
+    where('created_at >= ? and created_at <= ?', boy, eoy)
+  end
 
   # Duplicates the invoice and returns the copy. Needed
   # to make sure all items are duplicated for kreditnota.

@@ -1,7 +1,7 @@
 <h1>Rediger Profil</h1><br>
 
 <p class="text-muted">
-  Informasjonen du oppgir her vil bli brukt på dine fakturaer. Dersom et firma skal stå som avsender er det firmaets navn som skal fylles inn. Oppgi eventuelt ditt eget navn som "Vår Ref". Epostadressen du oppgir vil stå som avsender når du fakturerer kunder via epost.
+  Informasjonen du oppgir her vil bli brukt på dine fakturaer. Epostadressen du oppgir vil stå som avsender når du sender faktura til kunder. All informasjon kan redigeres i etterkant.
 </p>
 <br>
 
@@ -11,7 +11,7 @@
 
   <!-- Name -->
   <div class="form-group">
-    <%= f.label :name, 'Navn *', class:"col-sm-3 control-label" %>
+    <%= f.label :name, 'Navn/Firma *', class:"col-sm-3 control-label" %>
     <div class="col-sm-9">
       <%= f.text_field :name, autofocus: true, class:"form-control", placeholder:'Fornavn Etternavn / Firma' %>
     </div>

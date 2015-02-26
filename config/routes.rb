@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'static_pages/help'
   get 'static_pages/home'
 
@@ -25,12 +24,11 @@ Rails.application.routes.draw do
   get 'invoice_items/destroy'
 
   # Could probably be more elegant
-  get 'user_root' => 'users#show'
+  get 'user_root' => 'invoices#index'
 
   ActiveAdmin.routes(self)
   get 'static_pages/home'
 
   # You can have the root of your site routed with "root"
   root 'static_pages#home'
-
 end

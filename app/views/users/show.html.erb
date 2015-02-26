@@ -47,22 +47,3 @@
     </table>
   </div>
 </div>
-<hr class="divider">
-<div class="row">
-  <div class="col-xs-12">
-    <h3>Oversikt Utestående Fakturaer</h3>
-    <br>
-    <% if @invoices.count != 0 %>
-      <p>
-        Du har <%= pluralize(@invoices.unpaid.count, 'faktura', 'fakturaer') %> utestående, hvorav <%= @invoices.overdue.count %> er forfalt.
-      </p>
-      <p>
-        <strong>Totalt utestående: </strong><%= number_to_currency(unpaid_amount) %><br>
-        <strong>Forfalt beløp: </strong><%= number_to_currency(overdue_amount) %><br>
-      </p>
-      <%= render partial: 'invoices/partials/invoice_list' %>
-    <% else %>
-      <p>Du har ingen utestående fakturaer.</p>
-    <% end %>
-  </div>
-</div>

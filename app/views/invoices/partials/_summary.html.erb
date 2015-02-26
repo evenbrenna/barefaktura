@@ -1,0 +1,34 @@
+<div class="summary" id="summary">
+  <div class="content">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="table">
+          <table class="table table-no-border">
+            <colgroup>
+              <col class="col-xs-7">
+              <col class="col-xs-2">
+              <col class="col-xs-3">
+            </colgroup>
+            <thead>
+              <th>Status</th>
+              <th class="text-right">Antall</th>
+              <th class="text-right">Beløp</th>
+            </thead>
+            <tbody class="text-left">
+              <tr>
+                <td>Forfalt</td>
+                <td class="text-right"><%= @invoices.overdue.count %></td>
+                <td class="text-right"><%= subtotal(@invoices.overdue) %></td>
+              </tr>
+              <tr>
+                <td>Utestående</td>
+                <td class="text-right"><%= @invoices.unpaid.count %></td>
+                <td class="text-right"><%= subtotal(@invoices.unpaid) %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
