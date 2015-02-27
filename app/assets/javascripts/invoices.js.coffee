@@ -2,14 +2,14 @@
 # glyphicon (<i>) and replace html in summary div with
 # updated info
 jQuery ->
-  $('#invoice-table').on 'click', "[id$=paid-button]", ->
-    event.preventDefault()
+  $('#invoice-table').on 'click', "[id$=paid-button]", (event) ->
     $.get $(this).attr("href"), (data, status, xhr) ->
       summary = $(data).find('#summary').html()
       $('#summary').html(summary)
     button = $(this).closest('a').find('i')
     button.hide().toggleClass('unpaid').fadeIn(800)
     $(this).closest('tr').removeClass('danger')
+    event.preventDefault()
   $(this).off
 
 # Toggle between all, unpaid and overdue invoices

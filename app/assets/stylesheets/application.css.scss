@@ -94,8 +94,8 @@ a, a:link, a:visited, a:hover, a:active
 
 .btn-primary
 {
-  background-color: #015D70;
-  border-color: #015D70;
+  background-color: #015D70 !important;
+  border-color: #015D70 !important;
 }
 
 .btn-primary:hover
@@ -127,10 +127,4 @@ a.btn-default:hover, a.btn-default:focus
 .table-no-border>tfoot>tr>td
 {
   border-top: none;
-}
-
-/////// Badge //////////
-
-.label-as-badge {
-  border-radius: 1em;
 }
