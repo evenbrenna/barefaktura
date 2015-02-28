@@ -1,5 +1,4 @@
 <div class="top-section" id="side1">
-    <a class="glyph-link-down page-scroll" href="#side2"><i class="glyphicon glyphicon-download"></i></a>
     <div class="top-section-body">
         <div class="row">
             <div class="col-sm-12">
@@ -7,13 +6,14 @@
                 <p class="top-section-text">Enkel og <u>gratis</u> fakturering på nett.</p>
 
 
-                <button href="#" title="Logg inn" class="btn btn-default" data-toggle="modal" data-target="#modal-login-window">Logg inn</button>
+                <button href="#" title="Logg inn" class="btn btn-default btn-landing" data-toggle="modal" data-target="#modal-login-window">Logg inn</button>
 
-                <%= link_to 'Opprett konto', new_user_registration_path, title: "Opprett Konto", class: "btn btn-default" %>
+                <%= link_to 'Opprett konto', new_user_registration_path, title: "Opprett Konto", class: "btn btn-default btn-landing" %>
 
 
             </div>
         </div>
+        <a class="glyph-link-down page-scroll" href="#side2"><i class="glyphicon glyphicon-download"></i></a>
     </div>
 </div>
 
@@ -76,7 +76,7 @@
 
                             <div class="form-group">
                                 <%= f.label :email, class:"sr-only" %>
-                                <%= f.email_field :email, class:"form-control", placeholder:'epost', autofocus: true %>
+                                <%= f.email_field :email, class:"form-control", id: "login-email", placeholder:'epost' %>
                             </div>
 
                             <div class="form-group">

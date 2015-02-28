@@ -30,7 +30,6 @@ gem 'jquery-turbolinks'
 gem 'mail_form'
 gem 'simple_form'
 gem 'jquery-ui-rails'
-gem 'jquery-easing-rails'
 gem 'twitter-bootstrap-rails-confirm'
 
 group :doc do

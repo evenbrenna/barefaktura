@@ -14,10 +14,10 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap-datepicker3";
-@import "jquery-ui";
+/* @import "jquery-ui"; include as needed if using jquery-ui */
 @import "bootstrap";
 @import "navbar";
-@import "home";
+@import "static_pages";
 @import "footer";
 @import "form_feedback";
 @import "invoice";

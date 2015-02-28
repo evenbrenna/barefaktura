@@ -13,12 +13,12 @@
 # for details about supported directives.
 #
 #= require jquery
+#= require jquery-ui/effect-bounce
+#= require jquery-ui/effect-drop
 #= require jquery_ujs
 #= require bootstrap-sprockets
 #= require turbolinks
 #= require jquery.turbolinks
-#= require jquery.easing
-#= require jquery-ui
 #= require twitter/bootstrap/rails/confirm
 #= require bootstrap-datepicker/core
 #= require_tree .
