@@ -10,12 +10,12 @@ class ClientsController < ApplicationController
   # rubocop:disable Metrics/AbcSize
   def show
     @client = current_user.clients.find(params[:id])
-    if params[:filter] == 'all'
-      @invoice_list = @client.invoices
+    if params[:filter] == 'unpaid'
+      @invoice_list = @client.invoices.unpaid
     elsif params[:filter] == 'overdue'
       @invoice_list = @client.invoices.overdue
     else
-      @invoice_list = @client.invoices.unpaid
+      @invoice_list = @client.invoices
     end
   end
   # rubocop:enable Metrics/AbcSize

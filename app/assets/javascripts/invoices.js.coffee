@@ -17,9 +17,10 @@ jQuery ->
 jQuery ->
   @invoices =
   invoiceList: (filter) ->
-    $("[id$=selectbtn]").removeClass('btn-primary').addClass('btn-default')
-    $('#' + filter + '-selectbtn').removeClass(
-      'btn-default').addClass('btn-primary')
+    $("[id$=selectbtn]").switchClass('btn-primary', 'btn-default', 0)
+    $('#' + filter + '-selectbtn').switchClass(
+      'btn-default', 'btn-primary', 0)
     $.get '?filter=' + filter, (data, status, xhr) ->
       table = $(data).find('.table-responsive').html()
-      $('.table-responsive').slideUp(100).html(table).slideDown()
+      $('.table-responsive').hide('drop').html(table).show(
+        'drop', {direction: 'right'})

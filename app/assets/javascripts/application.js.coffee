@@ -18,6 +18,7 @@
 #= require turbolinks
 #= require jquery.turbolinks
 #= require jquery.easing
+#= require jquery-ui
 #= require twitter/bootstrap/rails/confirm
 #= require bootstrap-datepicker/core
 #= require_tree .

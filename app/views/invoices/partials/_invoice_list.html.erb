@@ -1,7 +1,7 @@
   <div class="btn-group pull-right">
-    <button href="#" class="btn btn-primary btn-xs" id="unpaid-selectbtn" onclick="invoices.invoiceList('unpaid')">Utestående</button>
+    <button href="#" class="btn btn-default btn-xs" id="unpaid-selectbtn" onclick="invoices.invoiceList('unpaid')">Utestående</button>
     <button href="#" class="btn btn-default btn-xs" id="overdue-selectbtn" onclick="invoices.invoiceList('overdue')">Forfalt</button>
-    <button href="#" class="btn btn-default btn-xs" id="all-selectbtn" onclick="invoices.invoiceList('all')">Alle</button>
+    <button href="#" class="btn btn-primary btn-xs" id="all-selectbtn" onclick="invoices.invoiceList('all')">Alle</button>
   </div><br><br>
   <!-- FAKTURALISTE -->
   <div class="table-responsive" id="invoice-table">
@@ -86,17 +86,16 @@
         <% end %>
       </tbody>
     </table>
-  </div>
-
-  <!-- IKON FORKLARINGER -->
-  <div class="text-muted text-center">
-    <small>
-    <ul class="list-inline">
-      <li><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;&nbsp;Se faktura.</li>
-      <li><i class="glyphicon glyphicon-save"></i>&nbsp;&nbsp;Last ned  PDF.</li>
-      <li><i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;Send til kunde på epost.</li>
-      <li><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;Lag kreditnota.</li>
-      <li><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;&nbsp;Marker som betalt/ikke betalt.</li>
-    </ul>
-    </small>
+    <!-- IKON FORKLARINGER -->
+    <div class="text-muted text-center">
+      <small>
+      <ul class="list-inline">
+        <li><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;&nbsp;Se faktura.</li>
+        <li><i class="glyphicon glyphicon-save"></i>&nbsp;&nbsp;Last ned  PDF.</li>
+        <li><i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;Send til kunde på epost.</li>
+        <li><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;Lag kreditnota.</li>
+        <li><i class="glyphicon glyphicon-ok-circle"></i>&nbsp;&nbsp;Marker som betalt/ikke betalt.</li>
+      </ul>
+      </small>
+    </div>
   </div>

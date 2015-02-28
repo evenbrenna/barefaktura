@@ -401,6 +401,7 @@ DEPENDENCIES
   jquery-easing-rails
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
   launchy
   mail_form
   mailcatcher

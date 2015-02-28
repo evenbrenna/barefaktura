@@ -7,12 +7,12 @@ class InvoicesController < ApplicationController
   # rubocop:disable Metrics/AbcSize
   def index
     @invoices = current_user.invoices
-    if params[:filter] == 'all'
-      @invoice_list = current_user.invoices
+    if params[:filter] == 'unpaid'
+      @invoice_list = current_user.invoices.unpaid
     elsif params[:filter] == 'overdue'
       @invoice_list = current_user.invoices.overdue
     else
-      @invoice_list = current_user.invoices.unpaid
+      @invoice_list = current_user.invoices
     end
   end
   # rubocop:enable Metrics/AbcSize
