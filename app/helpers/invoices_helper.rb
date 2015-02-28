@@ -1,5 +1,10 @@
 # Helper for invoice views
 module InvoicesHelper
+  # Returns a bootstrap label class based on count
+  def overdue_label_color
+    current_user.invoices.overdue.count == 0 ? 'label-success' : 'label-danger'
+  end
+
   # returns total amount for overdue invoices for current user
   def overdue_amount
     amount = 0.00

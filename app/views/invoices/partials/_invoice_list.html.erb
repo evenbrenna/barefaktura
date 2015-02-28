@@ -1,5 +1,4 @@
-  <h3>Fakturaoversikt</h3>
-  <div class="btn-group">
+  <div class="btn-group pull-right">
     <button href="#" class="btn btn-primary btn-xs" id="unpaid-selectbtn" onclick="invoices.invoiceList('unpaid')">Utestående</button>
     <button href="#" class="btn btn-default btn-xs" id="overdue-selectbtn" onclick="invoices.invoiceList('overdue')">Forfalt</button>
     <button href="#" class="btn btn-default btn-xs" id="all-selectbtn" onclick="invoices.invoiceList('all')">Alle</button>
@@ -10,7 +9,7 @@
       <thead>
         <tr>
           <th class="text-left">#</th>
-          <th class="text-left">Kunde</th>
+          <th class="text-left">Mottaker</th>
           <th class="text-left">Forfall</th>
           <th class="text-right">Beløp</th>
           <th></th>
@@ -18,6 +17,11 @@
       </thead>
 
       <tbody>
+      <% if @invoice_list.count == 0 %>
+        <tr>
+          <td colspan="5">Ingen fakturaer matcher søket</td>
+        </tr>
+      <% else %>
         <% @invoice_list.each do |invoice| %>
           <tr class="<%= rowcolor(invoice) %>">
             <!-- # -->
@@ -78,6 +82,7 @@
               </div>
             </td>
           </tr>
+        <% end %>
         <% end %>
       </tbody>
     </table>

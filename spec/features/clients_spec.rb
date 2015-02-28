@@ -23,7 +23,7 @@ describe 'The clients page' do
     end.to change(Client, :count).by(1)
     expect(page).to have_content('Kunde Opprettet!')
     within 'h1' do
-      expect(page).to have_content('Mine Kunder')
+      expect(page).to have_content('Kunder')
     end
     expect(page).to have_content('Kunde Kundesen')
     expect(page).to have_content('Gate 23')

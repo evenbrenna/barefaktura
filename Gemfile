@@ -42,13 +42,14 @@ group :production do
 end
 
 group :development, :test do
-  gem 'foreman'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
 end
 
 group :development do
   gem 'spring' # Spring speeds up development
+  gem 'foreman'
+  gem 'mailcatcher'
 end
 
 group :test do

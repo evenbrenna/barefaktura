@@ -34,19 +34,18 @@
 .summary
 {
   display: table;
-  min-height: 80px;
   width: 100%;
-  margin-bottom: 50px;
 }
 
 .summary .content
 {
   display: table-cell;
   vertical-align: middle;
+  min-height: 100px;
 
 }
 
 .summary .content p
 {
-  margin: 0;
+  margin-right: 10px;
 }

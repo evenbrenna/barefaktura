@@ -23,7 +23,7 @@ describe 'The products page' do
     end.to change(Product, :count).by(1)
     expect(page).to have_content('Produkt er opprettet!')
     within 'h1' do
-      expect(page).to have_content('Mine Produkter')
+      expect(page).to have_content('Produkter')
     end
     expect(page).to have_content('A01')
     expect(page).to have_content('Et fantastisk produkt')

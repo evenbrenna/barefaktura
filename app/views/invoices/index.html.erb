@@ -1,6 +1,6 @@
-<h1>Mine Fakturaer</h1>
+<h1>Fakturaoversikt</h1>
+<%= render partial: 'invoices/partials/summary' %><br>
 <p><%= link_to '+ Ny Faktura', new_invoice_path, class:'btn btn-default btn-block' %></p><br>
-  <%= render partial: 'invoices/partials/summary' %>
   <div id="invoice-list">
     <%= render partial: 'invoices/partials/invoice_list' %>
   </div>
