@@ -195,3 +195,24 @@
 {
   color: #fff;
 }
+
+a.btn.btn-default:link, a.btn.btn-default:visited
+{
+  color: #666 !important;
+  text-decoration: none !important;
+}
+
+a.btn.btn-default:hover
+{
+  color: #666 !important;
+  text-decoration: none !important;
+  background-color: #e6e6e6;
+}
+
+a.btn.btn-default:active
+{
+  color: #666 !important;
+  text-decoration: none !important;
+}
+
+
