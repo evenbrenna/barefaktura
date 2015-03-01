@@ -4,12 +4,12 @@ setInterval (->
 ), 5000
 
 # jQuery for page scrolling feature  on landing page
-# Requires jQuery Easing plugin (gem)
+# Requires jQuery-ui gem
 $ ->
-  $('a.page-scroll').bind 'click', (event) ->
-    $anchor = $(this)
+  $('a.page-scroll').on 'click', (event) ->
     $('html, body').stop().animate { scrollTop: $(
-      $anchor.attr('href')).offset().top }, 1500, 'easeInOutExpo'
+      $(this).attr('href')).offset().top }, 1500, 'easeInOutExpo'
+    setInterval.stop() # prevents focus that makes page jump back on animation
     event.preventDefault()
 
 # Focus on email field in login modal
