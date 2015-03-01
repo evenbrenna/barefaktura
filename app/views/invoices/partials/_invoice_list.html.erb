@@ -23,7 +23,7 @@
         </tr>
       <% else %>
         <% @invoice_list.each do |invoice| %>
-          <tr class="<%= rowcolor(invoice) %>">
+          <tr class="<%= rowcolor(invoice) %> <%= invoice.due_date < Time.now ? 'overdue' : '' %>">
             <!-- # -->
             <td class="text-left"><%= invoice.invoice_number %></td>
             <!-- Kunde -->

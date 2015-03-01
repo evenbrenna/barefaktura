@@ -8,7 +8,8 @@ jQuery ->
       $('#summary').html(summary)
     button = $(this).closest('a').find('i')
     button.hide().toggleClass('unpaid').fadeIn(800)
-    $(this).closest('tr').removeClass('danger')
+    if $(this).closest('tr').hasClass('overdue')
+      $(this).closest('tr').toggleClass('danger')
     event.preventDefault()
   $(this).off
 
@@ -22,5 +23,5 @@ jQuery ->
       'btn-default', 'btn-primary', 0)
     $.get '?filter=' + filter, (data, status, xhr) ->
       table = $(data).find('.table-responsive').html()
-      $('.table-responsive').hide('drop').html(table).show(
-        'drop', {direction: 'right'})
+      $('.table-responsive').hide('drop', {direction: 'down'}).html(table).show(
+        'drop', {direction: 'up'})
