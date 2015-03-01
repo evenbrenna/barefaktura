@@ -5,7 +5,7 @@
         <p class="label <%= overdue_label_color %>">
           Forfalt: <%= @invoices.overdue.count %> (<%= subtotal(@invoices.overdue) %>)
         </p>
-        <p class="label label-warning">
+        <p class="label label-default">
           Utestående: <%= @invoices.unpaid.count %> (<%= subtotal(@invoices.unpaid) %>)
         </p>
       </div>
