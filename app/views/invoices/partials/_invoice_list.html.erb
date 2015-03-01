@@ -56,11 +56,11 @@
                     <% end %>
                 <% else %>
                   <% if invoice.sends == 0 %>
-                    <%= link_to email_invoice_path(:id => invoice.id), { :title => "Send faktura til kunde", :remote => true, 'class' => "btn btn-default btn-xs", 'data-toggle' =>  "modal", 'data-target' => '#modal-invoice-email-window'} do %>
+                    <%= link_to email_invoice_invoice_path(:id => invoice.id), { :title => "Send faktura til kunde", :remote => true, 'class' => "btn btn-default btn-xs", 'data-toggle' =>  "modal", 'data-target' => '#modal-invoice-email-window'} do %>
                       <i class="glyphicon glyphicon-send"></i>
                     <% end %>
                   <% else %>
-                    <%= link_to email_invoice_path(:id => invoice.id), { :title => "Send på nytt", :remote => true, 'class' => "btn btn-default btn-xs", 'data-toggle' =>  "modal", 'data-target' => '#modal-invoice-email-window'} do %>
+                    <%= link_to email_invoice_invoice_path(:id => invoice.id), { :title => "Send på nytt", :remote => true, 'class' => "btn btn-default btn-xs", 'data-toggle' =>  "modal", 'data-target' => '#modal-invoice-email-window'} do %>
                       <i class="glyphicon glyphicon-send" style="color: #777"></i>
                     <% end %>
                   <% end %>
@@ -71,7 +71,7 @@
                     <i class="glyphicon glyphicon-ban-circle" style="color: #777"></i>
                   <% end %>
                 <% else %>
-                  <%= link_to kreditnota_path(:id => invoice.id), title: "Lag Kreditnota", class: "btn btn-default btn-xs" do %>
+                  <%= link_to kreditnota_invoice_path(:id => invoice.id), title: "Lag Kreditnota", class: "btn btn-default btn-xs" do %>
                     <i class="glyphicon glyphicon-remove"></i>
                   <% end %>
                 <% end %>
