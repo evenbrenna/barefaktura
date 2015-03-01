@@ -49,3 +49,24 @@
 {
   margin-right: 10px;
 }
+
+.pagination span,
+.pagination a,
+.pagination a:visited,
+.pagination a:hover {
+  color: #015D70;
+}
+
+.pagination .disabled span,
+.pagination .disabled a,
+.pagination .disabled a:hover {
+  color: #ccc;
+  background-color: transparent;
+}
+
+.pagination .active span,
+.pagination .active a,
+.pagination .active a:hover {
+  background-color: #015D70 !important;
+  border-color: #015D70;
+}

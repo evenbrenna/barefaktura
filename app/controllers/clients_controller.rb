@@ -8,17 +8,22 @@ class ClientsController < ApplicationController
   end
 
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def show
     @client = current_user.clients.find(params[:id])
     if params[:filter] == 'unpaid'
-      @invoice_list = @client.invoices.unpaid
+      @invoice_list = @client.invoices.unpaid.paginate(
+        :per_page => 25, :page => params[:page])
     elsif params[:filter] == 'overdue'
-      @invoice_list = @client.invoices.overdue
+      @invoice_list = @client.invoices.overdue.paginate(
+        :per_page => 25, :page => params[:page])
     else
-      @invoice_list = @client.invoices
+      @invoice_list = @client.invoices.paginate(
+        :per_page => 25, :page => params[:page])
     end
   end
   # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   def new
     @client = current_user.clients.new

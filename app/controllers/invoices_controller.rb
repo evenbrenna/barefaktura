@@ -5,17 +5,22 @@ class InvoicesController < ApplicationController
   load_and_authorize_resource
 
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def index
     @invoices = current_user.invoices
     if params[:filter] == 'unpaid'
-      @invoice_list = current_user.invoices.unpaid
+      @invoice_list = current_user.invoices.unpaid.paginate(
+        :per_page => 25, :page => params[:page])
     elsif params[:filter] == 'overdue'
-      @invoice_list = current_user.invoices.overdue
+      @invoice_list = current_user.invoices.overdue.paginate(
+        :per_page => 25, :page => params[:page])
     else
-      @invoice_list = current_user.invoices
+      @invoice_list = current_user.invoices.paginate(
+        :per_page => 25, :page => params[:page])
     end
   end
   # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   def new
     @client_list = current_user.clients.map { |c| [c.name, c.id] }

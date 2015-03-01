@@ -1,11 +1,20 @@
-  <div class="btn-group pull-right">
-    <button href="#" class="btn btn-default btn-xs" id="unpaid-selectbtn" onclick="invoices.invoiceList('unpaid')">Utestående</button>
-    <button href="#" class="btn btn-default btn-xs" id="overdue-selectbtn" onclick="invoices.invoiceList('overdue')">Forfalt</button>
-    <button href="#" class="btn btn-primary btn-xs" id="all-selectbtn" onclick="invoices.invoiceList('all')">Alle</button>
-  </div><br><br>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group pull-right">
+        <button href="#" class="btn btn-default btn-sm" id="unpaid-selectbtn" onclick="invoices.invoiceList('unpaid')">Utestående</button>
+        <button href="#" class="btn btn-default btn-sm" id="overdue-selectbtn" onclick="invoices.invoiceList('overdue')">Forfalt</button>
+        <button href="#" class="btn btn-primary btn-sm" id="all-selectbtn" onclick="invoices.invoiceList('all')">Alle</button>
+      </div>
+    </div>
+  </div>
   <!-- FAKTURALISTE -->
   <div class="table-responsive" id="invoice-table">
-    <table class="table table-condensed table-striped">
+    <% if @invoice_list.count > 25 %>
+      <%= will_paginate @invoice_list, renderer: BootstrapPagination::Rails %>
+    <% else %>
+      <br><br>
+    <% end %>
+    <table class="table table-striped">
       <thead>
         <tr>
           <th class="text-left">#</th>

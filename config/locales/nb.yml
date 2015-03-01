@@ -258,5 +258,7 @@ nb:
         unit: 'Enhet'
         price: 'Pris per enhet'
         vat: 'MVA'
-
+  will_paginate:
+    next_label: 'Neste'
+    previous_label: 'Forrige'
 
