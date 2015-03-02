@@ -50,9 +50,9 @@
             <td class="text-right"><%= number_with_precision(invoice.total, :precision => 2) %> <%= invoice.currency %></td>
             <!-- Meny -->
             <td class="text-right">
-              <div class="btn-group">
+              <div class="btn-group invoice-menu">
                 <!-- Popover -->
-                <%= link_to 'javascript://', { 'title'          => "#{invoice.to_s.capitalize}",
+                <%= link_to 'javascript://', { 'title'      => "#{invoice.to_s.capitalize}",
                                            'tabindex'       => '0',
                                            'data-container' => "body",
                                            'class'          => "btn btn-default btn-xs has-popover",

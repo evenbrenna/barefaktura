@@ -32,3 +32,25 @@ jQuery ->
       table = $(data).find('#invoice-table').html()
       $('#invoice-table').html(table)
     $(this).off
+
+# Loading spinner while loading ajax (all ajax requests)
+# jQuery ->
+#   $(document).on
+#     ajaxStart: ->
+#       $('body').addClass 'loading'
+#       return
+#     ajaxStop: ->
+#       $('body').removeClass 'loading'
+#       return
+
+# Loading spinner while generating PDF on email send
+jQuery ->
+  $('#modal-invoice-email-window').on 'click', '.send-pdf-email', ->
+    $('#modal-invoice-email-window').hide()
+    $('body').addClass('loading')
+
+# Loading modal while generating PDF for download
+# Controller will redirect to pdf so no need to remove class
+jQuery ->
+  $('body').on 'click', '.pdf-link', ->
+    $('body').addClass('loading')

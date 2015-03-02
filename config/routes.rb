@@ -22,7 +22,6 @@ Rails.application.routes.draw do
 
   get 'invoice_items/destroy'
 
-
   ActiveAdmin.routes(self)
   get 'static_pages/home'
 

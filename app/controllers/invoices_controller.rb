@@ -49,7 +49,9 @@ class InvoicesController < ApplicationController
       format.html
       format.pdf do
         render :pdf         => "faktura_#{@invoice.invoice_number}",
-               :disposition => 'attachment',
+               # Unncomment next line to force download instead of browser
+               # view. This will break loading spinner.
+               # :disposition => 'attachment',
                :encoding    => 'utf8'
       end
     end

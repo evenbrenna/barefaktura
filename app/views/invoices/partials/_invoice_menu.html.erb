@@ -8,9 +8,9 @@
     </li>
 
     <!-- PDF -->
-    <li class="list-group-item">
+    <li class="list-group-item pdf-dl">
         <i class="glyphicon glyphicon-save"></i>
-        <%= link_to 'Last ned PDF', invoice_path(invoice, :format => :pdf), title: "Last ned PDF" %>
+        <%= link_to 'Last ned PDF', invoice_path(invoice, :format => :pdf), class: 'pdf-link', title: "Last ned PDF" %>
     </li>
 
     <!-- Send -->
