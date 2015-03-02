@@ -22,13 +22,13 @@ jQuery ->
     $('#' + filter + '-selectbtn').switchClass(
       'btn-default', 'btn-primary', 0)
     $.get '?filter=' + filter, (data, status, xhr) ->
-      table = $(data).find('.table-responsive').html()
-      $('.table-responsive').hide().html(table).fadeIn(400)
+      table = $(data).find('#invoice-table').html()
+      $('#invoice-table').hide().html(table).fadeIn(400)
 
 jQuery ->
   $('#invoice-table').on 'click', ' li a', (event) ->
     event.preventDefault()
     $.get $(this).attr("href"), (data, status, xhr) ->
-      table = $(data).find('.table-responsive').html()
-      $('.table-responsive').html(table)
+      table = $(data).find('#invoice-table').html()
+      $('#invoice-table').html(table)
     $(this).off

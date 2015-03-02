@@ -1,6 +1,6 @@
   <div class="row">
-    <div class="col-sm-12">
-      <div class="btn-group pull-right">
+    <div class="col-sm-12 text-right">
+      <div class="btn-group">
         <button href="#" class="btn btn-default btn-sm" id="unpaid-selectbtn" onclick="invoices.invoiceList('unpaid')">Utestående</button>
         <button href="#" class="btn btn-default btn-sm" id="overdue-selectbtn" onclick="invoices.invoiceList('overdue')">Forfalt</button>
         <button href="#" class="btn btn-primary btn-sm" id="all-selectbtn" onclick="invoices.invoiceList('all')">Alle</button>
@@ -8,21 +8,15 @@
     </div>
   </div>
   <!-- FAKTURALISTE -->
-  <div class="table-responsive" id="invoice-table">
-
-    <!-- Add some space if not paginating -->
-    <% if @invoice_list.count > 25 %>
-      <%= will_paginate @invoice_list, renderer: BootstrapPagination::Rails %>
-    <% else %>
-      <br><br>
-    <% end %>
+  <div class="table" id="invoice-table">
+  <br>
 
     <!-- Start invoice list table -->
     <table class="table table-striped">
       <thead>
         <tr>
           <th class="text-left">#</th>
-          <th class="text-left">Mottaker</th>
+          <th class="text-left hidden-xs">Mottaker</th>
           <th class="text-left hidden-xs">Beskrivelse</th>
           <th class="text-left">Forfall</th>
           <th class="text-right">Beløp</th>
@@ -41,7 +35,7 @@
             <!-- # -->
             <td class="text-left"><%= invoice.invoice_number %></td>
             <!-- Kunde -->
-            <td><%= link_to invoice.client.name, invoice.client %></td>
+            <td class="hidden-xs"><%= link_to invoice.client.name, invoice.client %></td>
             <!-- Beskrivelse -->
             <td class="hidden-xs"><%= truncate(invoice.notes, :length => 50) %></td>
             <!-- Forfall -->
@@ -58,7 +52,7 @@
             <td class="text-right">
               <div class="btn-group">
                 <!-- Popover -->
-                <%= link_to 'Meny', 'javascript://', { 'title'          => "#{invoice.to_s.capitalize}",
+                <%= link_to 'javascript://', { 'title'          => "#{invoice.to_s.capitalize}",
                                            'tabindex'       => '0',
                                            'data-container' => "body",
                                            'class'          => "btn btn-default btn-xs has-popover",
@@ -66,7 +60,7 @@
                                            'data-html'      => 'true',
                                            'data-placement' => "left",
                                            'data-trigger'   => 'focus',
-                                           'data-content'   => "#{render 'invoices/partials/invoice_menu', invoice: invoice}" } %>
+                                           'data-content'   => "#{render 'invoices/partials/invoice_menu', invoice: invoice}" } do %><i class="glyphicon glyphicon-menu-hamburger"></i><% end %>
                 <!-- Marker Betalt -->
                 <%= link_to set_paid_invoice_path(invoice), title: "Marker som betalt/ikke betalt",
                                                             class: "btn btn-default btn-xs",
@@ -80,4 +74,7 @@
         <% end %>
       </tbody>
     </table>
+    <div class="col-sm-12 text-center">
+      <%= will_paginate @invoice_list, renderer: BootstrapPagination::Rails %>
+    </div>
   </div>
