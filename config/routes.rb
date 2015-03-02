@@ -22,12 +22,13 @@ Rails.application.routes.draw do
 
   get 'invoice_items/destroy'
 
-  # Could probably be more elegant
-  get 'user_root' => 'invoices#index'
 
   ActiveAdmin.routes(self)
   get 'static_pages/home'
 
-  # You can have the root of your site routed with "root"
+  # Set different roots for guest and logged in user
+  authenticated :user do
+    root 'invoices#index', :as => 'auth_root'
+  end
   root 'static_pages#home'
 end
