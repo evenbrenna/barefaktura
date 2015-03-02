@@ -1,0 +1,39 @@
+<!-- Invoice Context menu -->
+<ul class="list-group" id="menu_<%= invoice.id %>">
+
+    <!-- Åpne -->
+    <li class="list-group-item">
+        <i class="glyphicon glyphicon-zoom-in"></i>
+        <%= link_to 'Vis faktura', invoice, title: "Åpne faktura" %>
+    </li>
+
+    <!-- PDF -->
+    <li class="list-group-item">
+        <i class="glyphicon glyphicon-save"></i>
+        <%= link_to 'Last ned PDF', invoice_path(invoice, :format => :pdf), title: "Last ned PDF" %>
+    </li>
+
+    <!-- Send -->
+    <li class="list-group-item">
+        <% if invoice.client.email.blank? %>
+            <i class="glyphicon glyphicon-ban-circle"></i>
+            <%= link_to 'Ingen epost-adresse', '#', data: { :confirm => 'Du har ikke lagt inn en epost-adresse for denne kunden.'}, title: "Ingen lagret epostadresse for kunden" %>
+        <% else %>
+            <% if invoice.sends == 0 %>
+                <i class="glyphicon glyphicon-send"></i>
+                <%= link_to 'Send epost', email_invoice_invoice_path(:id => invoice.id), { :title => "Send faktura til kunde", :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-invoice-email-window'} %>
+            <% else %>
+                <i class="glyphicon glyphicon-send" style="color: #777"></i>
+                <%= link_to 'Send på nytt', email_invoice_invoice_path(:id => invoice.id), { :title => "Send på nytt", :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-invoice-email-window'} %>
+            <% end %>
+        <% end %>
+    </li>
+
+    <!-- Kreditnota -->
+    <% unless invoice.kreditnota %>
+        <li class="list-group-item">
+            <i class="glyphicon glyphicon-remove"></i>
+            <%= link_to 'Lag kreditnota', kreditnota_invoice_path(:id => invoice.id), title: "Lag Kreditnota" %>
+        </li>
+    <% end %>
+</ul>

@@ -8,10 +8,12 @@ class InvoicesController < ApplicationController
   # rubocop:disable Metrics/MethodLength
   def index
     @invoices = current_user.invoices
-    if params[:filter] == 'unpaid'
+
+    case params[:filter]
+    when 'unpaid'
       @invoice_list = current_user.invoices.unpaid.paginate(
         :per_page => 25, :page => params[:page])
-    elsif params[:filter] == 'overdue'
+    when 'overdue'
       @invoice_list = current_user.invoices.overdue.paginate(
         :per_page => 25, :page => params[:page])
     else

@@ -22,3 +22,12 @@
 #= require twitter/bootstrap/rails/confirm
 #= require bootstrap-datepicker/core
 #= require_tree .
+
+# Enable bootstrap popover
+jQuery ->
+  $('body').popover selector: '.has-popover', trigger: 'focus'
+
+# Auto dismiss alerts
+jQuery ->
+  $('.alert-dismissible').fadeTo(2000, 500).slideUp 500, ->
+    $('#success-alert').alert 'close'
