@@ -1,13 +1,16 @@
 Rails.application.configure do
-
-  # HEROKU PASSORD OPPLEGG
-  BareFaktura::Application.configure do
-    config.middleware.insert_after(::Rack::Runtime, "::Rack::Auth::Basic", "PreProd") do |u, p|
-      [u, p] == ['BareTestura', 'TungPengePung']
+  # Basic auth in staging
+  if ENV['AUTH'] == 'true'
+    BareFaktura::Application.configure do
+      config.middleware.insert_after(
+        ::Rack::Runtime, '::Rack::Auth::Basic', 'PreProd') do |u, p|
+        [u, p] == %w(BareTestura TungPengePung)
+      end
     end
   end
 
-  # Settings specified here will take precedence over those in config/application.rb.
+  # Settings specified here will take precedence over
+  # those in config/application.rb.
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -24,7 +27,8 @@ Rails.application.configure do
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
-  # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
+  # For large-scale production use, consider
+  # using a caching reverse proxy like nginx, varnish or squid.
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
@@ -40,13 +44,15 @@ Rails.application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
-  # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
+  # `config.assets.precompile` and `config.assets.version`
+  # have moved to config/initializers/assets.rb
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  # Force all access to the app over SSL, use
+  # Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
   # Set to :debug to see everything in the log.
@@ -65,7 +71,8 @@ Rails.application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  # Set this to true and configure the email server for immediate delivery
+  # to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
@@ -91,15 +98,15 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default :charset => 'utf-8'
 
   ActionMailer::Base.smtp_settings = {
-  :address        => 'smtp.sendgrid.net',
-  :port           => '587',
-  :authentication => :plain,
-  :user_name      => ENV['SENDGRID_USERNAME'],
-  :password       => ENV['SENDGRID_PASSWORD'],
-  :domain         => 'heroku.com',
-  :enable_starttls_auto => true
-}
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => ENV['SENDGRID_USERNAME'],
+    :password       => ENV['SENDGRID_PASSWORD'],
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
+  }
 end
