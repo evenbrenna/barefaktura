@@ -1,9 +1,9 @@
 # User model
 class User < ActiveRecord::Base
   # Associations
+  has_many :invoices, :dependent => :destroy
   has_many :clients,  :dependent => :destroy
   has_many :products, :dependent => :destroy
-  has_many :invoices, :dependent => :destroy
 
   # Validations
   validates :name,                :presence     => true
