@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'user logs in' do
+feature 'User logs in' do
   before :each do
     @user = FactoryGirl.create(:user, :password => 'password123')
   end
