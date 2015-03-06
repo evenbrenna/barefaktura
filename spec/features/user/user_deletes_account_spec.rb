@@ -18,4 +18,14 @@ feature 'user deletes account' do
     click_link 'Slett Konto'
     expect(page).to have_content('Opprett konto')
   end
+
+  scenario 'providing password (should delete)' do
+    visit invoices_path
+    expect(page).to have_content('Logg Ut')
+    click_link 'Min Profil'
+    click_link 'Rediger Profil'
+    fill_in 'Passord *', :with => @user.password
+    click_link 'Slett Konto'
+    expect(page).to have_content('Opprett konto')
+  end
 end

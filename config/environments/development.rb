@@ -47,6 +47,4 @@ Rails.application.configure do
 
   # mailcatcher
   config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
-
-  ENV['REDISTOGO_URL'] = 'redis://localhost:6379'
 end
