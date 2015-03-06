@@ -4,7 +4,7 @@ require 'rails_helper'
 include Warden::Test::Helpers
 Warden.test_mode!
 
-feature 'user edits account' do
+feature 'User edits account' do
   before :each do
     @user = FactoryGirl.create(:user)
     login_as @user, :scope => :user
