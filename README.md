@@ -1,10 +1,6 @@
 # BareFaktura
 
-**Code Ship Build Status**
-
-[ ![Codeship Status for evenbrenna/BareFaktura](https://codeship.com/projects/bbc45710-8b03-0132-04dc-660f9dc63bc4/status?branch=master)](https://codeship.com/projects/60234)
-
-**Code Climate**
+[ ![Codeship Status for evenbrenna/barefaktura](https://codeship.com/projects/42e7c2f0-f5d6-0132-8389-5eb2baa0d764/status?branch=master)](https://codeship.com/projects/85884)
 
 [![Code Climate](https://codeclimate.com/repos/54d917c669568006d5002a33/badges/cd14de099850f960a83b/gpa.svg)](https://codeclimate.com/repos/54d917c669568006d5002a33/feed)
 
