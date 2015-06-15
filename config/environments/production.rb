@@ -1,14 +1,4 @@
 Rails.application.configure do
-  # Basic auth in staging
-  if ENV['AUTH'] == 'true'
-    BareFaktura::Application.configure do
-      config.middleware.insert_after(
-        ::Rack::Runtime, '::Rack::Auth::Basic', 'PreProd') do |u, p|
-        [u, p] == %w(BareTestura TungPengePung)
-      end
-    end
-  end
-
   # Settings specified here will take precedence over
   # those in config/application.rb.
 
@@ -53,7 +43,7 @@ Rails.application.configure do
 
   # Force all access to the app over SSL, use
   # Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  # config.force_ssl = true
 
   # Set to :debug to see everything in the log.
   config.log_level = :info
